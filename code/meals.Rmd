@@ -1,0 +1,850 @@
+---
+title: "meals"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# install.packages("googlesheets4")
+require(googlesheets4)
+require(stringr)
+require(dplyr)
+require(magrittr)
+require(tidyverse)
+require(DT)
+
+
+source("/Users/joshvumc/Dropbox/meal_planning/meal_funs.R")
+
+```
+
+### TO DO LIST
+  - Need to group foods in way that makes most sense
+  - Need to address misspelling or variants of ingredients
+  - Create equivalance matrix for ingredients ie cabbage = red cabbage
+  - How to handle directionality ie dry chickpeas can sub for canned, but not the other way
+  - easily determine which ingredients are needed to make recipe
+  - pantry staples that are also recipes e.g. pickled onion
+  - strip white space from ingredients
+  
+  
+  - create a workable nomenclature
+  - only parse new recipes and add to existing df
+  - sort out peas and corn
+  - better classification for pantry items
+  - brackets around swappable and optional ingredients
+  - in add recipes app, preselected options are an issue
+  - cuisine is practically useless
+  - type: main, meal, side, etc. could use some clean up as well
+  
+### Order
+ - If new recipe is added to meals list
+  - download meals
+  - expand recipes
+  - update ingredients list
+      - If there are new ingredients, classify ingredients
+      - If any of the new ingredients are makeable, need to input their recipe as well
+  - generate list of makeable recipes
+       
+
+```{r}
+# Get df of recipes
+meals <- read.csv("/Users/joshvumc/Dropbox/meal_planning/DATA/Meals - Sheet1.csv")
+
+recipes_expand <- expand.recipes(meals)
+# write.csv(recipes_expand, "/Users/joshvumc/Dropbox/meal_planning/recipes_expand.csv", row.names = FALSE)
+save(recipes_expand, file= "/Users/joshvumc/Dropbox/meal_planning/DATA/recipes_expand.rda")
+
+## current ingredient list
+
+ingredients <- read.csv("/Users/joshvumc/Dropbox/meal_planning/DATA/ingredients.csv")
+
+##### update ingredient list 
+
+new.ingredients <- update_ingredients(recipes_expand, ingredients)
+write.csv(new.ingredients, "/Users/joshvumc/Dropbox/meal_planning/DATA/ingredients.csv", row.names = FALSE)
+
+## Make and colorize menu of makeable meals
+made_menu <- make_menu(recipes_expand, ingredients, meals)
+  write.csv(made_menu, "/Users/joshvumc/Dropbox/meal_planning/DATA/jd_recipes.csv")
+
+  ## Need to make this code work to speed up program
+  # make_menu(expand.recipes(meals[1,]), ingredients, meals)
+  
+
+  
+  
+```
+
+```{r}
+
+
+
+# recipes_expand <- bind_rows(meals %>% filter(Meal %in% setdiff(meals$Meal, recipes_expand$recipe %>% unique())) %>% expand.recipes(),
+#           recipes_expand)
+
+# bind_rows(expand.recipes(meals[1,]),
+#           expand.recipes(meals[45,]),
+#           expand.recipes(meals[133,])) %>%
+#   mutate(across(is.numeric, ~replace_na(.x, 0)))
+
+# load("/Users/joshvumc/Dropbox/meal_planning/DATA/recipes_expand.rda")
+# recipes_expand <- read.csv( "/Users/joshvumc/Dropbox/meal_planning/recipes_expand.csv")
+# new_row <- meals[1,]
+# expanded_new <- expand.recipes(new_row)
+# #             load("/Users/joshvumc/Dropbox/meal_planning/recipes_expand.rda")
+#             recipes_expand_new <- bind_rows(expanded_new, recipes_expand) %>%
+#                  mutate(across(is.numeric, ~replace_na(.x, 0)))
+# # #             save(recipes_expand, file= "/Users/joshvumc/Dropbox/meal_planning/recipes_expand.rda")
+#             
+#             l.ingredients <- read.csv("/Users/joshvumc/Dropbox/meal_planning/shinyapp/react/ingredients.csv")
+#             made_menu <- make_menu(recipes_expand, l.ingredients)
+#             write.csv(made_menu, "/Users/joshvumc/Dropbox/meal_planning/jd_recipes.csv")
+#             
+#             new.ingredients <- update_ingredients(recipes_expand, l.ingredients)
+#             write.csv(new.ingredients, "/Users/joshvumc/Dropbox/meal_planning/shinyapp/react/ingredients.csv", row.names = FALSE)
+          # make_menu(recipes_expand_new, new.ingredients, meals)  
+   
+```
+
+
+```{r}
+### Grocery planning
+
+
+recipes_expand 
+ingredients
+meals$Meal[c(5,7,8)]
+
+recipes_expand %>% filter(recipe %in% meals$Meal[c(5,7,8)]) %>% select(-variant) %>% pivot_longer(., - recipe) %>% filter(value ==1) %>%
+  group_by(recipe, name) %>%tally()
+```
+
+
+
+```{r}
+
+## This is the make_meal function outside of the function
+has <- ingredients %>% filter(has == 1) %$% name
+not.has <- ingredients %>% filter(has == 0) %$% name
+not.has <- not.has[not.has %in% ingredients$name]
+
+vegan <- ingredients %>% filter(vegan==1) %$% name
+veg <- ingredients %>% filter(vegetarian==1) %$% name
+
+equi <- ingredients %>% select(name, equal) %>%
+   separate_rows(., equal, sep = ", ") %>%
+  left_join(., ingredients %>% select(equal = name, has2 = has), by = "equal") %>% 
+  filter(has2==1) %$% name %>% unique()
+equi <- c(has, equi)%>% unique()
+
+sometimes <- ingredients %>% select(name, sometimes) %>%
+   separate_rows(., sometimes, sep = ", ") %>%
+  left_join(., ingredients %>% select(sometimes = name, has2 = has), by = "sometimes") %>% 
+  filter(has2==1) %$% name %>% unique()
+sometimes <- c(sometimes, equi) %>% unique()
+
+### Things I don't have, but I can substitute for
+subs1 <- ingredients %>% select(name,has, equal) %>%
+   separate_rows(., equal, sep = ", ") %>%
+  left_join(., ingredients %>% select(equal = name, has2 = has), by = "equal") %>% 
+  filter(has2==1, has==0) %$% name %>% unique()
+
+subs2 <- ingredients %>% select(name,has, sometimes) %>%
+   separate_rows(., sometimes, sep = ", ") %>%
+  left_join(., ingredients %>% select(sometimes = name, has2 = has), by = "sometimes") %>% 
+  filter(has2==1, has==0) %$% name %>% unique() %>% setdiff(., subs1)
+
+nh <- setdiff(not.has, c(subs1, subs2))
+
+
+has <- sort.vec(has)
+nh <- sort.vec(nh)
+subs1 <- sort.vec(subs1)
+subs2 <- sort.vec(subs2)
+
+
+
+MEAL <- recipes_expand %>% 
+  rowwise() %>%
+  mutate(n.ingredients = sum(c_across(where(is.numeric))))  %>% 
+  mutate(p.ingredients = sum(c_across(all_of(has))), can.make = 1*(p.ingredients == n.ingredients),
+         sub1 = sum(c_across(all_of(equi))), can.make2 = max(sub1 == n.ingredients, can.make), ## This can probably be reworked with the new subs1 variable
+         sub2 = sum(c_across(all_of(sometimes))), can.make3 = max(sub2 == n.ingredients, can.make2), 
+         n.vegan = sum(c_across(all_of(vegan))), is.vegan = n.vegan == n.ingredients, 
+         n.veg = sum(c_across(all_of(veg))), is.veg = n.veg == n.ingredients) %>%
+  group_by(recipe, variant)%>% 
+  mutate(makeability = 5 - (1+sum(c_across(contains("can.make")))),
+         makeability = ifelse(makeability==4, 5, makeability))
+
+make4 <- ingredients%>% filter(makeable ==1) %>% select(name, has) %>%
+  left_join(., 
+            MEAL%>%ungroup() %>% select(name = recipe, makeability) %>% group_by(name) %>% summarise(makeability = min(makeability)),
+            by = "name") %>% 
+  filter(makeability %in% 1:3, has == 0) %$% name
+reaching <- c(sometimes, make4) %>% unique()
+make4 <- setdiff(make4, c(subs1, subs2))
+nh <- setdiff(nh, make4)
+
+
+MEAL <- MEAL %>% mutate(sub4 = sum(c_across(all_of(reaching))), can.make4 = 1*(sub4 == n.ingredients),
+                makeability = ifelse(makeability==5 & can.make4==1, 4, makeability)) %>%
+  group_by(recipe) %>%
+  mutate(variants = n(), make1 = sum(makeability==1), make2 = sum(makeability==2), make3 = sum(makeability==3)) %>%
+  select(1, contains("make"), everything()) %>% 
+  arrange(recipe, makeability, desc(n.ingredients)) %>%
+  select(Meal = recipe, variant,makeability, n.ingredients, contains("can.make"), n.vegan, is.vegan, n.veg, is.veg, everything())%>% 
+  dplyr::slice(1) %>%
+  left_join(meals, ., by = "Meal")
+
+
+MEAL %>% 
+  mutate(Ingredients = sprintj6(all_of(has), Ingredients, "#458B00"))%>%
+    mutate(Ingredients = sprintj6(all_of(nh), Ingredients, "#CD2626"))%>%
+    mutate(Ingredients = sprintj6(all_of(subs1), Ingredients, "#CDAD00"))%>%
+    mutate(Ingredients = sprintj6(all_of(subs2), Ingredients, "orange"))%>%
+  mutate(Ingredients = sprintj6(all_of(make4), Ingredients, "#1C86EE"))%>%
+    mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub("&","", Ingredients))) )%>%
+  group_by(Meal) %>%
+  mutate(diet = case_when(is.vegan ~ "Vegan",
+                          is.veg & !is.vegan ~ "Vegetarian",
+                          TRUE ~ "Non-vegetarian"),
+         Needed = n.ingredients - p.ingredients) %>% 
+  select(recipe = Meal,  Source, Page,Type, Cuisine,diet, Ingredients, makeability, Needed) %>%
+  write.csv(., "jd_recipes.csv")
+
+## old colors
+#BFE8CF, salmon, gold, orange, lightblue
+
+# MEAL %>% select(contains("make")) %>% filter(makeability ==2)
+```
+
+
+
+```{r}
+## Putting parens around exchangeable and optional ingredients
+
+## 
+  f.exchange(meals$Ingredients[5])  
+  ## 16
+split <- str_split(gsub(" or | or$", "&exchangeable&", gsub(" or&", "&optional& &", gsub("& | &","&", paste0("&",gsub(",","&&",meals$Ingredients[16]), "&")))), "&&") %>% unlist()
+  
+opt <- gsub("optional|&|","", grep("optional", split, v = TRUE)) %>% gsub("exchangeable", ", ",.) %>% paste0("[",., "]") %>% 
+  toString() %>% ifelse(.=="[]", "", .)
+
+exc <- grep("optional", split, v = TRUE, invert = TRUE) %>% grep("exchangeable", ., v = TRUE) %>% gsub("exchangeable"," or ", .) %>% gsub("&", "", .) %>% paste0("(",., ")") %>% toString() %>% ifelse(.=="()", "", .)
+
+inc <- grep("optional|exchangeable", split, v = TRUE, invert = TRUE) %>% gsub("&", "", .)%>% toString()
+
+ing.string <- paste(inc, exc, opt, sep = ", ")
+
+has.vec <- ingredients %>% filter(has == 1) %$% name
+  
+
+sprintj6(has.vec, ing.string, "green")
+
+rm(split)
+```
+
+
+```{r}
+# reactable recipe table
+rr <- read.csv("jd_recipes.csv") %>% select(-1)
+
+reactable(rr[35:40,], columns = list(Ingredients = colDef(html = TRUE)),
+          theme = reactableTheme(rowSelectedStyle = list(backgroundColor = "#eee", boxShadow = "inset 2px 0 0 0 #ffa62d")))
+c("#458B00", "#CD2626", "#CDAD00", "#1C86EE")
+```
+
+
+```{r}
+# play with reactable ingredients
+require(reactable)
+
+ingredients
+reactable(ingredients %>% select(1:5), filterable = TRUE, minRows = 10, groupBy = c("class", "class2"), highlight = TRUE, compact = TRUE, onClick = "select", selection = "multiple", defaultSelected = which(ingredients$has ==1),
+  theme = reactableTheme(rowSelectedStyle = list(backgroundColor = "#eee", boxShadow = "inset 2px 0 0 0 #ffa62d")))
+
+which(ingredients$has ==1)
+```
+
+
+```{r}
+## extend makeability
+
+
+# MEAL %>% 
+#   mutate(Ingredients = sprintj6(all_of(has), Ingredients, "green"))%>%
+#     mutate(Ingredients = sprintj6(all_of(nh), Ingredients, "red"))%>%
+#     mutate(Ingredients = sprintj6(all_of(subs1), Ingredients, "gold"))%>%
+#     mutate(Ingredients = sprintj6(all_of(subs2), Ingredients, "orange"))%>%
+#     mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub("&","", Ingredients))) )%>%
+#   group_by(Meal) %>%
+#   mutate(diet = case_when(is.vegan ~ "Vegan",
+#                           is.veg& !is.vegan ~ "Vegetarian",
+#                           TRUE ~ "Non-vegetarian"),
+#          Needed = n.ingredients - p.ingredients) %>% 
+#   select(recipe = Meal,  Source, Page,Type, Cuisine,diet, Ingredients, makeability, Needed) %>%
+#   write.csv(., "jd_recipes.csv")
+
+
+```
+
+
+```{r}
+# colorize.food <- function(column, color){
+#   ifelse(column == "_", "_", sprintf("<span style='color: %s;'>%s</span>", color, 
+#       column))
+# }
+#   
+  # mutate_at(., c(not.has,has), nameify) %>% 
+  # mutate(HAS = toString(c_across(all_of(has))),
+  #        NOT.HAS = toString(c_across(all_of(not.has)))) %>% rowwise() %>% 
+  # mutate(HAS = gsub("_","",gsub("_,","",HAS)),
+  #        NOT.HAS = gsub("_","",gsub("_,","",NOT.HAS)))%>% 
+
+
+# %>% filter(makeability %in% 1:3) 
+# meals %>% group_by(Meal) %>% tally() %>% filter(n>1)
+
+# names(RDF)
+# names(MEAL)
+# MEAL %>% 
+#   mutate(diet = case_when(is.vegan ~ "Vegan",
+#                           is.veg& !is.vegan ~ "Vegetarian",
+#                           TRUE ~ "Non-vegetarian"),
+#          Needed = n.ingredients - p.ingredients) %>% 
+#   select(recipe = Meal,  Source, Page,Type, Cuisine,diet, Ingredients, makeability, NOT.HAS,Needed) %>%
+#   write.csv(., "jd_recipes.csv")
+# recipes_expand%>% 
+#   mutate_at(., c(not.has,has), nameify) %>% 
+#   mutate(HAS = toString(c_across(all_of(has))),
+#          NOT.HAS = toString(c_across(all_of(not.has)))) %>% select(HAS)
+
+
+
+
+# setdiff(ingredients$name, unique(c(nh, has, subs1, subs2)))
+# length(unique(c(nh, has, subs1, subs2)))
+# intersect(has, subs2)
+
+# MEAL %>% 
+#   mutate(across(all_of(has), ~colorize.food(.x, "green"))) %>%
+#   mutate(across(all_of(subs1), ~colorize.food(.x, "gold"))) %>%
+#   mutate(across(all_of(subs2), ~colorize.food(.x, "orange"))) %>%
+#   mutate(across(all_of(nh), ~colorize.food(.x, "red"))) %>%
+#   group_by(Meal) %>%
+#   mutate(I = toString(c_across(all_of(c(has,nh, subs1, subs2)))) )%>% 
+#   mutate(I = gsub("_","",gsub("_,","",I)))%>% select(1, I) %>%
+#   datatable(., rownames = FALSE, escape = FALSE)
+# 
+# 
+# ## Test out in app
+# MEAL %>% 
+#   mutate(across(all_of(has), ~colorize.food(.x, "green"))) %>%
+#   mutate(across(all_of(subs1), ~colorize.food(.x, "gold"))) %>%
+#   mutate(across(all_of(subs2), ~colorize.food(.x, "orange"))) %>%
+#   mutate(across(all_of(nh), ~colorize.food(.x, "red"))) %>%
+#   group_by(Meal) %>%
+#   mutate(I = toString(c_across(all_of(c(has,nh, subs1, subs2)))) )%>% 
+#   mutate(Ingredients = gsub("_","",gsub("_,","",I)))%>% 
+#   mutate(diet = case_when(is.vegan ~ "Vegan",
+#                           is.veg& !is.vegan ~ "Vegetarian",
+#                           TRUE ~ "Non-vegetarian"),
+#          Needed = n.ingredients - p.ingredients) %>% 
+#   select(recipe = Meal,  Source, Page,Type, Cuisine,diet, Ingredients, makeability, NOT.HAS,Needed) %>%
+#   write.csv(., "jd_recipes.csv")
+# 
+# 
+# 
+# ## The goal here was to colorize the raw ingredients list because i'm not accounting for the optional components of a recipe
+# MEAL %>% select(1, feta, cilantro, Ingredients) %>% rowwise() %>%
+#   mutate(Ingredients = gsub(feta,sprintf("<span style='color: %s;'>%s</span>", "green", feta), Ingredients))%>%
+#   mutate(Ingredients = gsub(cilantro,sprintf("<span style='color: %s;'>%s</span>", "red", cilantro), Ingredients))%>%
+#   datatable(., rownames = FALSE, escape = FALSE)
+# 
+# 
+# MEAL %>% select(1, feta, cilantro, Ingredients) %>% rowwise() %>%
+#   mutate(x = paste(feta, cilantro, sep = "|"),X = grepl(x, Ingredients)) 
+# 
+# sprintj2 <- function(vec, V, color){
+#   len <- length(vec)
+#   for(i in 1:length(vec)){
+#   V[V %in% vec[i]] <- gsub(vec[i], sprintf("<span style='color: %s;'>%s</span>", color, vec[i]), V[V %in% vec[i]])
+#   }
+#   V
+# }
+# vec <- c( "butternut squash" ,"butter")
+# V <- c("butternut squash","butter",  "beef")
+# V[V %in% vec[1]]
+# 
+# sprintj2(all_of(vec), toString(c("butternut squash","butter",  "beef")), "red")  
+# 
+# sprintj(c("butter", "butternut squash"), c("butternut squash","butter",  "beef"), "red")  
+# 
+# sprintj3 <- function(vec, V, color){
+#   len <- length(vec)
+#   for(i in 1:length(vec)){
+#   V <- gsub(paste0("[^>]",vec[i],"|^",vec[i] ), sprintf("<span style='color: %s;'> %s</span>", color, vec[i]), V)
+#   }
+#   V
+# }
+# sprintj3(all_of(vec), toString(c("butternut squash","butter",  "beef")), "red")  
+# 
+# sprintj(vec, c("butter","butternut squash",  "beef"), "red")  
+# Vs <- toString(V)
+# jj <- gsub(vec[1], sprintf(" <span style='color: %s;'>%s</span>", "red", vec[1]), Vs)
+# 
+# gsub(paste0(" ", vec[2]), sprintf("<span style='color: %s;'>%s</span>", "red", vec[2]), jj)
+# gsub(paste0("[^>]", vec[2]), sprintf("<span style='color: %s;'>%s</span>", "red", vec[2]), jj)
+# 
+# sprintj <- function(vec, V, color){
+#   len <- length(vec)
+#   for(i in 1:length(vec)){
+#   V <- gsub(vec[i], sprintf("<span style='color: %s;'>%s</span>", color, vec[i]), V)
+#   }
+#   V
+# }
+# 
+
+#   MEAL %>% select(1, Ingredients) %>% rowwise() %>%
+#   mutate(Ingredients = sprintj3(all_of(has), Ingredients, "green"))%>%
+#     mutate(Ingredients = sprintj3(all_of(nh), Ingredients, "red"))%>%
+#     mutate(Ingredients = sprintj3(all_of(subs1), Ingredients, "gold"))%>%
+#     mutate(Ingredients = sprintj3(all_of(subs2), Ingredients, "orange"))%>%
+#   datatable(., rownames = FALSE, escape = FALSE)
+# 
+# colorize.group <- function(x){
+#   case_when(x %in% has ~ "green",
+#             x %in% nh ~ "red",
+#             x %in% subs1 ~ "gold",
+#             x %in% subs2 ~ "orange")
+# }
+# 
+# all.ing <- ingredients$name
+# all.ing <- sort.vec(all.ing)
+# 
+# # sprintj4 <- function(vec, V){
+# #   len <- length(vec)
+# #   for(i in 1:length(vec)){
+# #   V <- gsub(paste0("[^>]",vec[i],"|^",vec[i] ), sprintf("<span style='color: %s;'> %s</span>", colorize.group(vec[i]), vec[i]), V)
+# #   }
+# #   V
+# # }
+# # sprintj4(all_of(vec), toString(c("butternut squash","butter",  "beef")))  
+# #   MEAL %>% select(1, Ingredients) %>% rowwise() %>%
+# #   mutate(Ingredients = sprintj4(all_of(all.ing), Ingredients))%>%
+# #   datatable(., rownames = FALSE, escape = FALSE)
+# sprintj5 <- function(vec, V, color){
+#   len <- length(vec)
+#   
+#   for(i in 1:length(vec)){
+#     gg <- paste( paste0("^", vec[i]), paste0( vec[i], "$"), paste0("[,]", vec[i]), paste0(", ", vec[i]), paste0("or ", vec[i]), paste0(vec[i], " or"), sep = "|")
+#   V <- gsub(gg, sprintf("<span style='color: %s;'> %s</span>,", color, vec[i]), V)
+#   }
+#   V
+# }
+# 
+# sprintj5(all_of(vec), toString(c("butternut squash","butter",  "beef")), "red") 
+# jjj <- sprintj5(all_of(vec[1]), toString(c("butternut squash","butter",  "beef")), "red") 
+# i =2
+# grep(paste0("^", vec[i]), jjj, v = TRUE)
+# grep(paste0( vec[i], "$"), jjj, v = TRUE)
+# grep(paste0("[,]", vec[i]), jjj, v = TRUE)
+# grep(paste0("[, ]", vec[i]), jjj, v = TRUE)
+# grep(paste0("[or ]", vec[i]), jjj, v = TRUE)
+# grep(paste0(vec[i], "[ or]"),jjj, v = TRUE)
+# 
+# gsub(paste0("^", vec[i]), "xy", jjj)
+# gsub(paste0( vec[i], "$"),"xy",  jjj)
+# gsub(paste0("[,]", vec[i]),"xy",  jjj)
+# gsub(paste0(", ", vec[i]),"xy",  jjj)
+# gsub(paste0("or ", vec[i]), "xy", jjj)
+# gsub(paste0(vec[i], " or"),"xy", jjj)
+# gsub(paste0(vec[i], " ,"),"xy", jjj)
+# gsub(paste0("[ ]",vec[i], "[,]"),"xy", jjj)
+# 
+# paste0("&",gsub(",","&",Vs), "&")
+
+
+# sprintj6(all_of(vec), toString(c("butternut squash","butter",  "beef")), "red") 
+# gsub("& | &","&", paste0("&",gsub(",","&&",toString(c("butternut squash","butter",  "beef"))), "&"))
+# ## starts the string or starts with [,] or with [ or ]
+# ## ends with [,] or [ or] or ends the string
+# 
+# paste(paste0("^", vec[1]), paste0( vec[1], "$"), paste0(",", vec[1]), paste0(", ", vec[1]), paste0("or ", vec[1]), paste0(vec[1], " or"), sep = "|")
+# 
+  MEAL %>% select(1, Ingredients) %>% rowwise() %>%
+  mutate(Ingredients = sprintj6(all_of(has), Ingredients, "green"))%>%
+    mutate(Ingredients = sprintj6(all_of(nh), Ingredients, "red"))%>%
+    mutate(Ingredients = sprintj6(all_of(subs1), Ingredients, "gold"))%>%
+    mutate(Ingredients = sprintj6(all_of(subs2), Ingredients, "orange"))%>%
+    mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub("&","", Ingredients))) )%>%
+  datatable(., rownames = FALSE, escape = FALSE)
+  
+
+
+  
+  
+  ## dried oregano
+  ## mexican oregano
+  ## blood orange
+  ## 2 spaces before parmesan
+  # MEAL %>% select(1, Ingredients) %>%.[1,2]
+```
+
+
+```{r}
+M <- c("beef pie")
+optional <- c("beef", "thyme")
+exchange <- c("carrot", "onion", "garlic")
+include <- c("kale", "milk", "cheddar", "brown rice")
+# exchange <- c(NULL)
+
+
+f.optional <- function(vec) {ifelse(length(vec)==0, "", paste0(str_c(vec, collapse = " or "), " or , "))}
+f.exchange <- function(vec) {ifelse(length(vec)==0, "", gsub(" or [0-9]+ or", ",", paste0(str_c(vec, collapse = " or "), ", ")))}
+f.include <- function(vec) {str_c(vec, collapse = ", ")}
+paste.ingredients <- function(opt, exc, inc) paste0(f.optional(opt),f.exchange(exc), f.include(inc), collapse = "")
+paste.ingredients(optional, exchange, include)
+
+expand.grid(c(str_split(grep(" or ", str_split(s1, ", ")[[1]], v = TRUE, inv = F), " or "),
+              item = list(grep(" or ", str_split(s1, ", ")[[1]], v = TRUE, inv = TRUE))))%>% 
+  mutate(v =1, recipe = "meals$Meal[x]", VarXX = " ")%>%  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% select(-VarXX)%>%
+  pivot_longer(., c(-v, -recipe,-variant)) %>% unique() %>% select(-name) %>%filter(value != "") %>% 
+  mutate(value = str_trim(value, "both"))%>%
+  pivot_wider(., names_from = "value", values_from = "v")
+
+exchange <- c("carrot", "onion", "garlic", "1", "oregano", "orange", "555", "carrot", "sausage")
+
+gsub(" or [0-9]+ or", ",", paste0(str_c(exchange, collapse = " or "), ", "))
+```
+
+
+```{r}
+
+# 
+# recipes_expand %<>%
+#   mutate(across(everything(), .fns = ~replace_na(.x, 0)))%>%
+#   group_by(recipe, variant) %>%
+#   mutate(rs = sum(c_across(where(is.numeric)))) %>%
+#   select(1,2,rs, everything())
+# ## Things that I can make right now
+# recipes_expand %>% 
+#   mutate(rs2 = sum(c_across(has)))%>% select(recipe, rs, rs2, everything()) %>% filter(rs2 >= rs) %>%
+#   group_by(recipe) %>% summarise_all(., first)
+# recipes_expand%>% mutate_at(., not.has, nameify) %>% 
+#   mutate(NOT.HAS = toString(c_across(not.has))) %>% rowwise() %>% 
+#   mutate(NOT.HAS = gsub("_","",gsub("_,","",NOT.HAS))) %>% select(1, NOT.HAS)
+# 
+
+# MEAL %>% filter(recipe == "black bean burgers") %>% select(1:11) %>% left_join(., bbb, by = "variant") %$% HAS[1]
+# 
+# bbbb <- Cs("american cheese", bacon, "hamburger buns", mayonnaise, ketchup, avocado, "jack cheese", "cheddar", "black bean burger" )
+# 
+# MEAL%>% filter(recipe == "test2") %>% select(1:6, "milk", "sour cream", "egg", "yogurt")
+# 
+# c("milk", "sour cream", "egg", "yogurt") %in% has
+# ing$`black bean burgers`
+
+# MEAL %>% filter(can.make==1) %>% group_by(recipe) %>% summarise_all(., first)
+# 
+# MEAL %>% group_by(can.make, can.make2, can.make3) %>% tally()
+# 
+# MEAL %>% mutate(makeability = 4 - sum(c_across(contains("can.make")))) %>% 
+#   group_by(recipe) %>%
+#   mutate(variants = n(), make1 = sum(makeability==1), make2 = sum(makeability==2), make3 = sum(makeability==3)) %>%
+#   select(1, contains("make"), everything()) %>% arrange(recipe, makeability, desc(n.ingredients)) %>% slice(1) %>% filter(makeability %in% 1:3)
+
+
+ # bbb%>% filter(recipe == "test2") %>% select(1:6, "milk", "sour cream", "egg", "yogurt")
+```
+
+
+
+```{r}
+
+
+# mf3 <- function(x) {expand.grid(c(str_split(grep(" or ", ing[[x]], v = TRUE, inv = F), " or "),
+#               item = list(grep(" or ", ing[[x]], v = TRUE, inv = TRUE))))%>% 
+#   mutate(v =1, recipe = meals$Meal[x], VarXX = " ")%>%  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% select(-VarXX)%>%
+#   pivot_longer(., c(-v, -recipe,-variant)) %>% unique() %>% select(-name) %>%filter(value != "") %>% 
+#   mutate(value = str_trim(value, "both"))%>%
+#    mutate(has = ifelse(value %in% has, "has", "not")) %>% group_by(recipe, variant, has) %>% 
+#   summarise(value = toString(value), does = n(), .groups = "keep") %>%
+#   pivot_wider(., names_from = "has", values_from = c("value", "does")) }
+
+rdf <- bind_rows(lapply(as.list(1:length(ing)), FUN = function(x) mf3(x)))%>%
+    mutate(does_not = replace_na(does_not, 0)) 
+
+rdf %>% group_by(recipe, does_not) %>% summarise_all(., first) %>% group_by(recipe) %>% filter(does_not == min(does_not)) %>% arrange(does_not) %>% select(recipe, does_not, value_not, value_has) %>% j.datatable(., nrow = 15)
+```
+
+```{r}
+## add vegan/ veg classification
+## Add back grouping data
+mf4 <- function(x) {expand.grid(c(str_split(grep(" or ", ing[[x]], v = TRUE, inv = F), " or "),
+              item = list(grep(" or ", ing[[x]], v = TRUE, inv = TRUE))))%>% 
+  mutate(v =1, recipe = meals$Meal[x], VarXX = " ")%>%  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% select(-VarXX)%>%
+  pivot_longer(., c(-v, -recipe,-variant)) %>% unique() %>% select(-name) %>%filter(value != "") %>% 
+  mutate(value = str_trim(value, "both"))%>%
+  left_join(., ingredients %>% rename(value = name), by = "value" ) %>%
+   mutate(has = ifelse(has ==1, "has", "not")) %>% 
+  group_by(recipe, variant) %>% mutate(vegetarian = all(vegetarian==1), vegan = all(vegan ==1)) %>% 
+  group_by(recipe, variant, has) %>% 
+  summarise(value = toString(value), does = n(), diet = case_when(first(vegan)==TRUE ~ "Vegan",
+                                                                  first(vegetarian)==TRUE ~ "Vegetarian",
+                                                                  !first(vegan) & !first(vegetarian) ~"Non-vegetarian") , .groups = "keep") %>%
+  pivot_wider(., names_from = "has", values_from = c("value", "does")) %>%
+    left_join(., meals %>% select(recipe = Meal, Type, Cuisine, Source, Page), by = "recipe")}
+
+rdf <- bind_rows(lapply(as.list(1:length(ing)), FUN = function(x) mf4(x)))%>%
+    mutate(does_not = replace_na(does_not, 0)) 
+
+rdf %>% group_by(recipe, does_not) %>% summarise_all(., first) %>% group_by(recipe) %>% filter(does_not == min(does_not)) %>% arrange(does_not) %>% select(recipe, does_not, value_not, value_has) %>% j.datatable(., nrow = 15)
+
+RDF <- rdf %>% group_by(recipe, does_not) %>% summarise_all(., first) %>% group_by(recipe) %>% filter(does_not == min(does_not)) %>% arrange(does_not)
+
+RDF %>% write.csv(., "jd_recipes.csv")
+
+
+
+toMatch <- c("onion", "olive oil", "butter")
+tooMatch <- c("zucchini", "asparagus")
+andMatch <- function(string){
+  string <- c(" ", string)
+  gsub(" )", "^", paste(paste(string,collapse = ")(?=.*"), ")", sep = ""))
+}
+
+orMatch <- function(string) paste(string,collapse="|")
+  
+## Filters based on OR
+RDF %>% filter(!grepl(orMatch(toMatch), value_has))
+grepl(orMatch(tooMatch), value_has)
+## Filters based on AND
+RDF %>% filter(!grepl(andMatch(toMatch), value_has,perl=TRUE) )
+
+'^(?=.*butter)(?=.*garlic)'
+```
+
+
+```{r}
+## Substitue equivalent or semi-equivalent ingredients
+somet <- ingredients %>% select(name, sometimes) %>%
+   separate_rows(., sometimes, sep = ", ") %>%
+  na.omit() %>% 
+  left_join(., ingredients %>% select(sometimes = name, has3 = has)) %>% rename(value = name)
+
+equi <- ingredients %>% select(name, equal) %>%
+   separate_rows(., equal, sep = ", ") %>%
+  na.omit() %>% 
+  left_join(., ingredients %>% select(equal = name, has2 = has)) %>% rename(value = name)
+
+makeable <- ingredients %>% select(name, makeable) %>%
+  na.omit() %>% rename(value = name)
+
+ingredients[ingredients$name == "tomato sauce", "has"] <- 0
+# test = 230
+
+X <- 120
+mf5 <- function(X){
+  expand.grid(c(str_split(grep(" or ", ing[[X]], v = TRUE, inv = F), " or "),
+              item = list(grep(" or ", ing[[X]], v = TRUE, inv = TRUE))))%>% 
+  mutate(v =1, recipe = meals$Meal[X], VarXX = " ")%>%  
+  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% 
+  select(-VarXX)%>%
+  pivot_longer(., c(-v, -recipe,-variant)) %>% 
+  unique() %>% select(-name) %>%filter(value != "") %>% 
+  mutate(value = str_trim(value, "both"))%>%
+  left_join(., ingredients %>% rename(value = name) %>% select(-equal, -sometimes), by = "value" ) %>%
+  arrange(variant) %>% 
+  left_join(., equi, by = "value") %>% 
+  left_join(., somet, by = "value") %>% 
+  group_by(recipe, variant, value) %>% arrange(desc(has2), desc(has3)) %>%
+  summarise_all(first) %>% 
+  mutate(has2 = ifelse(is.na(has2), has, has2),
+         has3 = ifelse(is.na(has3), has2, has3)) %>%
+  mutate(HAS = case_when(has == 1 ~ "has",
+                         has == 0 & has2 == 1 ~ "has2",
+                         has ==0 & has2 %in% c(NA, 0) & has3 ==1 ~ "has3",
+                         TRUE ~ "not"),
+         value = case_when(HAS == "has2" ~ paste("(",value,")", sep = ""),
+                           HAS == "has3" ~ paste("((",value,"))", sep = ""),
+                           TRUE ~ value)) %>%
+  group_by(recipe, variant) %>% 
+  mutate(vegetarian = all(vegetarian==1), 
+         vegan = all(vegan ==1),
+         makeability = case_when(sum(has) == n() ~ 1,
+                                 sum(has2) == n() ~ 2,
+                                 sum(has3) == n() ~ 3,
+                                 TRUE ~ 5)) %>% 
+  group_by(recipe, variant, HAS,makeability) %>% 
+  summarise(value = toString(value), does = n(), 
+            diet = case_when(first(vegan)==TRUE ~ "Vegan", 
+                             first(vegetarian)==TRUE ~ "Vegetarian", 
+                             !first(vegan) & !first(vegetarian) ~"Non-vegetarian"), .groups = "keep") %>%
+  pivot_wider(., names_from = "HAS", values_from = c("value", "does") ) %>%
+    left_join(., meals %>% select(recipe = Meal, Type, Cuisine, Source, Page), by = "recipe") %>%
+   mutate(does = sum(c_across(contains("does_has")))) %>% 
+  unite(., "value", contains("value_has"), sep = ", ") %>% # Need to fix this here
+  select(-contains("does_has"), -contains("value_has")) %>%
+  ungroup() %>%
+         mutate(variants = n(), mv = sum(makeability != 5)) %>% arrange(makeability, desc(does)) # %>% slice(1)
+}
+mf5(51) ## Why is NA in list of ingredients?
+rdx <- bind_rows(lapply(as.list(1:length(ing)), FUN = function(x) mf5(x)))%>%
+    mutate(does_not = replace_na(does_not, 0)) 
+
+rdx %>% arrange(recipe, makeability, desc(does), does_not) %>% group_by(recipe) %>% slice(1) %>% group_by(makeability) %>% tally()
+
+
+meals[40,] %>%
+   separate_rows(., Ingredients, sep = ", ") %>% 
+  mutate(variants = prod(1 + str_count(Ingredients, " or " )) )%>%
+  group_by(Meal) %>%
+  mutate(or = grepl(" or ", Ingredients), OR = cumsum(or)*or)%>%
+   separate_rows(., Ingredients, sep = " or ") %>%
+  left_join(., ingredients %>% select(Ingredients = name, has) %>% bind_rows(. ,data.frame(Ingredients = "", has = 1))) 
+
+
+```
+
+
+
+```{r}
+create.fluid.row <- function(DAT){
+
+        foo <- ingredients %>% group_by(class, class2) %>% tally() %>% group_by(class) %>% tally()
+        n.dairy <- foo %>% filter(class=="dairy") %$% n
+        n.meat <- foo %>% filter(class=="meat") %$% n
+        n.prod <- foo %>% filter(class=="produce") %$% n
+        n.pant <- foo %>% filter(class=="pantry") %$% n
+        n.spice <- foo %>% filter(class=="spice") %$% n
+  
+  BAR.d <- NULL
+  for(i in 1:n.dairy){
+    bar <- paste("                 checkboxGroupInput('dairy",i,"', names(Da)[",i,"], Da[[",i,"]]$name, selected = Dah[[",i,"]]$name)",
+                 ifelse(i == n.dairy,")," , ",\n"), sep = "")
+    BAR.d <- paste(BAR.d, bar, sep = "") }
+  
+  BAR.m <- NULL
+  for(i in 1:n.meat){
+    bar <- paste("                 checkboxGroupInput('meat",i,"', names(Me)[",i,"], Me[[",i,"]]$name, selected = Meh[[",i,"]]$name)",
+                 ifelse(i == n.meat,")," , ",\n"), sep = "")
+    BAR.m <- paste(BAR.m, bar, sep = "")}
+  
+  BAR.pr <- NULL
+  for(i in 1:n.prod){
+    bar <- paste("                 checkboxGroupInput('produce",i,"', names(Pr)[",i,"], Pr[[",i,"]]$name, selected = Prh[[",i,"]]$name)",
+                 ifelse(i == n.prod,")," , ",\n"), sep = "")
+    BAR.pr <- paste(BAR.pr, bar, sep = "")}
+  
+  BAR.pa <- NULL
+  for(i in 1:n.pant){
+    bar <- paste("                 checkboxGroupInput('pantry",i,"', names(Pa)[",i,"], Pa[[",i,"]]$name, selected = Pah[[",i,"]]$name)",
+                 ifelse(i == n.pant,")," , ",\n"), sep = "")
+    BAR.pa <- paste(BAR.pa, bar, sep = "")}
+  
+  BAR.s <- NULL
+  for(i in 1:n.spice){
+    bar <- paste("                 checkboxGroupInput('spice",i,"', names(Sp)[",i,"], Sp[[",i,"]]$name, selected = Sph[[",i,"]]$name)",
+                 ifelse(i == n.spice,")," , ",\n"), sep = "")
+    BAR.s <- paste(BAR.s, bar, sep = "")}
+  
+  cat(paste("column(2, 'Dairy',\n", BAR.d, 
+            "\ncolumn(2, 'Meat',\n", BAR.m,
+            "\ncolumn(2, 'Produce',\n", BAR.pr,
+            "\ncolumn(2, 'Pantry',\n", BAR.pa,
+            "\ncolumn(2, 'Spice',\n", BAR.s,
+            sep = ""))}
+
+create.fluid.row(ingredients)
+
+
+food.df <- function(DAT){
+  foo <- ingredients %>% group_by(class, class2) %>% tally() %>% group_by(class) %>% tally()
+BAR <- NULL
+for(i in 1:5){
+  
+bar <- paste("data.frame(Food = ", foo$class[i],"$name) %>% group_by(Food) %>% mutate(Has = 1*(Food %in% c(", 
+             toString(paste("input$",foo$class[i], 1:foo$n[i], sep = "")),")))", ifelse(i == nrow(foo), "", ","), sep = "")
+
+BAR <- paste(BAR, bar, sep = "\n")
+
+bar.bar <- paste("bind_rows(",BAR, ")", sep = "")
+}
+
+cat(bar.bar)
+}
+
+food.df(ingredients)
+```
+
+
+```{r}
+recipes_expand%>%ungroup() %>% select(4:100) %>% slice(1:25) %>% as.matrix() %>% cor() %>% qgraph()
+
+library("qgraph")
+data(big5)
+data(big5groups)
+qgraph(cor(big5),minimum=0.25,cut=0.4,vsize=2,legend=TRUE,borders=FALSE)
+title("Big 5 correlations",line=-2,cex.main=2)
+```
+
+
+```{r}
+## dead
+
+# ING <- unlist(ing) %>% as.data.frame() %>% rownames_to_column() %>% 
+#   select(meal = rowname, ing = ".") %>% 
+#   mutate(meal = gsub('[[:digit:]]+', '', meal)) %>% 
+#   mutate(or = 0.9*grepl(" or ", ing)) %>%
+#   separate_rows(., ing, sep = " or ") %>% 
+#   mutate(v = 1-or) %>% select(-or) %>% 
+#   group_by(meal) %>% mutate(n.or = sum(v!=1)) %>% 
+#   pivot_wider(., names_from= "ing", values_from = "v") %>%
+#   mutate(across(everything(), .fns = ~replace_na(.x, 0))) %>% 
+#   group_by(meal) %>%
+#   mutate(rs = sum(c_across(where(is.numeric))))
+
+# ING %>% #select(1, has, rs)%>%
+#   mutate(rs2 = sum(c_across(has))) %>% filter(rs2 >= rs) %>% select(meal, rs, rs2, everything())
+# 
+# ING %>% select(-rs) %>% pivot_longer(., -meal) %>% filter(value > 0) %>% group_by(name) %>% tally() %>% arrange(desc(n))
+# 
+# ## rs needs to capture the `or` and not count them all
+# ## how to handle multiple "or" recipes (a or b, c or d)
+# ## could repeat recipes and iterate through the combinations?
+# 
+# ## need to figure out how to handle optional ingredients
+# ## Same fix as above?
+# 
+# ing$`peanut noodles with shrimp` %in% "(optional)" 
+# ing[grepl("(optional)", ing)]
+# 
+# str_split(ing$`beef with broccoli`, " or ") %>% as.data.frame()%>%t() 
+# 
+# expand.grid(expand.grid(str_split(grep(" or ", ing$`beef with broccoli`, v = TRUE), " or ")) %>% 
+#   mutate(recipe = paste("recipe (", Var1, Var2,")"))%>% 
+#   pivot_longer(., -recipe),
+# expand.grid(grep(" or ", ing$`beef with broccoli`, v = TRUE, inv = TRUE)))   %>% mutate(v = 1) %>% unique() %>% select(-name) %>%
+#   pivot_wider(., names_from = c("value"), values_from = "v")
+# 
+# 
+# expand.grid(expand.grid(str_split(grep(" or ", ing$`ma po tofu`, v = TRUE), " or ")) %>% unlist(),
+# grep(" or ", ing$`ma po tofu`, v = TRUE, inv = TRUE)) %>% mutate(recipe = paste("recipe (", Var1,")")) %>% 
+#   pivot_longer(., -recipe) %>% mutate(v = 1) %>% unique() %>% select(-name) %>%
+#   pivot_wider(., names_from = c("value"), values_from = "v")
+# 
+# expand.grid(c("a", "b"), c("c", "d"), d = expand.grid(grep(" or ", ing$`beef with broccoli`, v = TRUE, inv = TRUE))$Var1) %>% 
+#   mutate(v =1, nameth = paste(Var1, Var2))%>% 
+#   pivot_longer(., c(-v, -nameth)) %>% unique() %>% select(-name) %>%
+#   pivot_wider(., names_from = "value", values_from = "v")
+# 
+# expand.grid(c(str_split(grep(" or", ing[[26]], v = TRUE, inv = F), " or"), 
+#               item = list(grep(" or", ing[[26]], v = TRUE, inv = TRUE)))) %>% 
+#   mutate(v =1, recipe = "recipe", VarXX = " ") %>%  unite(.,"variant", contains("Var"), remove = FALSE) %>% select(-VarXX) %>%
+#   pivot_longer(., c(-v, -recipe, -variant)) %>% unique() %>% select(-name) %>%
+#   pivot_wider(., names_from = "value", values_from = "v")
+```
+

@@ -1,0 +1,489 @@
+"name","n","has","class","class2","vegetarian","vegan","equal","sometimes","makeable","kroger","costco","ks","wf","other"
+"parmesan",61,1,"dairy","cheese",1,0,NA,NA,NA,1,2,NA,NA,NA
+"feta",11,0,"dairy","cheese",1,0,NA,NA,NA,1,2,NA,NA,NA
+"cheddar",9,1,"dairy","cheese",1,0,NA,NA,NA,1,2,NA,NA,NA
+"gruyere",6,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"mozzerella",6,0,"dairy","cheese",1,0,NA,NA,NA,1,2,NA,NA,NA
+"blue cheese",5,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"american cheese",4,1,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"fontina",4,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"cotija",3,1,"dairy","cheese",1,0,NA,NA,NA,1,NA,2,NA,NA
+"jack cheese",3,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"comte",2,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"cottage cheese",2,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"cream cheese",2,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"halloumi",2,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"provolone",2,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"ricotta",2,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"white cheddar",2,1,"dairy","cheese",1,0,NA,"cheddar",NA,NA,NA,NA,NA,NA
+"burrata",1,0,"dairy","cheese",1,0,NA,"mozzerella",NA,NA,NA,NA,NA,NA
+"goat cheese",1,1,"dairy","cheese",1,0,NA,NA,NA,NA,NA,NA,NA,NA
+"gorgonzola",1,0,"dairy","cheese",1,0,NA,NA,NA,1,2,NA,NA,NA
+"gouda",1,0,"dairy","cheese",1,0,NA,NA,NA,NA,NA,NA,NA,NA
+"stilton",1,0,"dairy","cheese",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"butter",116,1,"dairy","dairy",1,0,NA,NA,NA,1,2,NA,NA,NA
+"egg",38,1,"dairy","dairy",1,0,NA,NA,NA,1,1,NA,NA,NA
+"heavy cream",29,0,"dairy","dairy",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"sour cream",24,1,"dairy","dairy",1,0,"greek yogurt, yogurt",NA,NA,1,NA,NA,NA,NA
+"buttermilk",21,1,"dairy","dairy",1,0,NA,NA,NA,1,NA,NA,NA,NA
+"greek yogurt",14,1,"dairy","dairy",1,0,"yogurt",NA,NA,1,1,NA,NA,NA
+"yogurt",12,1,"dairy","dairy",1,0,"greek yogurt",NA,1,1,1,NA,NA,NA
+"milk",11,1,"dairy","dairy",1,0,"whole milk",NA,NA,1,1,NA,NA,NA
+"whole milk",10,1,"dairy","dairy",1,0,NA,"milk",NA,1,1,NA,NA,NA
+"creme fraiche",9,0,"dairy","dairy",1,0,NA,"heavy cream and buttermilk",1,1,NA,NA,NA,NA
+"ground beef",11,0,"meat","beef",0,0,NA,"short ribs, chuck roast, skirt steak, bone in short rib, brisket",NA,1,1,NA,NA,NA
+"flank steak",7,1,"meat","beef",0,0,NA,NA,NA,1,2,NA,NA,NA
+"short ribs",4,1,"meat","beef",0,0,NA,NA,NA,1,1,NA,NA,NA
+"baby back ribs",3,0,"meat","beef",0,0,NA,NA,NA,NA,2,NA,NA,NA
+"chuck roast",3,0,"meat","beef",0,0,NA,NA,NA,1,NA,NA,1,NA
+"skirt steak",3,0,"meat","beef",0,0,NA,NA,NA,1,2,NA,NA,NA
+"flap meat",2,0,"meat","beef",0,0,NA,NA,NA,1,2,NA,NA,NA
+"hanger steak",2,0,"meat","beef",0,0,NA,NA,NA,1,NA,NA,NA,NA
+"rib eye steak",2,0,"meat","beef",0,0,NA,NA,NA,1,2,NA,NA,NA
+"bone in short rib",1,0,"meat","beef",0,0,NA,NA,NA,1,1,NA,NA,NA
+"strip steak",1,0,"meat","beef",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"tri tip",1,0,"meat","beef",0,0,NA,NA,NA,1,1,NA,NA,NA
+"brisket",NA,0,"meat","beef",0,0,NA,NA,NA,NA,2,NA,NA,NA
+"chicken breast",18,1,"meat","chicken",0,0,NA,NA,NA,1,2,NA,NA,NA
+"whole chicken",17,1,"meat","chicken",0,0,NA,NA,NA,1,2,NA,NA,NA
+"chicken thigh",5,1,"meat","chicken",0,0,NA,NA,NA,1,1,NA,NA,NA
+"bone in chicken breast",2,0,"meat","chicken",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"chicken bones",2,1,"meat","chicken",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"bone in chicken thigh",1,0,"meat","chicken",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"chicken apple sausage",1,0,"meat","chicken",0,0,NA,NA,NA,1,1,NA,NA,NA
+"chicken leg quarters",1,0,"meat","chicken",0,0,NA,NA,NA,1,NA,NA,NA,NA
+"ground chicken",1,0,"meat","chicken",0,0,NA,"chicken thigh",NA,1,NA,NA,NA,NA
+"leftover roast chicken",1,0,"meat","chicken",0,0,NA,NA,NA,1,1,NA,NA,NA
+"ground lamb",3,0,"meat","other",0,0,NA,NA,NA,1,NA,NA,NA,NA
+"duck breast",2,1,"meat","other",0,0,NA,NA,NA,NA,1,NA,NA,NA
+"ground veal",2,0,"meat","other",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"lamb",1,0,"meat","other",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"bacon",14,1,"meat","pork",0,0,NA,NA,NA,1,2,NA,NA,NA
+"pork shoulder",9,0,"meat","pork",0,0,NA,NA,NA,1,2,NA,NA,NA
+"ground pork",7,0,"meat","pork",0,0,NA,"pork shoulder",NA,1,NA,NA,NA,NA
+"sweet italian sausage",5,0,"meat","pork",0,0,NA,NA,1,1,1,NA,NA,NA
+"breakfast sausage",2,0,"meat","pork",0,0,NA,NA,NA,1,NA,NA,2,NA
+"chorizo",2,0,"meat","pork",0,0,NA,NA,1,NA,NA,NA,NA,NA
+"ham",2,0,"meat","pork",0,0,NA,NA,NA,1,NA,NA,NA,NA
+"pancetta",2,0,"meat","pork",0,0,NA,NA,NA,1,NA,NA,NA,NA
+"prosciutto",2,0,"meat","pork",0,0,NA,NA,NA,1,1,NA,1,NA
+"spanish chorizo",2,0,"meat","pork",0,0,NA,NA,NA,1,NA,NA,NA,NA
+"bone-in pork chop",1,0,"meat","pork",0,0,NA,NA,NA,1,NA,NA,NA,NA
+"ham hock",1,0,"meat","pork",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"pork chop",1,0,"meat","pork",0,0,NA,NA,NA,1,NA,NA,NA,NA
+"pork loin",1,1,"meat","pork",0,0,NA,"pork tenderloin",NA,1,NA,NA,NA,NA
+"pork tenderloin",1,1,"meat","pork",0,0,NA,"pork loin",NA,1,NA,NA,NA,NA
+"sausage",2,1,"meat","sausage",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"bratwurst",1,1,"meat","sausage",0,0,NA,NA,1,NA,NA,NA,NA,NA
+"garlic sausage",1,0,"meat","sausage",0,0,NA,NA,1,NA,NA,NA,NA,NA
+"linguica",1,0,"meat","sausage",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"merguez sausage",1,0,"meat","sausage",0,0,NA,NA,1,NA,NA,NA,NA,NA
+"shrimp",9,1,"meat","seafood",0,0,NA,NA,NA,2,NA,NA,NA,NA
+"salmon",6,0,"meat","seafood",0,0,NA,NA,NA,2,NA,NA,NA,NA
+"cod",3,1,"meat","seafood",0,0,NA,NA,NA,2,NA,NA,NA,NA
+"grouper",1,0,"meat","seafood",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"lamb loin chops",1,0,"meat","seafood",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"mahi mahi",1,0,"meat","seafood",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"skin on salmon",1,0,"meat","seafood",0,0,"salmon",NA,NA,NA,NA,NA,1,NA
+"swordfish",1,0,"meat","seafood",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"tilapia",1,0,"meat","seafood",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"trout",1,0,"meat","seafood",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"tofu",4,1,"meat","tofu",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"silken tofu",2,0,"meat","tofu",1,1,"tofu",NA,NA,NA,NA,NA,NA,NA
+"ground turkey",3,0,"meat","turkey",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"turkey breast",1,0,"meat","turkey",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"white wine",14,0,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"vodka",7,1,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"lager",5,1,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"red wine",5,1,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sherry",3,1,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"brandy",1,0,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"marsala wine",1,0,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"port wine",1,0,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"porter beer",1,0,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sweet marsala",1,0,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"whiskey",1,1,"pantry","alcohol",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"canned chickpeas",6,1,"pantry","beans",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"black beans",5,1,"pantry","beans",1,1,NA,"canned black beans",NA,NA,NA,NA,NA,NA
+"canned cannelini beans",2,1,"pantry","beans",1,1,"canned chickpeas",NA,NA,NA,NA,NA,NA,NA
+"chickpeas",2,1,"pantry","beans",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"kidney beans",2,0,"pantry","beans",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pinto beans",2,1,"pantry","beans",1,1,NA,"canned pinto beans",NA,NA,NA,NA,NA,NA
+"white beans",2,1,"pantry","beans",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"black eyed peas",1,0,"pantry","beans",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"canned black beans",1,1,"pantry","beans",1,1,NA,"black beans",NA,NA,NA,NA,NA,NA
+"canned cannellini beans",1,1,"pantry","beans",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"canned white beans",1,1,"pantry","beans",1,1,"canned cannelini beans","cannelini beans",NA,NA,NA,NA,NA,NA
+"cannelini beans",1,1,"pantry","beans",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"giant white beans",1,0,"pantry","beans",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"crusty bread",12,0,"pantry","bread",1,1,NA,"sandwich bread",NA,NA,NA,NA,NA,NA
+"corn tortillas",6,1,"pantry","bread",1,1,NA,"flour tortillas",NA,NA,NA,NA,NA,NA
+"sandwich bread",5,1,"pantry","bread",1,1,NA,"crusty bread",NA,NA,NA,NA,NA,NA
+"hoagie rolls",4,0,"pantry","bread",1,1,NA,"hamburger bun",NA,NA,NA,NA,NA,NA
+"baguette",3,0,"pantry","bread",1,1,NA,"crusty bread",NA,NA,NA,NA,NA,NA
+"croutons",3,0,"pantry","bread",1,1,NA,"crusty bread",1,NA,NA,NA,NA,NA
+"flour tortillas",3,1,"pantry","bread",1,1,NA,"corn tortillas",NA,NA,NA,NA,NA,NA
+"hamburger buns",3,1,"pantry","bread",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"tortillas",3,1,"pantry","bread",1,1,"corn tortillas, flour tortillas",NA,NA,NA,NA,NA,NA,NA
+"flatbread",2,0,"pantry","bread",1,1,"naan","pita bread",1,NA,NA,NA,NA,NA
+"pita bread",2,0,"pantry","bread",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"buttermilk biscuits",1,0,"pantry","bread",1,0,NA,NA,NA,NA,NA,NA,NA,NA
+"naan",1,1,"pantry","bread",1,1,"flatbread",NA,1,NA,NA,NA,NA,NA
+"savory pastry dough",1,0,"pantry","bread",1,0,NA,NA,NA,NA,NA,NA,NA,NA
+"tomato paste",18,1,"pantry","canned",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"canned whole tomatoes",8,1,"pantry","canned",1,1,NA,"crushed tomatoes",NA,NA,NA,NA,NA,NA
+"chipotle",6,1,"pantry","canned",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"coconut milk",4,1,"pantry","canned",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"crushed tomatoes",4,0,"pantry","canned",1,1,"canned whole tomatoes",NA,NA,NA,NA,NA,NA,NA
+"canned tuna",2,0,"pantry","canned",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"tomato sauce",2,1,"pantry","canned",1,1,NA,"canned whole tomatoes, crushed tomatoes",NA,NA,NA,NA,NA,NA
+"canned baby clams",1,0,"pantry","canned",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"clam juice",1,0,"pantry","canned",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"diced tomatoes",1,1,"pantry","canned",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"evaporated milk",1,1,"pantry","canned",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"ancho chile",3,1,"pantry","chiles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"guajillo chile",2,1,"pantry","chiles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"arbol chile",1,0,"pantry","chiles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cascabel chile",1,0,"pantry","chiles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cubanelle pepper",1,0,"pantry","chiles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"dried new mexico chile",1,0,"pantry","chiles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"mulato chile",1,0,"pantry","chiles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pasilla chile",1,0,"pantry","chiles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pequin chile",1,0,"pantry","chiles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"soy sauce",41,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"mayonnaise",19,1,"pantry","condiment",1,1,NA,"aioli",1,NA,NA,NA,NA,NA
+"dijon mustard",16,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"fish sauce",15,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"tahini",11,1,"pantry","condiment",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"harissa",7,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"ketchup",7,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"maple syrup",7,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sriracha",7,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"hot sauce",5,1,"pantry","condiment",1,1,"Frank's hot sauce",NA,NA,NA,NA,NA,NA,NA
+"peanut butter",5,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"barbecue sauce",4,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"gochujang",3,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"mild red wine olive oil vinaigrette",3,0,"pantry","condiment",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"oyster sauce",3,1,"pantry","condiment",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"apricot preserves",2,0,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"Frank's hot sauce",2,0,"pantry","condiment",1,1,"hot sauce",NA,NA,NA,NA,NA,NA,NA
+"hazelnut vinaigrette",2,0,"pantry","condiment",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"horseradish",2,0,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"mild lemon olive oil vinaigrette",2,0,"pantry","condiment",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"miso",2,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"salsa verde",2,1,"pantry","condiment",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"tartar sauce",2,0,"pantry","condiment",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"aioli",1,0,"pantry","condiment",1,0,NA,"mayonnaise",1,NA,NA,NA,NA,NA
+"caesar dressing",1,1,"pantry","condiment",0,0,NA,NA,1,NA,NA,NA,NA,NA
+"chili-garlic sauce",1,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,2,NA,NA
+"chunky peanut butter",1,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"fig preserves",1,0,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"ginger peanut dressing",1,0,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"green curry paste",1,1,"pantry","condiment",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"low sodium soy sauce",1,1,"pantry","condiment",1,1,NA,"soy sauce",NA,NA,NA,NA,NA,NA
+"pine nut vinaigrette",1,0,"pantry","condiment",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"teriyaki sauce",1,1,"pantry","condiment",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"raisins",6,1,"pantry","dried fruit",1,1,NA,"currants",NA,NA,NA,NA,NA,NA
+"currants",3,0,"pantry","dried fruit",1,1,NA,"raisins",NA,NA,NA,NA,NA,NA
+"dried apricots",3,0,"pantry","dried fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"dates",2,1,"pantry","dried fruit",1,1,NA,"dried figs",NA,NA,NA,NA,NA,NA
+"dried cherries",2,1,"pantry","dried fruit",1,1,NA,"dried cranberries",NA,NA,NA,NA,NA,NA
+"dried cranberries",2,1,"pantry","dried fruit",1,1,NA,"dried cherries",NA,NA,NA,NA,NA,NA
+"dried figs",2,1,"pantry","dried fruit",1,1,NA,"dates",NA,NA,NA,NA,NA,NA
+"golden raisins",1,0,"pantry","dried fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"prunes",1,0,"pantry","dried fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"flour",60,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sugar",34,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sesame seeds",18,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cornstarch",16,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"baking powder",15,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"panko",15,1,"pantry","dry",1,1,"bread crumbs",NA,NA,NA,NA,NA,NA,NA
+"brown sugar",13,1,"pantry","dry",1,1,"dark brown sugar",NA,NA,NA,NA,NA,NA,NA
+"dark brown sugar",13,1,"pantry","dry",1,1,"brown sugar",NA,NA,NA,NA,NA,NA,NA
+"baking soda",9,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"gelatin",6,1,"pantry","dry",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"bread crumbs",5,1,"pantry","dry",1,1,"panko","crusty bread",NA,NA,NA,NA,NA,NA
+"instant yeast",5,1,"pantry","dry",1,1,"active dry yeast",NA,NA,NA,NA,NA,NA,NA
+"active dry yeast",3,1,"pantry","dry",1,1,"instant yeast",NA,NA,NA,NA,NA,NA,NA
+"cornstartch",2,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"unsweetened coconut chips",2,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"bread flour",1,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cocoa powder",1,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cornmeal",1,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"palm sugar",1,0,"pantry","dry",1,1,NA,"brown sugar, dark brown sugar",NA,NA,NA,NA,NA,NA
+"powdered sugar",1,1,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"rice flour",1,0,"pantry","dry",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"olive oil",180,1,"pantry","fat",1,1,NA,"vegetable oil, canola oil",NA,NA,NA,NA,NA,NA
+"vegetable oil",48,1,"pantry","fat",1,1,"canola oil","peanut oil",NA,NA,NA,NA,NA,NA
+"canola oil",37,1,"pantry","fat",1,1,"vegetable oil","peanut oil",NA,NA,NA,NA,NA,NA
+"sesame oil",21,1,"pantry","fat",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"lard",4,0,"pantry","fat",0,0,NA,"shortening",NA,NA,NA,NA,NA,NA
+"peanut oil",4,0,"pantry","fat",1,1,"canola oil, vegetable oil",NA,NA,NA,NA,NA,NA,NA
+"bacon fat",2,1,"pantry","fat",0,0,NA,"butter, olive oil, duck fat",NA,NA,NA,NA,NA,NA
+"duck fat",2,0,"pantry","fat",0,0,NA,"butter, olive oil, bacon fat",NA,NA,NA,NA,NA,NA
+"coconut oil",1,0,"pantry","fat",1,1,NA,"canola oil",NA,NA,NA,NA,NA,NA
+"ghee",1,0,"pantry","fat",1,0,NA,"canola oil, butter",1,NA,NA,NA,NA,NA
+"hazelnut oil",1,1,"pantry","fat",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"shortening",1,0,"pantry","fat",1,1,NA,"lard",NA,NA,NA,NA,NA,NA
+"walnut oil",1,1,"pantry","fat",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"farro",7,0,"pantry","grain",1,1,NA,"barley",NA,NA,NA,NA,NA,NA
+"rice",7,1,"pantry","grain",1,1,"white rice, brown rice",NA,NA,NA,NA,NA,NA,NA
+"white rice",6,1,"pantry","grain",1,1,"rice","brown rice",NA,NA,NA,NA,NA,NA
+"green lentils",5,1,"pantry","grain",1,1,NA,"brown lentils",NA,NA,NA,NA,NA,NA
+"barley",4,1,"pantry","grain",1,1,NA,"farro",NA,NA,NA,NA,NA,NA
+"basmati rice",4,1,"pantry","grain",1,1,NA,"rice, brown rice",NA,NA,NA,NA,NA,NA
+"black lentils",4,1,"pantry","grain",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"arborio rice",2,1,"pantry","grain",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"brown lentils",2,0,"pantry","grain",1,1,NA,"green lentils",NA,NA,NA,NA,NA,NA
+"couscous",2,1,"pantry","grain",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"wheat berries",2,0,"pantry","grain",1,1,NA,"barley",NA,NA,NA,NA,NA,NA
+"corn grits",1,1,"pantry","grain",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"grits",1,1,"pantry","grain",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"lentils",1,1,"pantry","grain",1,1,"green lentils, brown lentils, black lentils",NA,NA,NA,NA,NA,NA,NA
+"old fashioned rolled oats",1,1,"pantry","grain",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"wild rice",1,1,"pantry","grain",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"honey",16,1,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"marmite",7,1,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"puff pastry",6,0,"pantry","misc",1,0,NA,"pie dough",1,NA,NA,NA,NA,NA
+"frangipane",3,0,"pantry","misc",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"parmesan rind",3,1,"pantry","misc",1,0,NA,NA,NA,NA,NA,NA,NA,NA
+"pie dough",3,0,"pantry","misc",1,0,NA,"puff pastry",1,NA,NA,NA,NA,NA
+"pineapple juice",3,0,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"white miso",3,1,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"aji amarillo paste",2,1,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"club soda",2,0,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"dried mushrooms",2,0,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"red pasta sauce",2,0,"pantry","misc",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"agave nectar",1,1,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"almond extract",1,1,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"almond paste",1,0,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"apple juice",1,0,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"black bean burger",1,0,"pantry","misc",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"chile paste",1,0,"pantry","misc",0,0,NA,NA,1,NA,NA,NA,NA,NA
+"coke",1,1,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"dried porcini mushrooms",1,0,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"flax seed",1,1,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"frozen grated coconut",1,0,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"gyoza wrappers",1,0,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"laksa paste",1,1,"pantry","misc",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"red miso",1,0,"pantry","misc",1,1,"miso",NA,NA,NA,NA,NA,NA,NA
+"vanilla extract",1,1,"pantry","misc",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"almonds",9,1,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pepitas",7,1,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pine nuts",7,1,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"hazelnuts",6,0,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"peanuts",6,1,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"walnuts",5,1,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pecans",4,1,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pistachios",4,1,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sunflower seeds",2,1,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cashews",1,1,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"dry roasted peanuts",1,0,"pantry","nut",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pasta",16,1,"pantry","pasta",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"fettucine",3,0,"pantry","pasta",1,1,NA,"pasta",NA,NA,NA,NA,NA,NA
+"orzo",2,1,"pantry","pasta",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"spaghetti",2,0,"pantry","pasta",1,1,NA,"pasta",NA,NA,NA,NA,NA,NA
+"elbow macaroni",1,1,"pantry","pasta",1,1,NA,"pasta",NA,NA,NA,NA,NA,NA
+"lasagna noodles",1,0,"pantry","pasta",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"linguine",1,0,"pantry","pasta",1,1,NA,"pasta",NA,NA,NA,NA,NA,NA
+"lo mein noodles",1,1,"pantry","pasta",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"noodles",1,1,"pantry","pasta",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"rice noodles",1,1,"pantry","pasta",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"rice vermicelli",1,1,"pantry","pasta",1,1,"rice noodles",NA,NA,NA,NA,NA,NA,NA
+"anchovies",15,1,"pantry","pickles",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"capers",13,1,"pantry","pickles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"preserved lemon",6,1,"pantry","pickles",1,1,NA,"lemon",1,NA,NA,NA,NA,NA
+"castlevetrano olives",4,0,"pantry","pickles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pickle",4,1,"pantry","pickles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pickled onion",4,0,"pantry","pickles",1,1,NA,"red onion",1,NA,NA,NA,NA,NA
+"kalamata olives",3,1,"pantry","pickles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"kimchi",3,1,"pantry","pickles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pimento olives",1,0,"pantry","pickles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sauerkraut",1,1,"pantry","pickles",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"tortilla chips",2,1,"pantry","snack",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"crackers",1,1,"pantry","snack",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sriracha peas",1,0,"pantry","snack",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"wasabi peas",1,0,"pantry","snack",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"chicken stock",54,1,"pantry","stock",0,0,NA,"vegetable stock",1,NA,NA,NA,NA,NA
+"vegetable stock",3,0,"pantry","stock",1,1,NA,"chicken stock",NA,NA,NA,NA,NA,NA
+"parmesan broth",1,0,"pantry","stock",0,0,NA,NA,1,NA,NA,NA,NA,NA
+"shellfish stock",1,0,"pantry","stock",0,0,NA,"chicken stock",NA,NA,NA,NA,NA,NA
+"red wine vinegar",29,1,"pantry","vinegar",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"white wine vinegar",15,1,"pantry","vinegar",1,1,"white vinegar","rice wine vinegar",NA,NA,NA,NA,NA,NA
+"balsamic vinegar",14,1,"pantry","vinegar",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"white vinegar",14,1,"pantry","vinegar",1,1,"white wine vinegar",NA,NA,NA,NA,NA,NA,NA
+"apple cider vinegar",13,1,"pantry","vinegar",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"rice wine vinegar",9,1,"pantry","vinegar",1,1,"rice vinegar","white wine vinegar",NA,NA,NA,NA,NA,NA
+"rice vinegar",8,1,"pantry","vinegar",1,1,"rice wine vinegar",NA,NA,NA,NA,NA,NA,NA
+"worcestershire sauce",8,1,"pantry","vinegar",0,0,NA,NA,NA,NA,NA,NA,NA,NA
+"sherry vinegar",6,1,"pantry","vinegar",1,1,NA,"sherry wine, apple cider vinegar",NA,NA,NA,NA,NA,NA
+"mirin",4,1,"pantry","vinegar",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sake",4,1,"pantry","vinegar",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"xiaoxing wine",3,1,"pantry","vinegar",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"raspberry vinegar",1,0,"pantry","vinegar",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sherry wine",1,1,"pantry","vinegar",1,1,NA,"sherry vinegar",NA,NA,NA,NA,NA,NA
+"garlic",179,1,"produce","allium",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"onion",74,1,"produce","allium",1,1,NA,"shallot",NA,NA,NA,NA,NA,NA
+"shallot",55,1,"produce","allium",1,1,NA,"onion",NA,NA,NA,NA,NA,NA
+"scallions",44,1,"produce","allium",1,1,NA,"onion",NA,NA,NA,NA,NA,NA
+"red onion",27,0,"produce","allium",1,1,NA,"onion",NA,NA,NA,NA,NA,NA
+"white onion",5,1,"produce","allium",1,1,NA,"onion",NA,NA,NA,NA,NA,NA
+"leek",4,0,"produce","allium",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sweet onion",1,0,"produce","allium",1,1,NA,"onion",NA,NA,NA,NA,NA,NA
+"lemon",104,1,"produce","fruit",1,1,NA,"meyer lemon",NA,NA,NA,NA,NA,NA
+"lime",45,1,"produce","fruit",1,1,NA,"lemon",NA,NA,NA,NA,NA,NA
+"orange",14,1,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"granny smith apple",4,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"mango",4,1,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"apple",3,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"blood orange",3,0,"produce","fruit",1,1,"orange",NA,NA,NA,NA,NA,NA,NA
+"grapes",3,1,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"meyer lemon",3,0,"produce","fruit",1,1,NA,"lemon",NA,NA,NA,NA,NA,NA
+"pomegranate",3,1,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"asian pear",2,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"grapefruit",2,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pear",2,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pineapple",2,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"tangerine",2,0,"produce","fruit",1,1,NA,"orange",NA,NA,NA,NA,NA,NA
+"coconut",1,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"green apple",1,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"green plantain",1,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"papaya",1,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"persimmon",1,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"plums",1,0,"produce","fruit",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"parsley",90,0,"produce","herb",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cilantro",61,1,"produce","herb",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"thyme",33,0,"produce","herb",1,1,NA,"dried thyme",NA,NA,NA,NA,NA,NA
+"chives",26,0,"produce","herb",1,1,NA,"dried chives",NA,NA,NA,NA,NA,NA
+"mint",25,0,"produce","herb",1,1,NA,"dried mint",NA,NA,NA,NA,NA,NA
+"basil",18,1,"produce","herb",1,1,NA,"dried basil",NA,NA,NA,NA,NA,NA
+"oregano",18,1,"produce","herb",1,1,NA,"dried oregano",NA,NA,NA,NA,NA,NA
+"dill",13,0,"produce","herb",1,1,NA,"dried dill",NA,NA,NA,NA,NA,NA
+"rosemary",11,0,"produce","herb",1,1,NA,"dried rosemary",NA,NA,NA,NA,NA,NA
+"tarragon",9,0,"produce","herb",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sage",6,0,"produce","herb",1,1,NA,"dried sage",NA,NA,NA,NA,NA,NA
+"thai basil",3,0,"produce","herb",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"chervil",2,0,"produce","herb",1,1,NA,"parsley",NA,NA,NA,NA,NA,NA
+"lemongrass",1,0,"produce","herb",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"kale",14,1,"produce","leaf",1,1,NA,"spinach",NA,NA,NA,NA,NA,NA
+"spinach",11,0,"produce","leaf",1,1,NA,"kale",NA,NA,NA,NA,NA,NA
+"arugula",7,1,"produce","leaf",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"iceberg lettuce",2,0,"produce","leaf",1,1,NA,"shredded lettuce",NA,NA,NA,NA,NA,NA
+"shredded lettuce",2,0,"produce","leaf",1,1,"iceberg lettuce",NA,NA,NA,NA,NA,NA,NA
+"watercress",2,0,"produce","leaf",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"romaine hearts",1,0,"produce","leaf",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"romaine lettuce",1,0,"produce","leaf",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"salad greens",1,0,"produce","leaf",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"mushrooms",19,0,"produce","mushroom",1,1,"cremini mushrooms, white mushrooms",NA,NA,NA,NA,NA,NA,NA
+"cremini mushrooms",4,0,"produce","mushroom",1,1,"mushrooms","white mushrooms",NA,NA,NA,NA,NA,NA
+"shiitake mushrooms",1,0,"produce","mushroom",1,1,NA,"mushrooms",NA,NA,NA,NA,NA,NA
+"white mushrooms",1,0,"produce","mushroom",1,1,"mushrooms","cremini mushrooms",NA,NA,NA,NA,NA,NA
+"jalapeno",26,0,"produce","pepper",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"poblano pepper",5,0,"produce","pepper",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"new mexico chile",4,0,"produce","pepper",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"california chile",2,0,"produce","pepper",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"serrano pepper",2,0,"produce","pepper",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"thai chili",1,0,"produce","pepper",1,1,NA,"serrano pepper, jalapeno",NA,NA,NA,NA,NA,NA
+"carrot",37,1,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"ginger",28,1,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"russet potato",16,1,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sweet potato",7,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"beets",6,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"yukon gold potato",5,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"radish",4,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"fingerling potatoes",3,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"baby potatoes",2,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"daikon",2,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"pearl onions",2,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"baby turnips",1,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"jicama",1,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"kohlrabi",1,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"lotus root",1,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"new potato",1,0,"produce","root",1,1,NA,"yukon gold potato, baby potatoes",NA,NA,NA,NA,NA,NA
+"parsnip",1,0,"produce","root",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"zucchini",10,0,"produce","squash",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"butternut squash",4,0,"produce","squash",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"summer squash",4,0,"produce","squash",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"acorn squash",1,0,"produce","squash",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"kabocha squash",1,0,"produce","squash",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"celery",21,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"avocado",15,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cucumber",13,1,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"broccoli",12,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cabbage",11,0,"produce","vegetable",1,1,"red cabbage, green cabbage",NA,NA,NA,NA,NA,NA,NA
+"bell pepper",10,0,"produce","vegetable",1,1,"red bell pepper",NA,NA,NA,NA,NA,NA,NA
+"asparagus",8,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cauliflower",8,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"brussels sprouts",7,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"eggplant",7,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"frozen peas",7,1,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"green beans",7,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"snap peas",6,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"corn",5,1,"produce","vegetable",1,1,"corn on the cob",NA,NA,NA,NA,NA,NA,NA
+"fava beans",5,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"fennel bulb",5,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"corn on the cob",4,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"edamame",4,1,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"peas",4,1,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"red bell pepper",4,0,"produce","vegetable",1,1,"bell pepper",NA,NA,NA,NA,NA,NA,NA
+"tomatillo",4,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"bean sprouts",3,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"tomato",3,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"artichoke hearts",2,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"lima beans",2,1,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"napa cabbage",2,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"persian cucumber",2,0,"produce","vegetable",1,1,NA,"cucumber",NA,NA,NA,NA,NA,NA
+"red cabbage",2,0,"produce","vegetable",1,1,NA,"green cabbage",NA,NA,NA,NA,NA,NA
+"broccoli rabe",1,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"green cabbage",1,0,"produce","vegetable",1,1,NA,"red cabbage",NA,NA,NA,NA,NA,NA
+"rhubarb",1,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"rutabaga",1,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sprouts",1,0,"produce","vegetable",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"dried oregano",30,1,"spice","spice",1,1,"oregano",NA,NA,NA,NA,NA,NA,NA
+"red pepper flakes",30,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cumin",26,1,"spice","spice",1,1,"cumin seed",NA,NA,NA,NA,NA,NA,NA
+"bay leaf",20,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"coriander",16,1,"spice","spice",1,1,"coriander seed",NA,NA,NA,NA,NA,NA,NA
+"paprika",16,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cayenne pepper",14,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cumin seed",11,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"turmeric",11,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"garlic powder",10,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"black pepper",9,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"fennel seed",9,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"chili powder",8,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cinnamon",6,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"smoked paprika",6,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"sumac",6,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"nutmeg",5,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"dried thyme",4,1,"spice","spice",1,1,NA,"thyme",NA,NA,NA,NA,NA,NA
+"garam masala",4,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"mexican oregano",4,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"ancho chile powder",3,1,"spice","spice",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"memphis rub",3,0,"spice","spice",1,1,NA,NA,1,NA,NA,NA,NA,NA
+"mustard powder",3,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"onion powder",3,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"celery salt",2,0,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"celery seed",2,0,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"chile powder",2,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"dried basil",2,1,"spice","spice",1,1,NA,"basil",NA,NA,NA,NA,NA,NA
+"dried rosemary",2,0,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"dry mustard",2,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"five spice powder",2,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"poultry rub",2,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"saffron",2,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"black mustard seed",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"black peppercorns",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"caraway seed",1,0,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cardamon",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"cloves",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"epazote",1,0,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"ground allspice",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"ground cloves",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"ground ginger",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"ground mace",1,0,"spice","spice",1,1,"nutmeg",NA,NA,NA,NA,NA,NA,NA
+"ground sage",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"marjoram",1,0,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"nigella seeds",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"poppy seeds",1,0,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA
+"white pepper",1,1,"spice","spice",1,1,NA,NA,NA,NA,NA,NA,NA,NA

@@ -39,5 +39,5 @@ vignettes/*.pdf
 .Renviron
 
 # ignore archived ingredients
-/data/archive/
-/data/archive/*
+/data/archived/
+/data/archived/*

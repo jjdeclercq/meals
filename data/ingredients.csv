@@ -1,19 +1,19 @@
 "name","n","class","class2","vegetarian","vegan","equal","sometimes","makeable","rn","restricted","has"
-"parmesan",66,"dairy","cheese",1,0,NA,NA,NA,1,1,1
+"parmesan",67,"dairy","cheese",1,0,NA,NA,NA,1,1,1
 "feta",16,"dairy","cheese",1,0,NA,NA,NA,2,1,1
-"cheddar",11,"dairy","cheese",1,0,NA,NA,NA,3,1,1
+"cheddar",12,"dairy","cheese",1,0,NA,NA,NA,3,1,1
 "cream cheese",7,"dairy","cheese",1,0,NA,NA,NA,4,1,1
 "gruyere",7,"dairy","cheese",1,0,NA,NA,NA,5,1,0
 "mozzerella",6,"dairy","cheese",1,0,NA,NA,NA,6,0,1
-"blue cheese",5,"dairy","cheese",1,0,NA,NA,NA,7,0,0
-"american cheese",4,"dairy","cheese",1,0,NA,NA,NA,8,0,1
+"american cheese",5,"dairy","cheese",1,0,NA,NA,NA,7,0,1
+"blue cheese",5,"dairy","cheese",1,0,NA,NA,NA,8,0,0
 "fontina",4,"dairy","cheese",1,0,NA,NA,NA,9,0,0
-"cotija",3,"dairy","cheese",1,0,NA,NA,NA,10,0,0
-"jack cheese",3,"dairy","cheese",1,0,NA,NA,NA,11,0,0
+"jack cheese",4,"dairy","cheese",1,0,NA,NA,NA,10,0,0
+"cotija",3,"dairy","cheese",1,0,NA,NA,NA,11,0,0
 "comte",2,"dairy","cheese",1,0,NA,NA,NA,12,0,0
 "cottage cheese",2,"dairy","cheese",1,0,NA,NA,NA,13,0,0
 "goat cheese",2,"dairy","cheese",1,0,NA,NA,NA,14,0,0
-"halloumi",2,"dairy","cheese",1,0,NA,NA,NA,15,0,1
+"halloumi",2,"dairy","cheese",1,0,NA,NA,NA,15,0,0
 "paneer",2,"dairy","cheese",1,0,"","feta",0,16,0,0
 "provolone",2,"dairy","cheese",1,0,NA,NA,NA,17,0,1
 "ricotta",2,"dairy","cheese",1,0,NA,NA,NA,18,0,0
@@ -22,7 +22,7 @@
 "gorgonzola",1,"dairy","cheese",1,0,NA,NA,NA,21,0,1
 "gouda",1,"dairy","cheese",1,0,NA,NA,NA,22,0,0
 "stilton",1,"dairy","cheese",1,0,NA,NA,NA,23,0,0
-"butter",134,"dairy","dairy",1,0,NA,NA,NA,24,0,1
+"butter",135,"dairy","dairy",1,0,NA,NA,NA,24,0,1
 "egg",55,"dairy","dairy",1,0,NA,NA,NA,25,0,1
 "heavy cream",32,"dairy","dairy",1,0,NA,NA,NA,26,0,1
 "greek yogurt",28,"dairy","dairy",1,0,"yogurt",NA,NA,27,0,1
@@ -121,8 +121,8 @@
 "cannelini beans",1,"pantry","beans",1,1,NA,NA,NA,120,0,1
 "giant white beans",1,"pantry","beans",1,1,NA,NA,NA,121,0,0
 "crusty bread",17,"pantry","bread",1,1,NA,"sandwich bread",NA,122,0,1
-"corn tortillas",6,"pantry","bread",1,1,NA,"flour tortillas",NA,123,0,1
-"sandwich bread",6,"pantry","bread",1,1,NA,"crusty bread",NA,124,0,1
+"sandwich bread",7,"pantry","bread",1,1,NA,"crusty bread",NA,123,0,1
+"corn tortillas",6,"pantry","bread",1,1,NA,"flour tortillas",NA,124,0,1
 "baguette",4,"pantry","bread",1,1,NA,"crusty bread",NA,125,0,0
 "hamburger buns",4,"pantry","bread",1,1,NA,NA,NA,126,0,1
 "hoagie rolls",4,"pantry","bread",1,1,NA,"hamburger bun",NA,127,0,0
@@ -156,7 +156,7 @@
 "mulato chile",1,"pantry","chiles",1,1,NA,NA,NA,155,0,0
 "pequin chile",1,"pantry","chiles",1,1,NA,NA,NA,156,0,0
 "soy sauce",46,"pantry","condiment",1,1,NA,NA,NA,157,0,1
-"mayonnaise",21,"pantry","condiment",1,1,NA,"aioli",1,158,0,1
+"mayonnaise",22,"pantry","condiment",1,1,NA,"aioli",1,158,0,1
 "dijon mustard",19,"pantry","condiment",1,1,NA,NA,NA,159,0,1
 "fish sauce",17,"pantry","condiment",1,1,NA,NA,NA,160,0,1
 "tahini",15,"pantry","condiment",1,1,NA,NA,1,161,0,1
@@ -193,7 +193,7 @@
 "tamari",1,"pantry","condiment",1,1,"soy sauce","",0,192,0,0
 "teriyaki sauce",1,"pantry","condiment",1,1,NA,NA,1,193,0,1
 "raisins",7,"pantry","dried fruit",1,1,NA,"currants",NA,194,0,1
-"dried cranberries",5,"pantry","dried fruit",1,1,NA,"dried cherries",NA,195,0,1
+"dried cranberries",5,"pantry","dried fruit",1,1,NA,"dried cherries",NA,195,0,0
 "dried cherries",4,"pantry","dried fruit",1,1,NA,"dried cranberries",NA,196,0,0
 "currants",3,"pantry","dried fruit",1,1,NA,"raisins",NA,197,0,0
 "dried apricots",3,"pantry","dried fruit",1,1,NA,NA,NA,198,0,0
@@ -408,7 +408,7 @@
 "california chile",2,"produce","pepper",1,1,NA,NA,NA,407,0,0
 "thai chili",2,"produce","pepper",1,1,NA,"serrano pepper, jalapeno",NA,408,0,0
 "ginger",48,"produce","root",1,1,NA,NA,NA,409,0,1
-"carrot",44,"produce","root",1,1,NA,NA,NA,410,0,1
+"carrot",44,"produce","root",1,1,NA,NA,NA,410,0,0
 "russet potato",18,"produce","root",1,1,NA,NA,NA,411,0,1
 "sweet potato",11,"produce","root",1,1,NA,NA,NA,412,0,0
 "yukon gold potato",9,"produce","root",1,1,NA,NA,NA,413,0,0
@@ -437,7 +437,7 @@
 "bell pepper",14,"produce","vegetable",1,1,"red bell pepper",NA,NA,436,0,0
 "broccoli",12,"produce","vegetable",1,1,NA,NA,NA,437,0,0
 "cabbage",12,"produce","vegetable",1,1,"red cabbage, green cabbage",NA,NA,438,0,0
-"cauliflower",12,"produce","vegetable",1,1,NA,NA,NA,439,0,0
+"cauliflower",12,"produce","vegetable",1,1,NA,NA,NA,439,0,1
 "asparagus",8,"produce","vegetable",1,1,NA,NA,NA,440,0,0
 "brussels sprouts",8,"produce","vegetable",1,1,NA,NA,NA,441,0,0
 "corn",8,"produce","vegetable",1,1,"corn on the cob",NA,NA,442,0,1

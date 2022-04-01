@@ -3,7 +3,7 @@ expand.recipes <- function(m){
   names(ing) <- m$Meal
   
   bind_rows(lapply(as.list(1:length(ing)), FUN = function(x) mf(x, ing = ing))) %>%
-    mutate(across(everything(), .fns = ~replace_na(.x, 0)))
+    mutate(across(is.numeric, .fns = ~replace_na(.x, 0)))
   
 }
 
@@ -52,11 +52,14 @@ andMatch <- function(string){
 
 
 make_menu <- function(DF, ING, MEALS){
-  has <- ING %>% filter(has == 1) %$% name
-  not.has <- ING %>% filter(has == 0) %$% name
-  not.has <- not.has[not.has %in% ING$name]
   
-  vegan <- ING %>% filter(vegan==1) %$% name
+  ## vectors of ingredients both in and out of stock
+  has <- ING %>% filter(has == 1) %$% name
+  not.has <- ING %>% filter(has == 0) %$% name 
+  not.has <- not.has[not.has %in% ING$name] ## not sure what this is doing -- glossing over entry errors?
+  
+  ## vectors of dietary restrictions
+  vegan <- ING %>% filter(vegan==1) %$% name 
   veg <- ING %>% filter(vegetarian==1) %$% name
   
   equi <- ING %>% select(name, equal) %>%

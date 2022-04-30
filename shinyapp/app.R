@@ -437,7 +437,7 @@ server <- function(input, output, session) {
             updateSelectizeInput(session, "ar_cuisine", choices = new_cuisines, selected = NULL)
             updateSelectizeInput(session, "ar_type", choices = new_types, selected = NULL)# options = list(create = TRUE))
             updateSelectizeInput(session,"ar_include", choices = sort(filter.food$filter.food), selected = NULL)
-            updateSelectizeInput(session,"ar_one_of", choices =sort(filter.food$filter.food), selected = NULL)
+            updateSelectizeInput(session,"ar_one_of", choices =c(sort(filter.food$filter.food), "1","2","3","4","5"), selected = NULL)
             updateSelectizeInput(session,"ar_optional", choices =sort(filter.food$filter.food), selected = NULL)
 
             myproxy %>% addRow(new_row)

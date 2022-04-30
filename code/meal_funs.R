@@ -3,7 +3,7 @@ expand.recipes <- function(m){
   names(ing) <- m$Meal
   
   bind_rows(lapply(as.list(1:length(ing)), FUN = function(x) mf(x, ing = ing))) %>%
-    mutate(across(is.numeric, .fns = ~replace_na(.x, 0)))
+    mutate(across(where(is.numeric), .fns = ~replace_na(.x, 0)))
   
 }
 
@@ -98,11 +98,11 @@ make_menu <- function(DF, ING, MEALS){
   MEAL <- DF %>% 
     rowwise() %>%
     mutate(n.ingredients = sum(c_across(where(is.numeric))))  %>% 
-    mutate(p.ingredients = sum(c_across(all_of(has))), can.make = 1*(p.ingredients == n.ingredients),
-           sub1 = sum(c_across(all_of(equi))), can.make2 = max(sub1 == n.ingredients, can.make), ## This can probably be reworked with the new subs1 variable
-           sub2 = sum(c_across(all_of(sometimes))), can.make3 = max(sub2 == n.ingredients, can.make2), 
-           n.vegan = sum(c_across(all_of(vegan))), is.vegan = n.vegan == n.ingredients, 
-           n.veg = sum(c_across(all_of(veg))), is.veg = n.veg == n.ingredients) %>%
+    mutate(p.ingredients = sum(c_across(any_of(has))), can.make = 1*(p.ingredients == n.ingredients),
+           sub1 = sum(c_across(any_of(equi))), can.make2 = max(sub1 == n.ingredients, can.make), ## This can probably be reworked with the new subs1 variable
+           sub2 = sum(c_across(any_of(sometimes))), can.make3 = max(sub2 == n.ingredients, can.make2), 
+           n.vegan = sum(c_across(any_of(vegan))), is.vegan = n.vegan == n.ingredients, 
+           n.veg = sum(c_across(any_of(veg))), is.veg = n.veg == n.ingredients) %>%
     group_by(recipe, variant)%>% 
     mutate(makeability = 5 - (1+sum(c_across(contains("can.make")))),
            makeability = ifelse(makeability==4, 5, makeability))%>% 
@@ -121,7 +121,7 @@ make_menu <- function(DF, ING, MEALS){
   
   MEAL <- MEAL %>% 
     mutate(makeability = replace_na(makeability, 997.1)) %>%
-    mutate(sub4 = sum(c_across(all_of(reaching))), can.make4 = 1*(sub4 == n.ingredients),
+    mutate(sub4 = sum(c_across(any_of(reaching))), can.make4 = 1*(sub4 == n.ingredients),
                           makeability = ifelse(makeability==5 & can.make4==1, 4, makeability)) %>%
     mutate(makeability = replace_na(makeability, 997.2)) %>%
     group_by(recipe) %>%
@@ -163,5 +163,6 @@ update_ingredients <- function(DAT, ING){
   ### ingredient list updated with new recipes
   DAT %>% group_by(recipe) %>% summarise(across(where(is.numeric), max))%>% 
     pivot_longer(., -recipe) %>% filter(value > 0) %>% group_by(name) %>% tally() %>% arrange(desc(n)) %>%
-    full_join(., ING %>% select(-n), by = "name") %>%arrange(class, class2, desc(n))
+    full_join(., ING %>% select(-n), by = "name") %>%arrange(class, class2, desc(n)) %>%
+    mutate(has = replace_na(has, 0), n = replace_na(n, 0))
 }

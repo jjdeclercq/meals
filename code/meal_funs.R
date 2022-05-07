@@ -48,7 +48,13 @@ andMatch <- function(string){
   gsub(" )", "^", paste(paste(string,collapse = ")(?=.*"), ")", sep = ""))
 }
 
-
+regex.ingredients <- function(dat){
+  dat %>% mutate(Ingredients = gsub(" or ", "&xyz&",  gsub("& | &|&  ","&", paste0("&",gsub(",","&,&",Ingredients), "&"))) )%>%
+    mutate(Ingredients = gsub("&(", "&(&", Ingredients, fixed = TRUE)) %>%
+    mutate(Ingredients = gsub(")&", "&)&", Ingredients, fixed = TRUE)) %>%
+    mutate(Ingredients = gsub("&[", "&[&", Ingredients, fixed = TRUE)) %>%
+    mutate(Ingredients = gsub("]&", "&]&", Ingredients, fixed = TRUE))
+}
 
 
 make_menu <- function(DF, ING, MEALS){
@@ -139,7 +145,7 @@ make_menu <- function(DF, ING, MEALS){
   
   
   
-  MEAL %>%
+  MEAL %>% 
     mutate(Ingredients = sprintj6(all_of(has), Ingredients, "#458B00"))%>%
     mutate(Ingredients = sprintj6(all_of(nh), Ingredients, "#CD2626"))%>%
     mutate(Ingredients = sprintj6(all_of(subs1), Ingredients, "#CDAD00"))%>%
@@ -166,3 +172,5 @@ update_ingredients <- function(DAT, ING){
     full_join(., ING %>% select(-n), by = "name") %>%arrange(class, class2, desc(n)) %>%
     mutate(has = replace_na(has, 0), n = replace_na(n, 0))
 }
+
+

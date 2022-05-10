@@ -285,7 +285,21 @@ paste.ingredients2(fop, fex, fin)
 #     group_by(Meal, Source, Page, Cuisine, Type) %>% summarise(Ingredients = toString(Ingredients))%>%
 #     regex.ingredients(.) %>%
 
+tind <- data.frame(Meal = "test", Ingredients = paste.ingredients2(fop, fex, fin))
+ting <- str_split(tind$Ingredients, ", ") 
+  names(ting) <- tind$Meal
+  mf(1, ting)
+expand.grid(c(str_split(grep(" or ", ting[[1]], v = TRUE, inv = F), " or "),
+                item = list(grep(" or ", ting[[1]], v = TRUE, inv = TRUE))))%>% 
+    mutate(v =1, recipe = names(ting)[1], VarXX = " ")%>%  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% select(-VarXX)%>%
+    pivot_longer(., c(-v, -recipe,-variant)) %>% unique() %>% select(-name) %>%filter(value != "") %>%
+  mutate(value = gsub("[()]|\\[|\\]", "", value)) %>%
+    mutate(value = str_trim(value, "both"))%>%
+    pivot_wider(., names_from = "value", values_from = "v")
 
+# can add this to expand recipes, so don't have to bracketize everything everytime menu is colorized
+expand.recipes(tind %>% mutate(Ingredients = gsub("[()]|\\[|\\]", "", Ingredients)))
+  
 ```
 
 
@@ -442,6 +456,7 @@ DF <- expand.recipes(meals)
 ING <- ingredients %>% filter(!is.na(n))
 MEALS <- meals
 
+make_menu <- function(DF, ING, MEALS){
 
   ## vectors of ingredients both in and out of stock
   has <- ING %>% filter(has == 1) %$% name
@@ -562,16 +577,25 @@ MEAL <- DF %>%
   
   ## Colorize ingredients based on what level of 'in stock' they are
     MEAL.slice %>%
-    mutate(Ingredients = sprintj6(all_of(has), Ingredients, "#458B00"))%>%
-    mutate(Ingredients = sprintj6(all_of(nh), Ingredients, "#CD2626"))%>%
-    mutate(Ingredients = sprintj6(all_of(subs1), Ingredients, "#CDAD00"))%>%
-    mutate(Ingredients = sprintj6(all_of(subs2), Ingredients, "orange"))%>%
-    mutate(Ingredients = sprintj6(all_of(make4), Ingredients, "#1C86EE"))%>%
-    mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub("&","", Ingredients))) )%>%
-    mutate(makeability = replace_na(makeability, 997.8))%>%
-    group_by(Meal) %>%
-    select(recipe = Meal,  Source, Page,Type, Cuisine,diet,restricted, Ingredients, makeability, Needed) %>%
-    mutate(makeability = replace_na(makeability, 999))
+      select(recipe = Meal,  Source, Page,Type, Cuisine,diet,restricted, Ingredients, makeability, Needed) %>%
+     separate_rows(., "Ingredients", sep = ",") %>% 
+  mutate(X = case_when(grepl(" or $", Ingredients) ~ "Optional",
+                       grepl(" or ", Ingredients) ~ "One of",
+                       TRUE ~ "Essential")) %>%
+  mutate(Ingredients =   case_when(X == "Essential" ~ Ingredients,
+                                   X == "Optional" ~ paste0("[", str_trim(gsub(" or ", ", ", gsub(" or $", "", Ingredients))), "]"),
+                                   X== "One of" ~ paste0( "(", str_trim(Ingredients), ")"))) %>%
+  group_by(recipe, Source, Page, Cuisine, diet, Type, restricted, makeability, Needed) %>% arrange(X) %>% 
+      summarise(Ingredients = toString(Ingredients), .groups = "drop")%>%
+      regex.ingredients() %>%
+    mutate(Ingredients = sprintj7(all_of(has), Ingredients, "#458B00"))%>%
+    mutate(Ingredients = sprintj7(all_of(nh), Ingredients, "#CD2626"))%>%
+    mutate(Ingredients = sprintj7(all_of(subs1), Ingredients, "#CDAD00"))%>%
+    mutate(Ingredients = sprintj7(all_of(subs2), Ingredients, "orange"))%>%
+    mutate(Ingredients = sprintj7(all_of(make4), Ingredients, "#1C86EE"))%>%
+    mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub(",", ", ", gsub("&","", Ingredients)))))
+  
+}  
  
 ### HERE 
     ## move this to meal_funs

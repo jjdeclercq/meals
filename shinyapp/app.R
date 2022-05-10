@@ -79,7 +79,8 @@ ui <- navbarPage(
           selectizeInput("fr_food_and", "Select ingredients (and)", sort(filter.food_static), multiple = T, options = NULL),
           selectizeInput("fr_food_not", "Select ingredients (not)", choices = c("X", sort(filter.food_static)), multiple = TRUE, options = NULL, selected = "X"),
           sliderInput("fr_ingredient", "Ingredients Needed", min = 0, max = 10, value = c(0, 10), ticks = F),
-          radioButtons("fr_make", "Makeability", makea, inline = TRUE)
+          radioButtons("fr_make", "Makeability", makea, inline = TRUE),
+          radioButtons("fr_restrict", "Restrict", c("No", "Yes"), inline = TRUE, selected = "No")
         ),
         mainPanel(
           reactableOutput("filter_recipes_df")
@@ -204,6 +205,7 @@ server <- function(input, output, session) {
       input$fr_food_and,
       input$fr_food_not,
       input$fr_make,
+      input$fr_restrict,
       input$pi_save
     ),
     {
@@ -211,14 +213,15 @@ server <- function(input, output, session) {
         {
           df <- makeable.rv$df
           df %<>% 
-            dplyr::select(Recipe = recipe, Source,Page, Category = diet, Cuisine, Type, Needed, Ingredients,makeability) %>% 
+            dplyr::select(Recipe = recipe, Source,Page, Category = diet, Cuisine, Type, Needed, Ingredients,makeability, restricted) %>% 
             dplyr::filter(
               Source %in% input$fr_source,
               Type %in% input$fr_type,
               Category %in% input$fr_category,
               Cuisine %in% input$fr_cuisine,
               makeability <= input$fr_make,
-              dplyr::between(Needed, input$fr_ingredient[1], input$fr_ingredient[2])) %>% select(-Needed, -Category)
+              restricted == input$fr_restrict,
+              dplyr::between(Needed, input$fr_ingredient[1], input$fr_ingredient[2])) %>% select(-Needed, -Category, -restricted)
           
           df <- df[grepl(paste(as.character(input$fr_food_or),collapse="|"), df$Ingredients),]
           df <- df[grepl(andMatch(as.character(input$fr_food_and)), df$Ingredients, perl = TRUE),]

@@ -79,7 +79,8 @@ ui <- navbarPage(
           selectizeInput("fr_food_and", "Select ingredients (and)", sort(filter.food_static), multiple = T, options = NULL),
           selectizeInput("fr_food_not", "Select ingredients (not)", choices = c("X", sort(filter.food_static)), multiple = TRUE, options = NULL, selected = "X"),
           sliderInput("fr_ingredient", "Ingredients Needed", min = 0, max = 10, value = c(0, 10), ticks = F),
-          radioButtons("fr_make", "Makeability", makea, inline = TRUE)
+          radioButtons("fr_make", "Makeability", makea, inline = TRUE),
+          radioButtons("fr_restrict", "Restrict", c("No", "Yes"), inline = TRUE, selected = "No")
         ),
         mainPanel(
           reactableOutput("filter_recipes_df")
@@ -140,6 +141,7 @@ ui <- navbarPage(
           radioButtons("ai_make", "Makeable", c("No", "Yes"), inline = TRUE),
           radioButtons("ai_has", "In stock", c("No", "Yes"), inline = TRUE, selected = "No"),
           radioButtons("ai_veg", "Dietary classification", c("Vegan", "Vegetarian", "Neither"), inline = TRUE, selected = character(0)),
+          radioButtons("ai_restrict", "Restricted", c("No", "Yes"), inline = TRUE),
           actionButton("ai_submit", "Submit")
        
         ),
@@ -204,6 +206,7 @@ server <- function(input, output, session) {
       input$fr_food_and,
       input$fr_food_not,
       input$fr_make,
+      input$fr_restrict,
       input$pi_save
     ),
     {
@@ -211,14 +214,15 @@ server <- function(input, output, session) {
         {
           df <- makeable.rv$df
           df %<>% 
-            dplyr::select(Recipe = recipe, Source,Page, Category = diet, Cuisine, Type, Needed, Ingredients,makeability) %>% 
+            dplyr::select(Recipe, Source,Page, Category = diet, Cuisine, Type, Needed, Ingredients,makeability, restricted) %>% 
             dplyr::filter(
               Source %in% input$fr_source,
               Type %in% input$fr_type,
               Category %in% input$fr_category,
               Cuisine %in% input$fr_cuisine,
               makeability <= input$fr_make,
-              dplyr::between(Needed, input$fr_ingredient[1], input$fr_ingredient[2])) %>% select(-Needed, -Category)
+              restricted == input$fr_restrict,
+              dplyr::between(Needed, input$fr_ingredient[1], input$fr_ingredient[2])) %>% select(-Needed, -Category, -restricted)
           
           df <- df[grepl(paste(as.character(input$fr_food_or),collapse="|"), df$Ingredients),]
           df <- df[grepl(andMatch(as.character(input$fr_food_and)), df$Ingredients, perl = TRUE),]
@@ -364,7 +368,8 @@ server <- function(input, output, session) {
                                 vegan = 1*(input$ai_veg %in% c("Vegan")),
                                 equal = toString(input$ai_equal),
                                 sometimes = toString(input$ai_reach),
-                                makeable = 1*(input$ai_make == "Yes")
+                                makeable = 1*(input$ai_make == "Yes"),
+                                restricted = 1*(input$ai_restrict == "Yes")
                                 )
         
         new_df.i <- new_row.i %>%
@@ -391,6 +396,7 @@ server <- function(input, output, session) {
         updateSelectizeInput(session,"ai_equal", "Equivalent substitution:", sort(filter.food$filter.food), selected = NULL)
         updateSelectizeInput(session,"ai_reach", "Occasional substitution:", sort(filter.food$filter.food), selected = NULL)
         updateRadioButtons(session,"ai_make", "Makeable", c("No", "Yes"), inline = TRUE)
+        updateRadioButtons(session,"ai_restrict", "Restricted", c("No", "Yes"), inline = TRUE)
         updateRadioButtons(session,"ai_has", "In stock", c("No", "Yes"), inline = TRUE, selected = "No")
         updateRadioButtons(session,"ai_veg", "Dietary classification", c("Vegan", "Vegetarian", "Neither"), inline = TRUE, selected = character(0))
         
@@ -409,12 +415,12 @@ server <- function(input, output, session) {
         {
             
             # Update data
-            new_row <- data.frame(Meal = input$ar_name,
+            new_row <- data.frame(Recipe = input$ar_name,
                                   Source = input$ar_source,
                                   Page = input$ar_page,
                                   Cuisine = input$ar_cuisine,
                                   Type =  input$ar_type,
-                                  Ingredients = paste.ingredients(input$ar_optional, input$ar_one_of, input$ar_include))
+                                  Ingredients = paste.ingredients2(input$ar_optional, input$ar_one_of, input$ar_include))
 
             new_df <- new_row %>%
                 dplyr::bind_rows(., 

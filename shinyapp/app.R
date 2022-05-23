@@ -141,6 +141,7 @@ ui <- navbarPage(
           radioButtons("ai_make", "Makeable", c("No", "Yes"), inline = TRUE),
           radioButtons("ai_has", "In stock", c("No", "Yes"), inline = TRUE, selected = "No"),
           radioButtons("ai_veg", "Dietary classification", c("Vegan", "Vegetarian", "Neither"), inline = TRUE, selected = character(0)),
+          radioButtons("ai_restrict", "Restricted", c("No", "Yes"), inline = TRUE),
           actionButton("ai_submit", "Submit")
        
         ),
@@ -213,7 +214,7 @@ server <- function(input, output, session) {
         {
           df <- makeable.rv$df
           df %<>% 
-            dplyr::select(Recipe = recipe, Source,Page, Category = diet, Cuisine, Type, Needed, Ingredients,makeability, restricted) %>% 
+            dplyr::select(Recipe, Source,Page, Category = diet, Cuisine, Type, Needed, Ingredients,makeability, restricted) %>% 
             dplyr::filter(
               Source %in% input$fr_source,
               Type %in% input$fr_type,
@@ -367,7 +368,8 @@ server <- function(input, output, session) {
                                 vegan = 1*(input$ai_veg %in% c("Vegan")),
                                 equal = toString(input$ai_equal),
                                 sometimes = toString(input$ai_reach),
-                                makeable = 1*(input$ai_make == "Yes")
+                                makeable = 1*(input$ai_make == "Yes"),
+                                restricted = 1*(input$ai_restrict == "Yes")
                                 )
         
         new_df.i <- new_row.i %>%
@@ -394,6 +396,7 @@ server <- function(input, output, session) {
         updateSelectizeInput(session,"ai_equal", "Equivalent substitution:", sort(filter.food$filter.food), selected = NULL)
         updateSelectizeInput(session,"ai_reach", "Occasional substitution:", sort(filter.food$filter.food), selected = NULL)
         updateRadioButtons(session,"ai_make", "Makeable", c("No", "Yes"), inline = TRUE)
+        updateRadioButtons(session,"ai_restrict", "Restricted", c("No", "Yes"), inline = TRUE)
         updateRadioButtons(session,"ai_has", "In stock", c("No", "Yes"), inline = TRUE, selected = "No")
         updateRadioButtons(session,"ai_veg", "Dietary classification", c("Vegan", "Vegetarian", "Neither"), inline = TRUE, selected = character(0))
         
@@ -412,12 +415,12 @@ server <- function(input, output, session) {
         {
             
             # Update data
-            new_row <- data.frame(Meal = input$ar_name,
+            new_row <- data.frame(Recipe = input$ar_name,
                                   Source = input$ar_source,
                                   Page = input$ar_page,
                                   Cuisine = input$ar_cuisine,
                                   Type =  input$ar_type,
-                                  Ingredients = paste.ingredients(input$ar_optional, input$ar_one_of, input$ar_include))
+                                  Ingredients = paste.ingredients2(input$ar_optional, input$ar_one_of, input$ar_include))
 
             new_df <- new_row %>%
                 dplyr::bind_rows(., 

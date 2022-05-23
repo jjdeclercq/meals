@@ -1,6 +1,7 @@
 expand.recipes <- function(m){
+  m %<>% mutate(Ingredients = gsub("[()]|\\[|\\]", "", Ingredients))
   ing <- str_split(m$Ingredients, ", ") 
-  names(ing) <- m$Meal
+  names(ing) <- m$Recipe
   
   bind_rows(lapply(as.list(1:length(ing)), FUN = function(x) mf(x, ing = ing))) %>%
     mutate(across(where(is.numeric), .fns = ~replace_na(.x, 0)))
@@ -10,9 +11,9 @@ expand.recipes <- function(m){
 mf <- function(x, ing) {
   expand.grid(c(str_split(grep(" or ", ing[[x]], v = TRUE, inv = F), " or "),
                 item = list(grep(" or ", ing[[x]], v = TRUE, inv = TRUE))))%>% 
-    mutate(v =1, recipe = names(ing)[x], VarXX = " ")%>%  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% select(-VarXX)%>%
-    pivot_longer(., c(-v, -recipe,-variant)) %>% unique() %>% select(-name) %>%filter(value != "") %>% 
-    mutate(value = str_trim(value, "both"))%>%
+    mutate(v =1, Recipe = names(ing)[x], VarXX = " ")%>%  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% select(-VarXX)%>%
+    pivot_longer(., c(-v, -Recipe,-variant)) %>% unique() %>% select(-name) %>% mutate(value = str_trim(value, "both"))%>%
+    filter(value != "") %>% 
     pivot_wider(., names_from = "value", values_from = "v")}
 
 
@@ -130,7 +131,7 @@ make_menu <- function(DF, ING, MEALS){
            n.restrict = sum(c_across(any_of(not.restricted))), ## Number of not restricted ingredients
            is.restrict = n.restrict == n.ingredients ## Determine if recipe is not restricted
     ) %>% 
-    group_by(recipe, variant)%>% # determine makability
+    group_by(Recipe, variant)%>% # determine makability
     mutate(makeability = 5 - (1+sum(c_across(contains("can.make")))), 
            makeability = ifelse(makeability==4, 5, makeability))%>% 
     mutate(makeability = replace_na(makeability, 995))
@@ -148,7 +149,7 @@ make_menu <- function(DF, ING, MEALS){
   make4 <- ING %>% filter(makeable ==1) %>% 
     select(name, has) %>%
     left_join(., 
-              MEAL%>%ungroup() %>% select(name = recipe, makeability) %>% 
+              MEAL%>%ungroup() %>% select(name = Recipe, makeability) %>% 
                 group_by(name) %>% summarise(makeability = min(makeability, na.rm = TRUE)),
               by = "name") %>% 
     filter(makeability %in% 1:3, has == 0) %$% name
@@ -171,32 +172,32 @@ make_menu <- function(DF, ING, MEALS){
            can.make4 = 1*(m.ingredients == n.ingredients),
            makeability = ifelse(makeability==5 & can.make4==1, 4, makeability)) %>%
     select(1, contains("make"), everything()) %>% 
-    arrange(recipe, makeability, desc(n.ingredients))%>%
+    arrange(Recipe, makeability, desc(n.ingredients))%>%
     mutate(makeable.restrict = is.restrict == TRUE & makeability == min(makeability),
            makeable.vegan = is.vegan == TRUE & makeability == min(makeability),
            makeable.veg = is.veg == TRUE & makeability == min(makeability)) %>%
-    select(Meal = recipe, variant,makeability, n.ingredients, contains("make"), n.vegan, is.vegan, n.veg, is.veg, everything())%>% 
-    group_by(Meal) %>%
+    select(Recipe, variant,makeability, n.ingredients, contains("make"), n.vegan, is.vegan, n.veg, is.veg, everything())%>% 
+    group_by(Recipe) %>%
     dplyr::slice(1) %>%
     mutate(diet = case_when(is.vegan ~ "Vegan",
                             is.veg & !is.vegan ~ "Vegetarian",
                             TRUE ~ "Non-vegetarian"),
            restricted = yesno(makeable.restrict),
            Needed = n.ingredients - p.ingredients) %>%
-    left_join(MEALS , ., by = "Meal") 
+    left_join(MEALS , ., by = "Recipe") 
   
   ## Colorize ingredients based on what level of 'in stock' they are
   MEAL.slice %>%
-    select(recipe = Meal,  Source, Page,Type, Cuisine,diet,restricted, Ingredients, makeability, Needed) %>%
-    separate_rows(., "Ingredients", sep = ",") %>% 
-    mutate(X = case_when(grepl(" or $", Ingredients) ~ "Optional",
-                         grepl(" or ", Ingredients) ~ "One of",
-                         TRUE ~ "Essential")) %>%
-    mutate(Ingredients =   case_when(X == "Essential" ~ Ingredients,
-                                     X == "Optional" ~ paste0("[", str_trim(gsub(" or ", ", ", gsub(" or $", "", Ingredients))), "]"),
-                                     X== "One of" ~ paste0( "(", str_trim(Ingredients), ")"))) %>%
-    group_by(recipe, Source, Page, Cuisine, diet, Type, restricted, makeability, Needed) %>% arrange(X) %>% 
-    summarise(Ingredients = toString(Ingredients), .groups = "drop")%>%
+    select(Recipe,  Source, Page,Type, Cuisine,diet,restricted, Ingredients, makeability, Needed) %>%
+    # separate_rows(., "Ingredients", sep = ",") %>% 
+    # mutate(X = case_when(grepl(" or $", Ingredients) ~ "Optional",
+    #                      grepl(" or ", Ingredients) ~ "One of",
+    #                      TRUE ~ "Essential")) %>%
+    # mutate(Ingredients =   case_when(X == "Essential" ~ Ingredients,
+    #                                  X == "Optional" ~ paste0("[", str_trim(gsub(" or ", ", ", gsub(" or $", "", Ingredients))), "]"),
+    #                                  X== "One of" ~ paste0( "(", str_trim(Ingredients), ")"))) %>%
+    # group_by(recipe, Source, Page, Cuisine, diet, Type, restricted, makeability, Needed) %>% arrange(X) %>% 
+    # summarise(Ingredients = toString(Ingredients), .groups = "drop")%>%
     regex.ingredients() %>%
     mutate(Ingredients = sprintj7(all_of(has), Ingredients, "#458B00"))%>%
     mutate(Ingredients = sprintj7(all_of(nh), Ingredients, "#CD2626"))%>%
@@ -317,10 +318,19 @@ make_menu <- function(DF, ING, MEALS){
 update_ingredients <- function(DAT, ING){
   ## List of all ingredients used in each recipe
   ### ingredient list updated with new recipes
-  DAT %>% group_by(recipe) %>% summarise(across(where(is.numeric), max))%>% 
-    pivot_longer(., -recipe) %>% filter(value > 0) %>% group_by(name) %>% tally() %>% arrange(desc(n)) %>%
+  DAT %>% group_by(Recipe) %>% summarise(across(where(is.numeric), max))%>% 
+    pivot_longer(., -Recipe) %>% filter(value > 0) %>% group_by(name) %>% tally() %>% arrange(desc(n)) %>%
     full_join(., ING %>% select(-n), by = "name") %>%arrange(class, class2, desc(n)) %>%
     mutate(has = replace_na(has, 0), n = replace_na(n, 0))
 }
 
+f.optional2 <- function(vec) {ifelse(length(vec)==0, "", paste0("[", str_c(vec, collapse = " or "), "]"))}
+f.exchange2 <- function(vec) {ifelse(length(vec)==0, "", paste0("(",gsub(" or [0-9]+ or", ",", paste0(str_c(vec, collapse = " or "), ")"))))}
+f.include2 <- function(vec) {str_c(c(vec), collapse = ", ")}
+# paste.ingredients2 <- function(opt, exc, inc) paste(f.include2(inc),f.exchange2(exc),f.optional2(opt), collapse = ",")
 
+paste.ingredients2 <- function(opt, exc, inc){
+  data.frame(ing = c(f.include2(inc), f.exchange2(exc), f.optional2(opt) ), 
+             type = c("in", "ex", "op")) %>% 
+    filter(ing != "") %$% toString(ing)
+}

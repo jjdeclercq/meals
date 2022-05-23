@@ -72,6 +72,7 @@ made_menu <- make_menu(recipes_expand, new.ingredients, meals)
   # make_menu(expand.recipes(meals[1,]), ingredients, meals)
   
 # new.ingredients %>% filter(grepl("rice", name))
+
 ```
 
 ```{r}
@@ -108,7 +109,7 @@ made_menu <- make_menu(recipes_expand, new.ingredients, meals)
 ```{r}
 ## Expand recipes not working? Need to error check that food not entered twice...
 
-
+meals %<>% mutate(Ingredients = gsub("[()]|\\[|\\]", "", Ingredients))
   ing <- str_split(meals$Ingredients, ", ") 
   names(ing) <- meals$Meal
   
@@ -119,11 +120,11 @@ cx  %>%
   
 
 
-  expand.grid(c(str_split(grep(" or ", ing[[1]], v = TRUE, inv = F), " or "),
-                item = list(grep(" or ", ing[[1]], v = TRUE, inv = TRUE)))) %>% 
-    mutate(v =1, recipe = names(ing)[1], VarXX = " ")%>%  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% select(-VarXX)%>%
-    pivot_longer(., c(-v, -recipe,-variant)) %>% unique() %>% select(-name) %>%filter(value != "") %>% 
-    mutate(value = str_trim(value, "both"))%>%
+  expand.grid(c(str_split(grep(" or ", ing[[298]], v = TRUE, inv = F), " or "),
+                item = list(grep(" or ", ing[[298]], v = TRUE, inv = TRUE)))) %>% 
+    mutate(v =1, recipe = names(ing)[298], VarXX = " ")%>%  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% select(-VarXX)%>%
+    pivot_longer(., c(-v, -recipe,-variant)) %>% unique() %>% select(-name) %>%mutate(value = str_trim(value, "both"))%>%
+    filter(value != "") %>% 
     pivot_wider(., names_from = "value", values_from = "v")
 
 ```
@@ -148,7 +149,33 @@ recipes_expand %>% filter(recipe %in% wok[1:5])  %>%
   left_join(., ingredients %>% select(name, has), by = "name") %>% arrange(has, desc(n))
 
 f.exchange("a or b or 3 or c or d")
+```
 
+```{r}
+# wordcloud
+require(wordcloud)
+wci <- ingredients%>% filter(class == "spice") %>% mutate(word = name, freq = n) %>% mutate(color = ifelse(has==1, "green", "red")) %>%
+  arrange(n) #%>% filter(n > 0)
+
+
+wordcloud(wci$name, freq = wci$n, rot.per = 0, colors = as.character(wci$color), min.freq = 0, ordered.colors = TRUE)
+
+wordcloud2(wci, color =as.character(wci$color) )
+
+# Maybe don't do wordcloud--df is better?
+
+ingredients %>% group_by(class, class2) %>% summarise(Ingredients = toString(name))%>%
+     mutate(Ingredients = sprintj6(all_of(has), Ingredients, "#458B00"))%>%
+    mutate(Ingredients = sprintj6(all_of(not.has), Ingredients, "#CD2626")) %>%
+  mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub("&","", Ingredients)))) %>%
+    reactable(., columns = list(Ingredients = colDef(html = TRUE, width = 660)),
+          theme = reactableTheme(rowSelectedStyle = list(backgroundColor = "#eee", boxShadow = "inset 2px 0 0 0 #ffa62d")))
+```
+
+
+
+
+```{r}
 ## Work towards reformatting the ingredients as Required (), one of(), optional ()
 ## Attempt 1
 meals[1:6,] %>% separate_rows(., "Ingredients", sep = ",") %>% 
@@ -235,7 +262,7 @@ meals %>% #filter(Meal == "30 minute black bean soup") %>%
                                    X == "Optional" ~ paste0("[", gsub(", ,", ",", str_trim(gsub(" or ", ", ", gsub(" or $", "", Ingredients)))), "]"),
                                    X== "One of" ~ paste0( "(", str_trim(Ingredients), ")"))) %>%
   group_by(Meal, Source, Page, Cuisine, Type) %>% summarise(Ingredients = toString(Ingredients)) %>%
-  mutate(Cuisine = ifelse(Cuisine == "", "western", Cuisine))# %>%
+  mutate(Cuisine = ifelse(Cuisine == "", "western", Cuisine)) #%>%
   #write.csv(., "/Users/joshvumc/Documents/GitHub/meals/data/recipes_in.csv", row.names = FALSE)
 
 

@@ -186,7 +186,7 @@ server <- function(input, output, session) {
   #   tibble::as_tibble() 
   output$bind_ingredients <- DT::renderDataTable(
     {
-      DT::datatable(ingredients.rv$ingredients.df %>% select(name:makeable), rownames = FALSE, escape = FALSE, style = "bootstrap")
+      DT::datatable(ingredients.rv$ingredients.df %>% select(name:restricted), rownames = FALSE, escape = FALSE, style = "bootstrap")
     }, server = FALSE
   )
   
@@ -377,7 +377,7 @@ server <- function(input, output, session) {
           arrange(class, class2, desc(n))
         
         ingredients.rv$ingredients.df <- new_df.i %>% 
-          mutate(rn = 1:n()) %>% tibble::as_tibble() %>% select(name:makeable, rn)
+          mutate(rn = 1:n()) %>% tibble::as_tibble() %>% select(name:restricted, rn)
         
         write.csv(new_df.i, "/Users/joshvumc/Documents/GitHub/meals/data/ingredients.csv", row.names = FALSE)
         

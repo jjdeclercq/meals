@@ -14,7 +14,7 @@ require(tidyverse)
 require(DT)
 
 
-source("/Users/joshvumc/Dropbox/meal_planning/meal_funs.R")
+source("/Users/joshvumc/Documents/GitHub/meals/code/meal_funs.R")
 
 ```
 
@@ -76,9 +76,16 @@ made_menu <- make_menu(recipes_expand, new.ingredients, meals)
 ```
 
 ```{r}
+lg <- c(30, 16)
+md <- c(23, 12)
+sm <- c(14, 8)
 
-
-
+pizza.cost <- function(x){
+  x[1]/((x[2]/2)^2*pi)
+}
+pizza.cost(sm)
+pizza.cost(md)
+pizza.cost(lg)
 # recipes_expand <- bind_rows(meals %>% filter(Meal %in% setdiff(meals$Meal, recipes_expand$recipe %>% unique())) %>% expand.recipes(),
 #           recipes_expand)
 

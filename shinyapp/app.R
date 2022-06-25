@@ -80,7 +80,8 @@ ui <- navbarPage(
           selectizeInput("fr_food_not", "Select ingredients (not)", choices = c("X", sort(filter.food_static)), multiple = TRUE, options = NULL, selected = "X"),
           sliderInput("fr_ingredient", "Ingredients Needed", min = 0, max = 10, value = c(0, 10), ticks = F),
           radioButtons("fr_make", "Makeability", makea, inline = TRUE),
-          radioButtons("fr_restrict", "Restrict", c("No", "Yes"), inline = TRUE, selected = "No")
+          radioButtons("fr_restrict", "Restrict", c("No", "Yes"), inline = TRUE, selected = "No"),
+          actionButton("fr_submit", "Update selections")
         ),
         mainPanel(
           reactableOutput("filter_recipes_df")
@@ -88,6 +89,7 @@ ui <- navbarPage(
       )
     ),
     tabPanel("Pantry",
+        
              sidebarLayout(
                sidebarPanel(
                  selectizeInput("pi_select.has", "Newly in stock", sort(ingredients.0_static), multiple = T, options = NULL),
@@ -98,9 +100,12 @@ ui <- navbarPage(
                  
                ),
                mainPanel(
+                 tabsetPanel(
                  tabPanel("Data", 
                           reactableOutput("pantry_df"),
-                          verbatimTextOutput("selected")
+                          verbatimTextOutput("selected")),
+                 tabPanel("Cloud", 
+                          reactableOutput("pantry_cloud"))
                  )
                )
              )
@@ -186,7 +191,7 @@ server <- function(input, output, session) {
   #   tibble::as_tibble() 
   output$bind_ingredients <- DT::renderDataTable(
     {
-      DT::datatable(ingredients.rv$ingredients.df %>% select(name:makeable), rownames = FALSE, escape = FALSE, style = "bootstrap")
+      DT::datatable(ingredients.rv$ingredients.df %>% select(name:restricted), rownames = FALSE, escape = FALSE, style = "bootstrap")
     }, server = FALSE
   )
   
@@ -228,6 +233,8 @@ server <- function(input, output, session) {
           df <- df[grepl(andMatch(as.character(input$fr_food_and)), df$Ingredients, perl = TRUE),]
           df <- df[!grepl(paste(as.character(input$fr_food_not),collapse="|"), df$Ingredients),]
           reactable(df, searchable = TRUE, 
+                    onClick = "select", 
+                    selection = "multiple",
                     columns = list(Ingredients = colDef(html = TRUE, minWidth = 300),
                                    Recipe = colDef(minWidth = 150),
                                    Source = colDef(minWidth = 150),
@@ -278,6 +285,25 @@ server <- function(input, output, session) {
                 ),#,
                 
       )
+  })
+  
+  output$pantry_cloud <- renderReactable({
+    
+    ingredients.rv$ingredients.df %>% 
+      group_by(class, class2) %>% 
+     summarise(Ingredients = toString(name))%>%
+      mutate(Ingredients = sprintj6(all_of(ingredients.rv$ingredients.1), Ingredients, "#458B00"))%>%
+      mutate(Ingredients = sprintj6(all_of(ingredients.rv$ingredients.0), Ingredients, "#CD2626")) %>%
+      mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub("&","", Ingredients)))) %>%
+      reactable(., columns = list(Ingredients = colDef(html = TRUE, width = 660),
+                                  class = colDef(minWidth = 100),
+                                  class2 = colDef(minWidth = 100)),
+                groupBy = c("class"), 
+                highlight = TRUE, 
+                theme = reactableTheme(rowSelectedStyle = list(backgroundColor = "#eee", boxShadow = "inset 2px 0 0 0 #ffa62d")),
+                searchable = TRUE,
+                filterable = TRUE)
+    
   })
   
   
@@ -377,7 +403,7 @@ server <- function(input, output, session) {
           arrange(class, class2, desc(n))
         
         ingredients.rv$ingredients.df <- new_df.i %>% 
-          mutate(rn = 1:n()) %>% tibble::as_tibble() %>% select(name:makeable, rn)
+          mutate(rn = 1:n()) %>% tibble::as_tibble() %>% select(name:restricted, rn)
         
         write.csv(new_df.i, "/Users/joshvumc/Documents/GitHub/meals/data/ingredients.csv", row.names = FALSE)
         

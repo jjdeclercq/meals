@@ -14,7 +14,7 @@ require(tidyverse)
 require(DT)
 
 
-source("/Users/joshvumc/Dropbox/meal_planning/meal_funs.R")
+source("/Users/joshvumc/Documents/GitHub/meals/code/meal_funs.R")
 
 ```
 
@@ -76,9 +76,16 @@ made_menu <- make_menu(recipes_expand, new.ingredients, meals)
 ```
 
 ```{r}
+lg <- c(30, 16)
+md <- c(23, 12)
+sm <- c(14, 8)
 
-
-
+pizza.cost <- function(x){
+  x[1]/((x[2]/2)^2*pi)
+}
+pizza.cost(sm)
+pizza.cost(md)
+pizza.cost(lg)
 # recipes_expand <- bind_rows(meals %>% filter(Meal %in% setdiff(meals$Meal, recipes_expand$recipe %>% unique())) %>% expand.recipes(),
 #           recipes_expand)
 
@@ -129,6 +136,12 @@ cx  %>%
 
 ```
 
+Need to:
+ Add button to save selections
+ Create way to store saved selections and make sure they persist between sessions
+ create new tab panel to show selected 
+ Add button to remove selections
+ 
 
 ```{r}
 ### Grocery planning
@@ -141,14 +154,14 @@ meals$Meal[c(5,7,8)]
 recipes_expand %>% filter(recipe %in% meals$Meal[c(5,7,8:12)]) %>% select(-variant) %>% pivot_longer(., -recipe) %>% filter(value ==1) %>%
   group_by(name) %>%tally()
 
-wok <- made_menu %>% filter(Source == "Wok") %$% Meal
+wok <- made_menu %>% filter(Source == "Wok") %$% Recipe
 
-recipes_expand %>% filter(recipe %in% wok[1:5])  %>% 
-  select(-variant) %>% group_by(recipe) %>% summarise_all(mean) %>% pivot_longer(., -recipe) %>% filter(value >0) %>%
+recipes_expand %>% filter(Recipe %in% wok[1:5])  %>% 
+  select(-variant) %>% group_by(Recipe) %>% summarise_all(mean) %>% pivot_longer(., -Recipe) %>% filter(value >0) %>%
   group_by(name) %>%summarise(n = sum(value), count = n()) %>%
   left_join(., ingredients %>% select(name, has), by = "name") %>% arrange(has, desc(n))
 
-f.exchange("a or b or 3 or c or d")
+# f.exchange("a or b or 3 or c or d")
 ```
 
 ```{r}

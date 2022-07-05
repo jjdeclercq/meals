@@ -1,5 +1,9 @@
+## easy yes-no of binary variables
+yesno <- function(logic) {ifelse(logic, "Yes", "No")}
+
 expand.recipes <- function(m){
-  m %<>% mutate(Ingredients = gsub("[()]|\\[|\\]", "", Ingredients))
+  m %<>% separate(., Ingredients, c("Ingredients", "Optional"), sep= "\\[") %>% ## Remove optional ingredients from the expansion
+    mutate(Ingredients = gsub("[()]|\\[|\\]", "", Ingredients))
   ing <- str_split(m$Ingredients, ", ") 
   names(ing) <- m$Recipe
   
@@ -80,18 +84,18 @@ make_menu <- function(DF, ING, MEALS){
   not.restricted <- ING %>% filter(restricted == 0) %$% name
   
   ## vector of ingredients that are in stock that are equivalent substitutions for other ingredients
-  equi <- ING %>% select(name, equal) %>%
-    separate_rows(., equal, sep = ", ") %>%
-    left_join(., ING %>% select(equal = name, has2 = has), by = "equal") %>% 
-    filter(has2==1) %$% name %>% unique()
-  equi <- c(has, equi)%>% unique()
-  
-  ## vector of ingredients that are in stock that can sometimes be substituted for other ingredients
-  sometimes <- ING %>% select(name, sometimes) %>%
-    separate_rows(., sometimes, sep = ", ") %>%
-    left_join(., ING %>% select(sometimes = name, has2 = has), by = "sometimes") %>% 
-    filter(has2==1) %$% name %>% unique()
-  sometimes <- c(sometimes, equi) %>% unique()
+  # equi <- ING %>% select(name, equal) %>%
+  #   separate_rows(., equal, sep = ", ") %>%
+  #   left_join(., ING %>% select(equal = name, has2 = has), by = "equal") %>% 
+  #   filter(has2==1) %$% name %>% unique()
+  # equi <- c(has, equi)%>% unique()
+  # 
+  # ## vector of ingredients that are in stock that can sometimes be substituted for other ingredients
+  # sometimes <- ING %>% select(name, sometimes) %>%
+  #   separate_rows(., sometimes, sep = ", ") %>%
+  #   left_join(., ING %>% select(sometimes = name, has2 = has), by = "sometimes") %>% 
+  #   filter(has2==1) %$% name %>% unique()
+  # sometimes <- c(sometimes, equi) %>% unique()
   
   ### Things I don't have, but I can substitute for
   subs1 <- ING %>% select(name,has, equal) %>%
@@ -120,9 +124,9 @@ make_menu <- function(DF, ING, MEALS){
     mutate(n.ingredients = sum(c_across(where(is.numeric))), ## Number of ingredients in recipe variant
            p.ingredients = sum(c_across(any_of(has))), ## Number of ingredients in stock for recipe variant
            can.make = 1*(p.ingredients == n.ingredients), ## If n and p match, then the recipe is makeable
-           e.ingredients = sum(c_across(any_of(equi))), ## Number of ingredients or equivalent substitutions in stock for recipe variant
+           e.ingredients = sum(c_across(any_of(c(has, subs1)))), ## Number of ingredients or equivalent substitutions in stock for recipe variant
            can.make2 = max(e.ingredients == n.ingredients, can.make), ## If n and e match, then the recipe is makeable
-           s.ingredients = sum(c_across(any_of(sometimes))), ## Number of ingredients or sometimes substitutions in stock for recipe variant
+           s.ingredients = sum(c_across(any_of(c(has, subs1, subs2)))), ## Number of ingredients or sometimes substitutions in stock for recipe variant
            can.make3 = max(s.ingredients == n.ingredients, can.make2), ## If n and s match, then the recipe is makeable
            n.vegan = sum(c_across(any_of(vegan))), ## Number of vegan ingredients
            is.vegan = n.vegan == n.ingredients, ## Determine if recipe is vegan
@@ -188,7 +192,7 @@ make_menu <- function(DF, ING, MEALS){
   
   ## Colorize ingredients based on what level of 'in stock' they are
   MEAL.slice %>%
-    select(Recipe,  Source, Page,Type, Cuisine,diet,restricted, Ingredients, makeability, Needed) %>%
+    select(Recipe,  Source, Page,Type, Cuisine,diet,restricted, Ingredients, makeability, Needed, Selected) %>%
     # separate_rows(., "Ingredients", sep = ",") %>% 
     # mutate(X = case_when(grepl(" or $", Ingredients) ~ "Optional",
     #                      grepl(" or ", Ingredients) ~ "One of",
@@ -199,14 +203,26 @@ make_menu <- function(DF, ING, MEALS){
     # group_by(recipe, Source, Page, Cuisine, diet, Type, restricted, makeability, Needed) %>% arrange(X) %>% 
     # summarise(Ingredients = toString(Ingredients), .groups = "drop")%>%
     regex.ingredients() %>%
-    mutate(Ingredients = sprintj7(all_of(has), Ingredients, "#458B00"))%>%
-    mutate(Ingredients = sprintj7(all_of(nh), Ingredients, "#CD2626"))%>%
-    mutate(Ingredients = sprintj7(all_of(subs1), Ingredients, "#CDAD00"))%>%
-    mutate(Ingredients = sprintj7(all_of(subs2), Ingredients, "orange"))%>%
-    mutate(Ingredients = sprintj7(all_of(make4), Ingredients, "#1C86EE"))%>%
+    mutate(Ingredients = sprintj8(all_of(has), Ingredients, "#458B00"))%>%
+    mutate(Ingredients = sprintj8(all_of(nh), Ingredients, "#CD2626"))%>%
+    mutate(Ingredients = sprintj8(all_of(subs1), Ingredients, "#CDAD00"))%>%
+    mutate(Ingredients = sprintj8(all_of(subs2), Ingredients, "orange"))%>%
+    mutate(Ingredients = sprintj8(make4, Ingredients, "#1C86EE"))%>%
     mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub(",", ", ", gsub("&","", Ingredients)))))
   
 }  
+
+sprintj8 <- function(vec, V, color){
+  if(length(vec)==0){ 
+    V <- V
+    }else{
+  for(i in 1:length(vec)){
+    V <- gsub(paste0("&",vec[i],"&"), sprintf("<span style='color: %s;'>%s</span>", color, vec[i]), V)
+  }
+      
+  }
+  return(V)
+}
 
 # make_menu <- function(DF, ING, MEALS){
 #   

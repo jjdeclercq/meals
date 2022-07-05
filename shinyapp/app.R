@@ -21,15 +21,15 @@ require(reactable)
 ## Ingredients to fix
 ## Rice wine vinegar vs rice vinegar
 ## Hears of romaine vs romaine
-# cornstartch
-# green apple/ granny smith
-# onion/ sweet onion
+# cornstartch - done
+# green apple/ granny smith - done
+# onion/ sweet onion - done
 ## cooking oil/ vegetable oil/ peanut oil/ etc.
 ## balsamic vinaigrette recipe is wrong?
 ## and/or/ not filters are not exclusive matches (searching 'corn' returns 'cornstarch')
 # italian sausage/ breakfast sausage move to sausage
 
-
+# perfect easy red sauve is a duplicate recipe
 
 source("/Users/joshvumc/Documents/GitHub/meals/code/meal_funs.R")
 
@@ -43,6 +43,7 @@ cuisines <- unique(recipe_df$Cuisine)
 categories <- unique(recipe_df$diet)
 types <- unique(recipe_df$Type)
 makea <- sort(unique(recipe_df$makeability))
+pre_selected <- recipe_df %>% filter(Selected==1) %$% Recipe
 
 # recipes_naive <- recipe_df %>% select(Meal = recipe, Source, Cuisine, Type, Ingredients = Ingredients.naive)
 recipes_naive <- read.csv("/Users/joshvumc/Documents/GitHub/meals/data/recipes_in.csv")
@@ -80,12 +81,18 @@ ui <- navbarPage(
           selectizeInput("fr_food_not", "Select ingredients (not)", choices = c("X", sort(filter.food_static)), multiple = TRUE, options = NULL, selected = "X"),
           sliderInput("fr_ingredient", "Ingredients Needed", min = 0, max = 10, value = c(0, 10), ticks = F),
           radioButtons("fr_make", "Makeability", makea, inline = TRUE),
-          radioButtons("fr_restrict", "Restrict", c("No", "Yes"), inline = TRUE, selected = "No"),
+          radioButtons("fr_selected", "Selected", c("All", "Selected"), inline = TRUE),
+          checkboxGroupInput("fr_restrict", "Restrict", c("No", "Yes"), inline = TRUE, selected = "No"),
           actionButton("fr_submit", "Update selections")
         ),
         mainPanel(
-          reactableOutput("filter_recipes_df")
-        )
+          tabsetPanel(
+          tabPanel("All", 
+                   reactableOutput("filter_recipes_df")),
+          tabPanel("Selected", 
+                   textOutput("select_test"),
+                   plotOutput("xxx"))
+        ))
       )
     ),
     tabPanel("Pantry",
@@ -168,9 +175,11 @@ server <- function(input, output, session) {
   
   ## Vector of selected pantry ingredients for reactable
   react.selected.rv <- reactiveValues(vec=ingredients_static %>% filter(name %in% ingredients.1_static) %$% rn)
-  
+ 
   ## Makeable recipes
-  makeable.rv <- reactiveValues(df = recipe_df)
+  makeable.rv <- reactiveValues(df = recipe_df,
+                                RRR = recipe_df %>% filter(Recipe %in% pre_selected),
+                                Selected = pre_selected)
   
   ## Complete list of ingredients
   filter.food <- reactiveValues(filter.food = filter.food_static)
@@ -211,42 +220,102 @@ server <- function(input, output, session) {
       input$fr_food_and,
       input$fr_food_not,
       input$fr_make,
-      input$fr_restrict,
-      input$pi_save
+      input$fr_selected,
+      input$fr_submit,
+      input$fr_restrict
     ),
+
     {
-      output$filter_recipes_df <-   renderReactable(
+      filter_select <- ifelse(input$fr_selected == "All", 0, 1)
+      df <- makeable.rv$df
+      df %<>% 
+        dplyr::select(Recipe, Source,Page, Category = diet, Cuisine, Type, Needed, Ingredients,makeability, restricted, Selected) %>% 
+        mutate(Selected = ifelse(Recipe %in% makeable.rv$Selected, 1, 0)) %>%
+        dplyr::filter(
+          Source %in% input$fr_source,
+          Type %in% input$fr_type,
+          Category %in% input$fr_category,
+          Cuisine %in% input$fr_cuisine,
+          makeability <= input$fr_make,
+          restricted %in% input$fr_restrict,
+          Selected >= filter_select,
+          dplyr::between(Needed, input$fr_ingredient[1], input$fr_ingredient[2])) %>% select(-Needed, -Category, -restricted)
+      
+      df <- df[grepl(paste(as.character(input$fr_food_or),collapse="|"), df$Ingredients),]
+      df <- df[grepl(andMatch(as.character(input$fr_food_and)), df$Ingredients, perl = TRUE),]
+      df <- df[!grepl(paste(as.character(input$fr_food_not),collapse="|"), df$Ingredients),]
+      
+      makeable.rv$RRR <- df
+      
+      output$filter_recipes_df <- renderReactable(
         {
-          df <- makeable.rv$df
-          df %<>% 
-            dplyr::select(Recipe, Source,Page, Category = diet, Cuisine, Type, Needed, Ingredients,makeability, restricted) %>% 
-            dplyr::filter(
-              Source %in% input$fr_source,
-              Type %in% input$fr_type,
-              Category %in% input$fr_category,
-              Cuisine %in% input$fr_cuisine,
-              makeability <= input$fr_make,
-              restricted == input$fr_restrict,
-              dplyr::between(Needed, input$fr_ingredient[1], input$fr_ingredient[2])) %>% select(-Needed, -Category, -restricted)
-          
-          df <- df[grepl(paste(as.character(input$fr_food_or),collapse="|"), df$Ingredients),]
-          df <- df[grepl(andMatch(as.character(input$fr_food_and)), df$Ingredients, perl = TRUE),]
-          df <- df[!grepl(paste(as.character(input$fr_food_not),collapse="|"), df$Ingredients),]
-          reactable(df, searchable = TRUE, 
+
+          reactable(df %>% select(-Selected), searchable = TRUE, 
                     onClick = "select", 
                     selection = "multiple",
+                    defaultSelected = which(df$Recipe %in% makeable.rv$Selected),
                     columns = list(Ingredients = colDef(html = TRUE, minWidth = 300),
                                    Recipe = colDef(minWidth = 150),
                                    Source = colDef(minWidth = 150),
                                    Page = colDef(minWidth = 50)),
                     theme = reactableTheme(rowSelectedStyle = list(backgroundColor = "#eee", boxShadow = "inset 2px 0 0 0 #ffa62d")),
                     resizable = TRUE)
+          
         }
       )
+
     }
   )
   
-  #### Pantry ##################
+  ## Make a show all button
+
+  ## Prepare selected recipe plot
+  observe({
+
+  output$select_test <- renderText(makeable.rv$Selected)
+  output$xxx <- renderPlot(
+    {
+      rv.expand$recipes_expand_new %>%
+      filter(Recipe %in% makeable.rv$Selected) %>%
+      select(-variant) %>% group_by(Recipe) %>% summarise_all(mean) %>%
+      pivot_longer(., -Recipe) %>% filter(value >0) %>%
+      group_by(name) %>%summarise(n = sum(value), count = n()) %>%
+      left_join(., ingredients.rv$ingredients.df %>% select(name, has, class), by = "name") %>% arrange(class,  desc(n)) %>%
+      mutate(name = fct_inorder(name))  %>%
+        ggplot(., aes(x = name, y = n, fill = factor(has))) + geom_bar(stat = "identity") +
+        facet_grid(~class, scales = "free", space = "free")+ theme_bw()+
+        guides(fill = "none") +
+        theme(axis.text.x = element_text(angle = 45, hjust = 1)) + labs(x= NULL, y = NULL) +
+        scale_fill_manual(values = c("#CD2626","#458B00"))
+    }
+  )
+  } )
+
+  # Select meals
+  observeEvent(
+    c(input$fr_submit),
+    {
+     X <- getReactableState("filter_recipes_df", "selected")
+     Y <- setdiff(1:nrow(makeable.rv$RRR), X)
+     not.selected <- unique(c(makeable.rv$RRR$Recipe[Y]))
+     current.select <- unique(c(makeable.rv$RRR$Recipe[X]))
+     prev.select <- makeable.rv$Selected
+      
+      makeable.rv$Selected <- unique(setdiff(c(prev.select, current.select),not.selected))
+      
+      
+      makeable.rv$df %>%
+        mutate(Selected = 1*(Recipe %in% makeable.rv$Selected)) %>%
+      write.csv(., "/Users/joshvumc/Documents/GitHub/meals/data/recipes_out.csv", row.names = FALSE)
+      
+      rv.expand$rv.df%>%
+        mutate(Selected = 1*(Recipe %in% makeable.rv$Selected)) %>%
+      write.csv(., "/Users/joshvumc/Documents/GitHub/meals/data/recipes_in.csv", row.names = FALSE)
+                                    
+    }, ignoreInit = TRUE)
+
+  
+  ######## Pantry ##################
 
   observeEvent(
     c(input$pi_react),
@@ -259,9 +328,11 @@ server <- function(input, output, session) {
     #           data.frame(name = ingredients.rv$ingredients.0, has = 0)) %>%
     #   left_join(ingredients.rv$ingredients.df %>% select(-has), ., by = "name") %>%
       
-    ingredients.rv$ingredients.df %>% 
+    ingredients.rv$ingredients.df %<>% 
       mutate(has = ifelse(name %in% ingredients.rv$ingredients.1, 1, 0))%>%
-      arrange(class, class2, desc(n) )%>%
+      arrange(class, class2, desc(n) )
+    
+    ingredients.rv$ingredients.df  %>%
       select(name, has, class, class2, n)%>%
       reactable(.,
                 minRows = 10, 
@@ -286,26 +357,6 @@ server <- function(input, output, session) {
                 
       )
   })
-  
-  output$pantry_cloud <- renderReactable({
-    
-    ingredients.rv$ingredients.df %>% 
-      group_by(class, class2) %>% 
-     summarise(Ingredients = toString(name))%>%
-      mutate(Ingredients = sprintj6(all_of(ingredients.rv$ingredients.1), Ingredients, "#458B00"))%>%
-      mutate(Ingredients = sprintj6(all_of(ingredients.rv$ingredients.0), Ingredients, "#CD2626")) %>%
-      mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub("&","", Ingredients)))) %>%
-      reactable(., columns = list(Ingredients = colDef(html = TRUE, width = 660),
-                                  class = colDef(minWidth = 100),
-                                  class2 = colDef(minWidth = 100)),
-                groupBy = c("class"), 
-                highlight = TRUE, 
-                theme = reactableTheme(rowSelectedStyle = list(backgroundColor = "#eee", boxShadow = "inset 2px 0 0 0 #ffa62d")),
-                searchable = TRUE,
-                filterable = TRUE)
-    
-  })
-  
   
   observeEvent(
     c(input$pi_update),
@@ -360,6 +411,25 @@ server <- function(input, output, session) {
       
     }, ignoreInit = TRUE)
 
+  ## Pantry cloud ##
+  output$pantry_cloud <- renderReactable({
+    
+    ingredients.rv$ingredients.df %>% 
+      group_by(class, class2) %>% 
+      summarise(Ingredients = toString(name))%>%
+      mutate(Ingredients = sprintj6(all_of(ingredients.rv$ingredients.1), Ingredients, "#458B00"))%>%
+      mutate(Ingredients = sprintj6(all_of(ingredients.rv$ingredients.0), Ingredients, "#CD2626")) %>%
+      mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub("&","", Ingredients)))) %>%
+      reactable(., columns = list(Ingredients = colDef(html = TRUE, width = 660),
+                                  class = colDef(minWidth = 100),
+                                  class2 = colDef(minWidth = 100)),
+                groupBy = c("class"), 
+                highlight = TRUE, 
+                theme = reactableTheme(rowSelectedStyle = list(backgroundColor = "#eee", boxShadow = "inset 2px 0 0 0 #ffa62d")),
+                searchable = TRUE,
+                filterable = TRUE)
+    
+  })
   
   ######### add recipes and ingredients ########
   
@@ -379,7 +449,7 @@ server <- function(input, output, session) {
                              selected = NULL)
       }
     )
-    ## Update ingredients list #####
+    ####### Update ingredients list #####
     observeEvent(    
       input$ai_submit,
       {
@@ -435,7 +505,7 @@ server <- function(input, output, session) {
       }
       
     )
-    ### Add new recipes
+    ######### Add new recipes####
     observeEvent(    
         input$ar_submit,
         {
@@ -492,7 +562,9 @@ server <- function(input, output, session) {
           mutate(across(is.numeric, ~replace_na(.x, 0)))
         
         new.ingredients <- update_ingredients(rv.expand$recipes_expand_new, ingredients.rv$ingredients.df)
-        made_menu_new <- make_menu(rv.expand$recipes_expand_new, new.ingredients, rv.expand$rv.df )
+        ## HERE, can I just make_menu on the new recipe?
+        made_menu_new <- make_menu(rv.expand$recipes_expand_new, new.ingredients, rv.expand$rv.df ) %>%
+          mutate(Selected = 1*(Recipe %in% makeable.rv$Selected))
         
         recipes_expand <- rv.expand$recipes_expand_new
         makeable.rv$df <- made_menu_new
@@ -508,3 +580,23 @@ server <- function(input, output, session) {
 
 shinyApp(ui = ui, server = server)
 
+
+# output$selected_recipes_df <-   renderReactable(
+#   {
+#     df <- makeable.rv$df
+#     df %<>% dplyr::filter(Selected ==1) %>%
+#       dplyr::select(Selected, Recipe, Source,Page,  Cuisine, Type, Ingredients,makeability)
+#     SL <- which(df$Recipe %in% makeable.rv$Selected)
+#     reactable(df %>% select(-Selected), searchable = TRUE, 
+#               onClick = "select", 
+#               selection = "multiple",
+#               defaultSelected = SL,
+#               columns = list(Ingredients = colDef(html = TRUE, minWidth = 300),
+#                              Recipe = colDef(minWidth = 150),
+#                              Source = colDef(minWidth = 150),
+#                              Page = colDef(minWidth = 50)),
+#               theme = reactableTheme(rowSelectedStyle = list(backgroundColor = "#eee", boxShadow = "inset 2px 0 0 0 #ffa62d")),
+#               resizable = TRUE)
+#   }
+# )
+# 

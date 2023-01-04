@@ -19,15 +19,14 @@ require(reactable)
 # Makeability is 997.7 for something...?
 
 ## Ingredients to fix
-## Rice wine vinegar vs rice vinegar
-## Hears of romaine vs romaine
+## Rice wine vinegar vs rice vinegar - done
+## Hears of romaine vs romaine - done
 # cornstartch - done
 # green apple/ granny smith - done
 # onion/ sweet onion - done
-## cooking oil/ vegetable oil/ peanut oil/ etc.
-## balsamic vinaigrette recipe is wrong?
+## cooking oil/ vegetable oil/ peanut oil/ etc. - done
 ## and/or/ not filters are not exclusive matches (searching 'corn' returns 'cornstarch')
-# italian sausage/ breakfast sausage move to sausage
+# italian sausage/ breakfast sausage move to sausage - done
 
 # perfect easy red sauve is a duplicate recipe
 

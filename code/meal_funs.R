@@ -83,19 +83,19 @@ make_menu <- function(DF, ING, MEALS){
   veg <- ING %>% filter(vegetarian==1) %$% name
   not.restricted <- ING %>% filter(restricted == 0) %$% name
   
-  ## vector of ingredients that are in stock that are equivalent substitutions for other ingredients
-  # equi <- ING %>% select(name, equal) %>%
-  #   separate_rows(., equal, sep = ", ") %>%
-  #   left_join(., ING %>% select(equal = name, has2 = has), by = "equal") %>% 
-  #   filter(has2==1) %$% name %>% unique()
-  # equi <- c(has, equi)%>% unique()
-  # 
-  # ## vector of ingredients that are in stock that can sometimes be substituted for other ingredients
-  # sometimes <- ING %>% select(name, sometimes) %>%
-  #   separate_rows(., sometimes, sep = ", ") %>%
-  #   left_join(., ING %>% select(sometimes = name, has2 = has), by = "sometimes") %>% 
-  #   filter(has2==1) %$% name %>% unique()
-  # sometimes <- c(sometimes, equi) %>% unique()
+  # vector of ingredients that are in stock that are equivalent substitutions for other ingredients
+  equi <- ING %>% select(name, equal) %>%
+    separate_rows(., equal, sep = ", ") %>%
+    left_join(., ING %>% select(equal = name, has2 = has), by = "equal") %>%
+    filter(has2==1) %$% name %>% unique()
+  equi <- c(has, equi)%>% unique()
+
+  ## vector of ingredients that are in stock that can sometimes be substituted for other ingredients
+  sometimes <- ING %>% select(name, sometimes) %>%
+    separate_rows(., sometimes, sep = ", ") %>%
+    left_join(., ING %>% select(sometimes = name, has2 = has), by = "sometimes") %>%
+    filter(has2==1) %$% name %>% unique()
+  sometimes <- c(sometimes, equi) %>% unique()
   
   ### Things I don't have, but I can substitute for
   subs1 <- ING %>% select(name,has, equal) %>%
@@ -159,7 +159,7 @@ make_menu <- function(DF, ING, MEALS){
     filter(makeability %in% 1:3, has == 0) %$% name
   
   ## 'reaching' is the vector of ingredient that are in stock + equivalent + substitutible or makeable ingredients 
-  reaching <- c(sometimes, make4) %>% unique()
+  reaching <- c(has, equi, sometimes, make4) %>% unique()
   
   ## limit make4 to the lowest level of availability
   make4 <- setdiff(make4, c(subs1, subs2))
@@ -208,7 +208,8 @@ make_menu <- function(DF, ING, MEALS){
     mutate(Ingredients = sprintj8(all_of(subs1), Ingredients, "#CDAD00"))%>%
     mutate(Ingredients = sprintj8(all_of(subs2), Ingredients, "orange"))%>%
     mutate(Ingredients = sprintj8(make4, Ingredients, "#1C86EE"))%>%
-    mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub(",", ", ", gsub("&","", Ingredients)))))
+    mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub(",", ", ", gsub("&","", Ingredients))))) %>%
+    mutate(Selected = replace_na(Selected, 0))
   
 }  
 

@@ -30,13 +30,13 @@ require(reactable)
 
 # perfect easy red sauve is a duplicate recipe
 
-source("/Users/joshvumc/Documents/GitHub/meals/code/meal_funs.R")
+source("../code/meal_funs.R")
 
 new_expansions <- NULL
-load("/Users/joshvumc/Documents/GitHub/meals/data/recipes_expand.rda")
+load("../data/recipes_expand.rda")
 
 
-recipe_df <- read.csv("/Users/joshvumc/Documents/GitHub/meals/data/recipes_out.csv")
+recipe_df <- read.csv("../data/recipes_out.csv")
 sources <- unique(recipe_df$Source)
 cuisines <- unique(recipe_df$Cuisine)
 categories <- unique(recipe_df$diet)
@@ -45,10 +45,10 @@ makea <- sort(unique(recipe_df$makeability))
 pre_selected <- recipe_df %>% filter(Selected==1) %$% Recipe
 
 # recipes_naive <- recipe_df %>% select(Meal = recipe, Source, Cuisine, Type, Ingredients = Ingredients.naive)
-recipes_naive <- read.csv("/Users/joshvumc/Documents/GitHub/meals/data/recipes_in.csv")
+recipes_naive <- read.csv("../data/recipes_in.csv")
 
 
-ingredients_static <- read.csv("/Users/joshvumc/Documents/GitHub/meals/data/ingredients.csv") %>% 
+ingredients_static <- read.csv("../data/ingredients.csv") %>% 
   mutate(rn = 1:n()) %>% tibble::as_tibble() 
 filter.food_static <- ingredients_static$name
 class1 <- unique(ingredients_static$class)
@@ -252,6 +252,8 @@ server <- function(input, output, session) {
           reactable(df %>% select(-Selected), searchable = TRUE, 
                     onClick = "select", 
                     selection = "multiple",
+                    height = 900, 
+                    pagination = FALSE,
                     defaultSelected = which(df$Recipe %in% makeable.rv$Selected),
                     columns = list(Ingredients = colDef(html = TRUE, minWidth = 300),
                                    Recipe = colDef(minWidth = 150),
@@ -305,11 +307,11 @@ server <- function(input, output, session) {
       
       makeable.rv$df %>%
         mutate(Selected = 1*(Recipe %in% makeable.rv$Selected)) %>%
-      write.csv(., "/Users/joshvumc/Documents/GitHub/meals/data/recipes_out.csv", row.names = FALSE)
+      write.csv(., "../data/recipes_out.csv", row.names = FALSE)
       
       rv.expand$rv.df%>%
         mutate(Selected = 1*(Recipe %in% makeable.rv$Selected)) %>%
-      write.csv(., "/Users/joshvumc/Documents/GitHub/meals/data/recipes_in.csv", row.names = FALSE)
+      write.csv(., "../data/recipes_in.csv", row.names = FALSE)
                                     
     }, ignoreInit = TRUE)
 
@@ -398,15 +400,15 @@ server <- function(input, output, session) {
         # select(names(ingredients.rv$ingredients.df), -rn)%>%
         arrange(class, class2, desc(n))
       
-      write.csv(save.ingredients, "/Users/joshvumc/Documents/GitHub/meals/data/ingredients.csv", row.names = FALSE)
-      write.csv(save.ingredients, paste0("/Users/joshvumc/Documents/GitHub/meals/data/archive/ingredients_", Sys.time(), ".csv"), row.names = FALSE)
+      write.csv(save.ingredients, "../data/ingredients.csv", row.names = FALSE)
+      write.csv(save.ingredients, paste0("../data/archive/ingredients_", Sys.time(), ".csv"), row.names = FALSE)
       
       ## Step 2 - Update makeable recipes
-      load("/Users/joshvumc/Documents/GitHub/meals/data/recipes_expand.rda")
+      load("../data/recipes_expand.rda")
       made_menu <- make_menu(recipes_expand, save.ingredients, rv.expand$rv.df)
       
       makeable.rv$df <- made_menu
-      write.csv(made_menu, "/Users/joshvumc/Documents/GitHub/meals/data/recipes_out.csv", row.names = FALSE)
+      write.csv(made_menu, "../data/recipes_out.csv", row.names = FALSE)
       
     }, ignoreInit = TRUE)
 
@@ -474,7 +476,7 @@ server <- function(input, output, session) {
         ingredients.rv$ingredients.df <- new_df.i %>% 
           mutate(rn = 1:n()) %>% tibble::as_tibble() %>% select(name:restricted, rn)
         
-        write.csv(new_df.i, "/Users/joshvumc/Documents/GitHub/meals/data/ingredients.csv", row.names = FALSE)
+        write.csv(new_df.i, "../data/ingredients.csv", row.names = FALSE)
         
         iproxy %>% addRow(new_row.i)
         
@@ -519,11 +521,11 @@ server <- function(input, output, session) {
 
             new_df <- new_row %>%
                 dplyr::bind_rows(., 
-                                 read.csv("/Users/joshvumc/Documents/GitHub/meals/data/recipes_in.csv"))
+                                 read.csv("../data/recipes_in.csv"))
             
             rv.expand$rv.df <- new_df
             
-            write.csv(new_df, "/Users/joshvumc/Documents/GitHub/meals/data/recipes_in.csv", row.names = FALSE)
+            write.csv(new_df, "../data/recipes_in.csv", row.names = FALSE)
             
             # Update UI
             filter.food$filter.food <- unique(c(input$ar_optional, input$ar_one_of, input$ar_include, filter.food$filter.food))
@@ -568,9 +570,9 @@ server <- function(input, output, session) {
         recipes_expand <- rv.expand$recipes_expand_new
         makeable.rv$df <- made_menu_new
         
-        write.csv(made_menu_new, "/Users/joshvumc/Documents/GitHub/meals/data/recipes_out.csv", row.names = FALSE)
-        write.csv(new.ingredients, "/Users/joshvumc/Documents/GitHub/meals/data/ingredients.csv", row.names = FALSE)
-        save(recipes_expand, file= "/Users/joshvumc/Documents/GitHub/meals/data/recipes_expand.rda")
+        write.csv(made_menu_new, "../data/recipes_out.csv", row.names = FALSE)
+        write.csv(new.ingredients, "../data/ingredients.csv", row.names = FALSE)
+        save(recipes_expand, file= "../data/recipes_expand.rda")
       }
     )
 

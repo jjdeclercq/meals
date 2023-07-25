@@ -1,10 +1,10 @@
 "Recipe","Source","Page","Cuisine","Type","Ingredients","Selected"
 "zucchini quesadillas","Anylist",NA,"western","main","olive oil, garlic, zucchini, lime, tortillas, cilantro, (jack cheese or cheddar), [aleppo pepper or avocado]",0
-"zucchini, rice and cheese gratin","Anylist",NA,"western","side","zucchini, butter, white rice, onion, olive oil, garlic, flour, milk, parmesan",0
+"zucchini, rice and cheese gratin","Anylist",NA,"western","side","zucchini, butter, white rice, onion, olive oil, garlic, flour, milk, parmesan",1
 "bok choy with brown sauce and crispy garlic","Anylist",NA,"asian","side","cooking oil, shiitake mushrooms, xiaoxing wine, soy sauce, garlic, bok choy",0
 "bulgogi style eggplant","Anylist",NA,"asian","side","onion, garlic, scallions, sugar, soy sauce, gochugaru, sesame oil, chinese eggplant, cooking oil, sesame seeds",0
 "roasted garlic potato and parmesan soup","Anylist",NA,"western","soup","olive oil, onion, yukon gold potato, garlic, parmesan broth, crusty bread, red pepper flakes, [basil]",0
-"popcorn granola bars","Anylist",NA,"western","breakfast","peanut butter, applesauce, popcorn, almonds, pepitas, unsweetened coconut chips, sunflower seeds, flax seed, (honey or maple syrup)",1
+"popcorn granola bars","Anylist",NA,"western","breakfast","peanut butter, applesauce, popcorn, almonds, pepitas, unsweetened coconut chips, sunflower seeds, flax seed, (honey or maple syrup)",0
 "green rice pilaf","Anylist",NA,"middle eastern","side","cooking oil, onion, garlic, basmati rice, cilantro, parsley, chives, mint, lemon, soy sauce, [chicken stock]",0
 "winter squash and spinach pasta bake","Anylist",NA,"western","meal","egg, ricotta, parmesan, fontina, olive oil, red pepper flakes, garlic, spinach, pasta, butternut squash, [sage or thyme]",0
 "glazed beets with creme fraiche","Anylist",NA,"western","side","beets, honey, butter, pistachios, creme fraiche, lemon, [parsley or mint]",0
@@ -18,7 +18,7 @@
 "spicy honey glazed parships","Anylist",NA,"western","side","parsnip, olive oil, red pepper flakes, butter, apple cider vinegar, honey",0
 "parsnip puree","Anylist",NA,"western","side","parsnip, garlic, heavy cream, milk, butter",0
 "chicken tikka masala","Anylist",NA,"indian","meal","garlic, ginger, turmeric, garam masala, coriander, cumin, yogurt, chicken breast, onion, tomato paste, cardamon, red pepper flakes, canned whole tomatoes, heavy cream, cilantro, rice, (ghee or cooking oil), [naan]",0
-"cranberry orange muffins","Anylist",NA,"western","breakfast","flour, baking powder, nutmeg, cardamon, butter, sugar, brown sugar, orange, egg, vanilla extract, sour cream, dried cranberries, powdered sugar, milk",1
+"cranberry orange muffins","Anylist",NA,"western","breakfast","flour, baking powder, nutmeg, cardamon, butter, sugar, brown sugar, orange, egg, vanilla extract, sour cream, dried cranberries, powdered sugar, milk",0
 "mint mojo","Anylist",NA,"latin","sauce","mint, parsley, garlic, capers, lemon, shallot, olive oil, (orange or lime)",0
 "japanese side salad with carrot and ginger dressing","Wok",622,"asian","salad","carrot, onion, ginger, garlic, miso, cooking oil, rice vinegar, (honey or agave nectar), [iceberg lettuce or red onion or cucumber or bell pepper or green beans or snap peas or red cabbage]",1
 "savory sesame ginger vinaigrette","Wok",620,"asian","dressing","soy sauce, rice vinegar, miso, ginger, garlic, sugar, sesame seeds, cooking oil, [salad greens or cucumber or carrot]",0
@@ -44,9 +44,9 @@
 "chicken and ginger soup with rice cakes","Wok",544,"asian","soup","whole chicken, ginger, garlic, onion, scallions, black peppercorns, napa cabbage, rice cakes, cilantro, [pickled chiles or chinese chives]",0
 "chicken and ginger stock","Wok",542,"asian","prep","chicken bones, ginger, scallions, black peppercorns",0
 "spicy korean rice cake stew","Wok",540,"asian","stew","cooking oil, kimchi, garlic, rice cakes, gochujang, gochugaru, sugar, soy sauce, scallions, (dashi or hondashi), [pork belly or bacon]",0
-"korean soft tofu and kimchi soup","Wok",539,"asian","soup","kimchi, cooking oil, scallions, garlic, gochujang, soy sauce, gochugaru, tofu, (dashi or hondashi), [egg]",1
-"simmered greens with soy dashi and katsuobushi","Wok",531,"asian","side","mirin, sake, soy sauce, katsuobushi, sesame seeds, (spinach or kale, dashi or hondashi)",1
-"simmered kabocha squash","Wok",530,"asian","side","soy sauce, sake, mirin, kabocha squash, ginger, (dashi or hondashi)",1
+"korean soft tofu and kimchi soup","Wok",539,"asian","soup","kimchi, cooking oil, scallions, garlic, gochujang, soy sauce, gochugaru, tofu, (dashi or hondashi), [egg]",0
+"simmered greens with soy dashi and katsuobushi","Wok",531,"asian","side","mirin, sake, soy sauce, katsuobushi, sesame seeds, (spinach or kale, dashi or hondashi)",0
+"simmered kabocha squash","Wok",530,"asian","side","soy sauce, sake, mirin, kabocha squash, ginger, (dashi or hondashi)",0
 "simmered daikon radish","Wok",528,"asian","side","soy sauce, mirin, sugar, daikon, (dashi or hondashi), [bok choy or edamame or ginger or spinach]",0
 "hondashi mayo","Wok",525,"asian","sauce","hondashi, mayonnaise, rice vinegar, sugar",0
 "hondashi popcorn","Wok",525,"asian","snack","hondashi, popcorn, sugar, nori, sesame seeds, togarashi",0
@@ -87,9 +87,9 @@
 "korean pancake dipping sauce","Wok",391,"asian","sauce","soy sauce, sesame oil, sugar, scallions, (rice vinegar or chinkiang vinegar), [ginger]",0
 "korean style shrimp pancakes","Wok",390,"asian","main","shrimp, scallions, flour, sugar, egg, cooking oil, (cornstarch or potato flour)",0
 "korean style pancakes","Wok",389,"asian","main","kimchi, onion, scallions, flour, sugar, gochugaru, (cornstarch or potato flour)",0
-"ants climbing trees","Wok",382,"asian","meal","glass noodles, soy sauce, dark soy sauce, sugar, chicken stock, cooking oil, szechuan peppercorn, ground pork, garlic, scallions, doubanjiang, cilantro, [pickled chiles]",0
+"ants climbing trees","Wok",382,"asian","meal","glass noodles, soy sauce, dark soy sauce, sugar, chicken stock, cooking oil, szechuan peppercorn, ground pork, garlic, scallions, doubanjiang, cilantro, [pickled chiles]",1
 "pad thai","Wok",378,"asian","meal","rice vermicelli, fish sauce, tamarind paste, cooking oil, shallot, garlic, shrimp, egg, bean sprouts, scallions, tofu, dry roasted peanuts, lime, (palm sugar or dark brown sugar)",0
-"pad see ew with chicken","Wok",372,"asian","meal","chicken breast, soy sauce, cornstarch, baking soda, dark soy sauce, oyster sauce, sugar, cooking oil, egg, garlic, chow fun, (broccoli or chinese broccoli)",0
+"pad see ew with chicken","Wok",372,"asian","meal","chicken breast, soy sauce, cornstarch, baking soda, dark soy sauce, oyster sauce, sugar, cooking oil, egg, garlic, chow fun, (broccoli or chinese broccoli)",1
 "beef chow fun","Wok",368,"asian","meal","baking soda, dark soy sauce, soy sauce, xiaoxing wine, cornstarch, cooking oil, onion, garlic, scallions, bean sprouts, chow fun, (flank steak or skirt steak), [msg]",0
 "chow mein with beef and peppers","Wok",362,"asian","meal","baking soda, soy sauce, xiaoxing wine, sugar, cornstarch, chow mein, sesame oil, dark soy sauce, oyster sauce, bell pepper, onion, garlic, ginger, bean sprouts, (flank steak or skirt steak)",0
 "cantonese superior sauce noodles","Wok",360,"asian","meal","chow mein, soy sauce, dark soy sauce, white pepper, xiaoxing wine, sesame oil, sugar, cooking oil, onion, scallions, bean sprouts, [chinese chives]",0
@@ -120,7 +120,7 @@
 "bacon and onion jam","Meathead",194,"western","prep","bacon,  onion,  garlic,  balsamic vinegar,  maple syrup, (dried thyme or dried rosemary)",0
 "bacon parmesan biscuits","The Food Lab",164,"western","breakfast","buttermilk,  sour cream,  flour,  baking powder,  baking soda,  butter,  bacon,  parmesan",0
 "bacony baked pintos with the works","every day",197,"latin","main","pinto beans,  bacon,  onion,  garlic,  tomato paste,  cumin,  coriander,  chili powder,  cilantro,  lime,  avocado,  sour cream, (vegetable stock or chicken stock,  corn tortillas or tortilla chips), [jalapeno]",0
-"baja fish tacos","Meathead",333,"western","main"," ancho chile powder,  sour cream,  mayonnaise,  chipotle,  corn tortillas,  avocado,  lime,  cabbage, (tilapia or mahi mahi or grouper)",0
+"baja fish tacos","Meathead",333,"western","main"," ancho chile powder,  sour cream,  mayonnaise,  chipotle,  corn tortillas,  avocado,  lime,  cabbage, (tilapia or mahi mahi or grouper)",1
 "baked tofu with peanut sauce","Anylist",NA,"asian","meal"," honey,  cooking oil,  lime,  bell pepper,  rice,  miso,  ginger,  tofu,  scallions, [arugula]",0
 "balsamic soy dressing","The Food Lab",790,"western","dressing","cooking oil,  olive oil,  balsamic vinegar,  garlic,  shallot,  soy sauce,  dijon mustard",0
 "balsamic strawberry baked goat cheese dip","Anylist",NA,"western","appetizer","strawberries,  baguette,  olive oil,  goat cheese,  cream cheese,  honey,  balsamic vinegar,  sugar,  basil",0
@@ -131,7 +131,7 @@
 "basic salsa verde","Salt, Fat, Acid, Heat",360,"western","sauce"," shallot,  red wine vinegar,  parsley,  olive oil, [bread crumbs or almonds or red pepper flakes or lemon or garlic]",0
 "basic vegetable and egg fried rice","Wok",278,"asian","meal","leftover rice,  cooking oil,  egg,  onion,  carrot,  garlic,  soy sauce,  sesame oil,  frozen peas",0
 "beef and barley stew","The Food Lab",193,"western","stew","short ribs,  cooking oil,  carrot,  celery,  onion,  marmite,  soy sauce,  garlic,  tomato paste,  chicken stock,  barley,  bay leaf,  kale, [canned whole tomatoes]",0
-"beef bulgogi tacos","every day",191,"asian","main","ground beef,  garlic,  ginger,  soy sauce,  rice vinegar,  brown sugar,  sesame oil,  lime,  scallions,  flour tortillas,  kimchi,  cilantro,  sesame seeds, (gochujang or sriracha,  shredded lettuce or iceberg lettuce)",0
+"beef bulgogi tacos","every day",191,"asian","main","ground beef,  garlic,  ginger,  soy sauce,  rice vinegar,  brown sugar,  sesame oil,  lime,  scallions,  flour tortillas,  kimchi,  cilantro,  sesame seeds, (gochujang or sriracha,  shredded lettuce or iceberg lettuce)",1
 "beef chilli fry with pancetta","the flavor equation",160,"indian","meal"," pancetta,  yukon gold potato,  olive oil,  onion,  garlic,  ginger,  ground cloves,  black pepper,  cinnamon,  turmeric,  flank steak,  apple cider vinegar,  cilantro, [jalapeno]",0
 "beef with broccoli","Wok",118,"asian","meal"," soy sauce,  xiaoxing wine,  cornstarch,  chicken stock,  oyster sauce,  sugar,  sesame oil,  garlic,  scallions,  cooking oil,  broccoli,  rice, (flank steak or skirt steak or hanger steak or flap meat)",0
 "beer battered fish","Salt, Fat, Acid, Heat",312,"western","main"," flour,  baking powder,  cayenne pepper,  cod,  cooking oil,  vodka,  lager, [rice flour or tartar sauce]",0
@@ -158,16 +158,16 @@
 "bratwurst","The Food Lab",505,"western","main","pork shoulder,  nutmeg,  ginger, (sour cream or creme fraiche)",0
 "bratwurt with beer and sauerkraut","The Food Lab",520,"western","main","sauerkraut,  lager,  bratwurst,  dijon mustard,  hoagie rolls, [thyme]",0
 "bright cabbage slaw","Salt, Fat, Acid, Heat",224,"western","side"," red onion,  lemon,  parsley,  red wine vinegar,  olive oil, (cabbage or kale or brussels sprouts or kohlrabi)",0
-"broccoli , cheddar and wild rice fritters","every day",126,"western","main","egg,  scallions,  cheddar,  butter,  olive oil,  broccoli, (wild rice or rice)",0
+"broccoli , cheddar and wild rice fritters","every day",126,"western","main","egg,  scallions,  cheddar,  butter,  olive oil,  broccoli, (wild rice or rice)",1
 "broccoli cheese soup","Anylist",NA,"western","soup","broccoli,  cooking oil,  butter,  carrot,  onion,  garlic,  chicken stock,  milk,  russet potato,  cheddar,  american cheese,  mustard powder",0
-"broccoli melts","every day",94,"western","main","broccoli,  olive oil,  garlic,  red pepper flakes,  lemon,  parmesan,  crusty bread,  provolone",0
+"broccoli melts","every day",94,"western","main","broccoli,  olive oil,  garlic,  red pepper flakes,  lemon,  parmesan,  crusty bread,  provolone",1
 "broiled asparagus with parmesan bread crumbs","The Food Lab",457,"western","side"," butter,  parmesan,  asparagus,  olive oil,  lemon, (sandwich bread or bread crumbs or panko)",0
 "broiled miso eggplant","Wok",243,"asian","side"," mirin,  sake,  miso,  sugar,  cooking oil,  sesame seeds,  scallions, (eggplant or chinese eggplant)",0
 "brown butter vinaigrette","Anylist",241,"western","dressing","butter,  balsamic vinegar,  shallot,  red wine vinegar",0
 "brussels and three chese pasta bake","every day",157,"western","main","pasta,  butter,  olive oil,  garlic,  brussels sprouts,  lemon,  flour,  parmesan,  gruyere,  fontina, (vegetable stock or chicken stock)",0
-"brussels sprouts with bacon","Appetites",201,"western","side","bacon,  brussels sprouts,  butter,  lemon",0
+"brussels sprouts with bacon","Appetites",201,"western","side","bacon,  brussels sprouts,  butter,  lemon",1
 "burnt garlic sesame and chile oil","Wok",307,"asian","sauce"," cooking oil,  garlic,  sesame oil,  sesame seeds,  sugar, (thai chili or gochugaru)",0
-"burnt shallot dip","the flavor equation",314,"western","appetizer","shallot,  cooking oil,  greek yogurt,  lemon,  black pepper,  olive oil,  nigella seeds,  chives",0
+"burnt shallot dip","the flavor equation",314,"western","appetizer","shallot,  cooking oil,  greek yogurt,  lemon,  black pepper,  olive oil,  nigella seeds,  chives",1
 "butchers steak with dried chiles and salted peanuts","nothing fancy",182,"latin","main"," cooking oil,  dried new mexico chile,  guajillo chile,  garlic,  onion,  lime,  cilantro,  corn tortillas, (hazelnuts or dry roasted peanuts,  apple cider vinegar or white vinegar,  short ribs or flank steak or hanger steak or strip steak), [watercress or avocado]",0
 "buttered slamon with red onion and dill","nothing fancy",247,"western","main"," lemon,  salmon,  butter,  olive oil,  red onion,  capers,  dill, [sesame seeds]",0
 "buttered turmeric rice with crushed almonds and herbs","nothing fancy",173,"western","side"," white rice,  butter,  almonds,  turmeric,  shallot,  cilantro, [mint or dill]",0
@@ -175,7 +175,7 @@
 "buttermilk marinated roast chicken","Salt, Fat, Acid, Heat",340,"western","main","whole chicken,  buttermilk",0
 "buttermilk ranch dressing","The Food Lab",843,"western","dressing","buttermilk,  lemon,  garlic,  dijon mustard,  chives,  cilantro,  cayenne pepper, (sour cream or greek yogurt)",0
 "butternut squash and brussels sprouts in agrodolce","Salt, Fat, Acid, Heat",262,"western","side","butternut squash,  olive oil,  brussels sprouts,  red onion,  red wine vinegar,  sugar,  red pepper flakes,  garlic,  mint",0
-"butternut squash and farro bowls","Anylist",NA,"western","meal","farro,  olive oil,  butternut squash,  pickled onion,  pepitas,  feta,  pomegranate",0
+"butternut squash and farro bowls","Anylist",NA,"western","meal","farro,  olive oil,  butternut squash,  pickled onion,  pepitas,  feta,  pomegranate",1
 "buttery lemon herb rubbed roast chicken","The Food Lab",595,"western","main","whole chicken,  cooking oil,  parsley,  sage,  rosemary,  scallions,  garlic,  lemon,  butter",0
 "buttery oniony charred hash browns","The Food Lab",478,"western","side","russet potato,  butter,  olive oil,  onion",0
 "cacio e pepe potatoes anna","every day",145,"mediterranean","main","parmesan,  cornstarch,  butter,  yukon gold potato,  arugula,  white vinegar,  olive oil, [chives]",0
@@ -183,7 +183,7 @@
 "caesar dressing","Hero Dinners",23,"western","dressing","mayonnaise,  anchovies,  lemon,  garlic,  dijon mustard,  worcestershire sauce,  olive oil",0
 "cajun chicken and sausage jambalaya","Essential Instant Pot",66,"cajun","meal"," cooking oil,  andoullie sausage,  onion,  garlic,  rice,  bay leaf,  dried oregano,  white pepper,  cayenne pepper,  chicken stock,  worcestershire sauce, (chicken thigh or chicken breast)",0
 "cajun seasoning","Meathead",170,"cajun","prep","celery seed,  caraway seed,  bay leaf,  dried rosemary,  dried oregano,  red pepper flakes,  black pepper,  paprika,  ancho chile powder,  garlic powder,  onion powder,  sugar,  dry mustard,  ground mace,  ground allspice",0
-"caramelized onion tart","Salt, Fat, Acid, Heat",399,"western","main"," parmesan,  onion, (pie dough or puff pastry)",0
+"caramelized onion tart","Salt, Fat, Acid, Heat",399,"western","main"," parmesan,  onion, (pie dough or puff pastry)",1
 "carmelized cabbage risotto","every day",148,"western","main","butter,  olive oil,  onion,  cabbage,  chicken stock,  arborio rice,  white wine,  parmesan",0
 "carrot cake with cream cheese frosting","Essential Instant Pot",134,"western","dessert","butter,  cream cheese,  vanilla extract,  powdered sugar,  flour,  brown sugar,  cinnamon,  nutmeg,  ground cloves,  baking powder,  baking soda,  carrot,  egg",0
 "carrot salad with tahini, chickpeas and pistachios","every day",68,"mediterranean","side","canned chickpeas,  olive oil,  cumin,  garlic,  lemon,  tahini,  red pepper flakes,  carrot,  parsley,  pistachios",0
@@ -192,7 +192,7 @@
 "cauliflower wedge","every day",42,"western","side","cauliflower,  olive oil,  parmesan,  lemon,  white vinegar,  capers,  scallions,  parsley, [currants]",0
 "ceramy herb dressing","Salt, Fat, Acid, Heat",248,"western","dressing"," shallot,  red wine vinegar,  olive oil,  scallions,  sugar, (creme fraiche or sour cream or heavy cream or yogurt,  parsley or cilantro or dill or chives or basil or tarragon)",0
 "chard with raisins and pine nuts","Essential Instant Pot",123,"western","side","olive oil,  garlic,  red pepper flakes,  onion,  chard,  raisins,  chicken stock,  pine nuts",0
-"charred corn and scallions with tomatillo","nothing fancy",113,"latin","salad","scallions,  corn on the cob,  cooking oil,  lime,  tomatillo,  cilantro,  avocado,  olive oil",0
+"charred corn and scallions with tomatillo","nothing fancy",113,"latin","salad","scallions,  corn on the cob,  cooking oil,  lime,  tomatillo,  cilantro,  avocado,  olive oil",1
 "charred corn succotash with lime and crispy shallots","every day",59,"western","side","cooking oil,  shallot,  lime,  dark brown sugar,  fish sauce,  green beans,  corn,  garlic, (thai basil or basil), [thai chili or jalapeno]",0
 "cheddar cheese and scallion biscuits","The Food Lab",163,"western","breakfast","buttermilk,  sour cream,  flour,  baking powder,  baking soda,  butter,  cheddar,  scallions",0
 "cheesy broccoli or cauliflower casserole","The Food Lab",421,"western","main","sandwich bread,  shallot,  parsley,  butter,  milk,  gelatin,  garlic,  evaporated milk,  flour,  hot sauce, (broccoli or cauliflower,  american cheese or cheddar or jack cheese or fontina or gruyere)",0
@@ -213,15 +213,15 @@
 "chicken strips","Hungry Monkey",194,"western","main","chicken breast,  flour,  egg,  cooking oil,  panko, (lard or shortening)",0
 "chicken with basil chiles and fish sauce","Wok",69,"asian","meal"," fish sauce,  white pepper,  sugar,  baking soda,  cornstarch,  red pepper flakes,  cooking oil,  garlic,  ginger,  thai basil, (chicken breast or pork loin), [thai chili]",0
 "chicken with lemon caper sauce","The Food Lab",368,"western","main","chicken breast,  flour,  cooking oil,  shallot,  butter,  white wine,  capers,  lemon,  parsley",0
-"chicken with lentil rice","Salt, Fat, Acid, Heat",334,"western","main","whole chicken,  cumin,  olive oil,  butter,  onion,  bay leaf,  saffron,  basmati rice,  raisins,  dates,  chicken stock, (brown lentils or green lentils)",0
+"chicken with lentil rice","Salt, Fat, Acid, Heat",334,"western","main","whole chicken,  cumin,  olive oil,  butter,  onion,  bay leaf,  saffron,  basmati rice,  raisins,  dates,  chicken stock, (brown lentils or green lentils)",1
 "chicken with mushroom marsala sauce","The Food Lab",369,"western","main","chicken breast,  flour,  cooking oil,  butter,  mushrooms,  shallot,  thyme,  tomato paste,  soy sauce,  sweet marsala,  lemon",0
 "chicken with vinegar","Salt, Fat, Acid, Heat",336,"western","main"," whole chicken,  flour,  olive oil,  butter,  onion,  white wine,  white vinegar,  tarragon, (heavy cream or creme fraiche)",0
-"chicken zucchini meatballs with feta","Anylist",NA,"mediterranean","main"," zucchini,  shallot,  panko,  cumin,  red pepper flakes,  lemon,  feta, (ground chicken or ground turkey,  mint or basil or parsley or dill)",0
+"chicken zucchini meatballs with feta","Anylist",NA,"mediterranean","main"," zucchini,  shallot,  panko,  cumin,  red pepper flakes,  lemon,  feta, (ground chicken or ground turkey,  mint or basil or parsley or dill)",1
 "chickpea salad with date and tamarind dressing","the flavor equation",74,"middle eastern","salad"," date syrup,  tamarind paste,  lime,  ground ginger,  canned chickpeas,  cucumber,  shallot,  dill,  olive oil,  aleppo pepper,  amchur powder, [mint]",0
 "chickpea sweet potato hash and eggs","Hero Dinners",211,"western","meal","sweet potato,  olive oil,  canned chickpeas,  bell pepper,  smoked paprika,  dried thyme,  spinach,  egg",0
 "chile paste","The Food Lab",259,"western","prep"," chicken stock, (ancho chile or pasilla chile or mulato chile,  new mexico chile or california chile,  cascabel chile or arbol chile or pequin chile)",0
 "chili verde with pork","The Food Lab",274,"western","stew","pork shoulder,  poblano pepper,  tomatillo,  garlic,  jalapeno,  cooking oil,  cilantro,  onion,  cumin,  chicken stock, (cubanelle pepper or new mexico chile)",0
-"chilled corn soup with basil","Anylist",NA,"western","soup"," corn,  buttermilk,  basil,  scallions,  lime,  garlic,  olive oil, [radish]",0
+"chilled corn soup with basil","Anylist",NA,"western","soup"," corn,  buttermilk,  basil,  scallions,  lime,  garlic,  olive oil, [radish]",1
 "chimichurri sauce","The Food Lab",395,"latin","sauce","parsley,  cilantro,  oregano,  garlic,  red pepper flakes,  red wine vinegar,  olive oil",0
 "chinese american kung pao chicken","Wok",61,"asian","meal"," chicken breast,  soy sauce,  xiaoxing wine,  sugar,  sesame oil,  cornstarch,  dark soy sauce,  rice vinegar,  cooking oil,  ginger,  zucchini,  bell pepper,  scallions,  dry roasted peanuts, [red hot chili pepper]",0
 "chinese broccoli with oyster sauce","Wok",205,"asian","side"," oyster sauce,  cornstarch,  xiaoxing wine,  soy sauce,  sugar,  cooking oil,  garlic,  ginger, (chinese broccoli or bok choy), [chicken stock]",0
@@ -229,7 +229,7 @@
 "chopped greek salad","The Food Lab",837,"mediterranean","salad","cucumber,  red onion,  bell pepper,  kalamata olives,  feta,  parsley, (mild red wine olive oil vinaigrette or mild lemon olive oil vinaigrette)",0
 "chorizo","The Food Lab",506,"ingredient","ingredient","pork shoulder,  paprika,  cayenne pepper,  cinnamon,  ground cloves,  cumin, (red wine vinegar or lime,  dried oregano or mexican oregano)",0
 "chunking pork","Wok",95,"asian","meal"," dark soy sauce,  xiaoxing wine,  baking soda,  cornstarch,  msg,  dried fermented black beans,  hoisin sauce,  chicken stock,  red pepper flakes,  cooking oil,  ginger,  garlic,  green cabbage, (pork loin or pork belly)",0
-"citrus chicken rested in herbs","nothing fancy",214,"western","main"," orange,  soy sauce,  cooking oil,  jalapeno,  garlic,  whole chicken,  cilantro,  parsley, (lemon or lime), [rosemary or thyme or oregano]",0
+"citrus chicken rested in herbs","nothing fancy",214,"western","main"," orange,  soy sauce,  cooking oil,  jalapeno,  garlic,  whole chicken,  cilantro,  parsley, (lemon or lime), [rosemary or thyme or oregano]",1
 "citrusy cucumbers with red onion and toasted sesame","nothing fancy",96,"western","salad"," red onion,  tahini,  sesame oil,  cilantro,  sesame seeds,  olive oil, (lemon or lime,  cucumber or persian cucumber), [sumac]",1
 "classic baked ziti","The Food Lab",746,"mediterranean","meal","pasta,  olive oil,  butter,  onion,  garlic,  dried oregano,  basil,  canned whole tomatoes,  ricotta,  parmesan,  egg,  heavy cream,  parsley,  mozzerella",0
 "classic french herb salsa","Salt, Fat, Acid, Heat",362,"western","sauce"," shallot,  white vinegar,  parsley,  chervil,  chives,  basil,  tarragon,  olive oil, [lemon]",0
@@ -253,22 +253,22 @@
 "creme fraiche","Noggin",NA,"ingredient","ingredient","heavy cream,  buttermilk",0
 "crispy baked pasta with mushrooms, sausage and parmesan cream sauce","Anylist",NA,"western","meal","panko,  parmesan,  parsley,  chives,  shallot,  garlic,  olive oil,  butter,  mushrooms,  soy sauce,  lemon,  flour,  chicken stock,  heavy cream,  pasta, [chicken apple sausage or sweet italian sausage]",0
 "crispy braised chicken with cabbage and bacon","Anylist",NA,"western","meal"," bacon,  cabbage,  onion,  dijon mustard,  apple cider vinegar,  chicken stock,  sugar,  bay leaf,  thyme,  butter, (bone in chicken thigh or chicken breast)",0
-"crispy carrots with garlic and mint tahini","the flavor equation",178,"mediterranean","side","tahini,  lemon,  garlic,  dried mint,  cayenne pepper,  egg,  black pepper,  bread crumbs,  olive oil,  carrot,  amchur powder,  kala namak",0
-"crispy haloumi with honey and pistachio","nothing fancy",49,"western","appetizer","halloumi,  honey,  pistachios",0
+"crispy carrots with garlic and mint tahini","the flavor equation",178,"mediterranean","side","tahini,  lemon,  garlic,  dried mint,  cayenne pepper,  egg,  black pepper,  bread crumbs,  olive oil,  carrot,  amchur powder,  kala namak",1
+"crispy haloumi with honey and pistachio","nothing fancy",49,"western","appetizer","halloumi,  honey,  pistachios",1
 "crispy potato and chorizo tacos","Anylist",NA,"latin","main","russet potato,  white vinegar,  cooking oil,  cilantro,  chorizo,  cheddar, (corn tortillas or flour tortillas), [lime or  pickled onion or white onion or  salsa verde]",0
 "crispy potato, onion, and mushroom cake","The Food Lab",136,"western","main","russet potato,  olive oil,  onion,  mushrooms,  garlic,  thyme",0
 "crispy semi smashed new potatoes","The Food Lab",477,"western","side"," new potato, (cooking oil or duck fat), [chives or parsley or thyme or rosemary]",0
-"crispy short rib carnitas with sunset slaw","every day",169,"latin","main","chili powder,  bone in short rib,  orange,  lime,  garlic,  red cabbage,  carrot,  scallions,  corn tortillas, (mayonnaise or sour cream or yogurt,  cilantro or parsley)",0
+"crispy short rib carnitas with sunset slaw","every day",169,"latin","main","chili powder,  bone in short rib,  orange,  lime,  garlic,  red cabbage,  carrot,  scallions,  corn tortillas, (mayonnaise or sour cream or yogurt,  cilantro or parsley)",1
 "crispy sour cream and onion chicken","Anylist",NA,"western","main"," chicken breast,  onion powder,  panko,  cooking oil,  lemon, (sour cream or greek yogurt,  chives or dried chives)",0
 "crispy tofu with sesame peanut pesto","every day",121,"asian","main","tofu,  broccoli,  olive oil,  low sodium soy sauce,  cornstarch,  sesame seeds,  peanuts,  ginger,  garlic,  sesame oil,  rice vinegar,  dark brown sugar,  scallions",0
 "croutons","The Food Lab",824,"ingredient","ingredient","crusty bread,  parmesan,  garlic,  olive oil",0
 "crunchy oven fries","The Food Lab",915,"western","side","russet potato,  white vinegar,  cooking oil,  buttermilk,  garlic powder,  paprika,  flour,  cornstarch,  baking powder",0
-"crushed peas with burrata and olives","nothing fancy",104,"western","salad"," castlevetrano olives,  olive oil,  peas,  lemon,  arugula,  mint,  chives,  parsley, (burrata or mozzerella)",0
+"crushed peas with burrata and olives","nothing fancy",104,"western","salad"," castlevetrano olives,  olive oil,  peas,  lemon,  arugula,  mint,  chives,  parsley, (burrata or mozzerella)",1
 "crusty baked cauliflower and farro","Anylist",NA,"western","main","farro,  olive oil,  cauliflower,  capers,  garlic,  lemon,  fontina,  panko,   parmesan, [chicken stock or  sage or  ricotta or cottage cheese or  parsley]",0
 "cuban picadillo","Anylist",NA,"latin","meal","olive oil,  onion,  red bell pepper,  tomato paste,  garlic,  cumin,  dried oregano,  bay leaf,  white wine,  ground beef,  diced tomatoes,  yukon gold potato,  worcestershire sauce,  raisins,  pimento olives,  capers",0
 "cuban rice and beans","Hero Dinners",219,"latin","meal","bell pepper,  onion,  garlic,  olive oil,  white rice,  black beans,  cumin,  dried oregano,  fennel seed,  coriander",0
 "cucumber and roasted corn salad","the flavor equation",287,"western","salad","corn on the cob,  olive oil,  cucumber,  shallot,  pepitas,  black mustard seed,  sherry vinegar,  fish sauce,  honey,  aleppo pepper,  black pepper",0
-"cucumber yogurt gazpacho","every day",82,"western","side","cucumber,  greek yogurt,  buttermilk,  white vinegar,  shallot,  olive oil,  mint,  almonds,  grapes",0
+"cucumber yogurt gazpacho","every day",82,"western","side","cucumber,  greek yogurt,  buttermilk,  white vinegar,  shallot,  olive oil,  mint,  almonds,  grapes",1
 "cumin ginger carrot coins","Hungry Monkey",91,"western","side","butter,  cumin,  carrot,  ground ginger",0
 "cumin lamb or beef","Wok",134,"asian","meal"," baking soda,  cumin seed,  sichuan peppercorns,  red hot chili pepper,  garlic,  soy sauce,  cooking oil,  onion,  celery,  cilantro, (lamb or flank steak or skirt steak or flap meat or hanger steak)",0
 "dan dan noodles","Wok",317,"asian","meal"," szechuan chili oil,  szechuan peppercorn,  soy sauce,  chinkiang vinegar,  sugar,  garlic,  cooking oil,  ground pork,  ya cai,  xiaoxing wine,  noodles,  dry roasted peanuts,  scallions, (chinese sesame paste or peanut butter or tahini), [spinach or bok choy]",1
@@ -281,7 +281,7 @@
 "duck breasts with cranberry red wine sauce","Hero Dinners",80,"western","main","duck breast,  olive oil,  shallot,  dried cranberries,  chicken stock,  red wine,  butter, (raspberry vinegar or apple cider vinegar), [fingerling potatoes or  brussels sprouts]",0
 "easy cream biscuits","The Food Lab",165,"western","breakfast","flour,  baking powder,  butter,  heavy cream",0
 "easy herb packed falafel","Anylist",NA,"mediterranean","main","chickpeas,  scallions,  garlic,  cumin,  coriander, (cilantro or parsley or mint,  cooking oil or cooking oil)",0
-"easy one pot chicken tinga","Anylist",NA,"latin","main"," cooking oil,  tomatillo,  garlic,  white onion,  bay leaf,  apple cider vinegar,  chicken stock,  chipotle,  fish sauce, (bone in chicken breast or chicken breast,  dried oregano or mexican oregano)",0
+"easy one pot chicken tinga","Anylist",NA,"latin","main"," cooking oil,  tomatillo,  garlic,  white onion,  bay leaf,  apple cider vinegar,  chicken stock,  chipotle,  fish sauce, (bone in chicken breast or chicken breast,  dried oregano or mexican oregano)",1
 "easy pork fried rice with corn and shishito","Wok",284,"asian","meal","leftover rice,  cooking oil,  spanish chorizo,  corn,  scallions,  shishito peppers,  soy sauce,  sesame oil,  cilantro",0
 "easy stir fried noodles with mushrooms, carrots, basil and sweet soy sauce","Wok",351,"asian","meal"," lo mein noodles,  cooking oil,  sesame oil,  dark soy sauce,  sugar,  carrot,  shallot,  scallions,  garlic,  bean sprouts,  white pepper, (shiitake mushrooms or mushrooms,  basil or thai basil), [egg]",0
 "egg fried rice with the mix","Wok",281,"asian","meal","leftover rice,  cooking oil,  egg,  the mix,  onion,  carrot,  scallions,  oyster sauce,  soy sauce,  sesame oil,  frozen peas",0
@@ -305,8 +305,8 @@
 "fried polenta crescents","Appetites",248,"western","side","corn grits,  chicken stock,  butter,  parmesan,  olive oil",0
 "fried shallots","Wok",254,"western","prep","shallot,  cooking oil",0
 "frizzled chickpeas and onions with feta and oregano","nothing fancy",168,"middle eastern","side","olive oil,  onion,  canned chickpeas,  garlic,  red pepper flakes,  oregano,  feta",1
-"garlic and ginger dal with greens","the flavor equation",256,"indian","soup"," red lentils,  turmeric,  ginger,  garlic,  chili powder, (rice or flatbread or naan,  kale or spinach), [ghee or asafetida]",0
-"garlic bread","every day",144,"western","side","baguette,  butter,  garlic,  parmesan, (parsley or chives), [dried oregano]",0
+"garlic and ginger dal with greens","the flavor equation",256,"indian","soup"," red lentils,  turmeric,  ginger,  garlic,  chili powder, (rice or flatbread or naan,  kale or spinach), [ghee or asafetida]",1
+"garlic bread","every day",144,"western","side","baguette,  butter,  garlic,  parmesan, (parsley or chives), [dried oregano]",1
 "garlic parmesan croutons","The Food Lab",824,"western","prep","olive oil,  garlic,  crusty bread,  parmesan",0
 "garlic sausage","The Food Lab",505,"western","main","pork shoulder,  garlic",0
 "garlic sausage with lentils","The Food Lab",514,"western","meal","butter,  onion,  carrot,  garlic,  green lentils,  chicken stock,  parsley,  olive oil,  red wine vinegar, (sausage or garlic sausage)",0
@@ -338,13 +338,13 @@
 "grilled hearts of romaine with chilli pumpkin seeds","the flavor equation",73,"mediterranean","salad"," pepitas,  olive oil,  paprika,  aleppo pepper,  greek yogurt,  creme fraiche,  pomegranate molasses,  lime,  garlic,  turmeric,  romaine lettuce, [parmesan]",0
 "grilled italian sausage with onions and peppers","The Food Lab",515,"western","meal"," onion,  bell pepper,  olive oil,  hoagie rolls, (sausage or sweet italian sausage)",0
 "grilled marinated tofu","Anylist",NA,"asian","main","sesame oil,  soy sauce,  mirin,  ginger,  tofu,  cooking oil",0
-"grilled romaine salad","Meathead",355,"western","salad","olive oil,  red wine vinegar,  basil,  lemon,  sugar,  romaine lettuce,  blue cheese,  pecans",0
+"grilled romaine salad","Meathead",355,"western","salad","olive oil,  red wine vinegar,  basil,  lemon,  sugar,  romaine lettuce,  blue cheese,  pecans",1
 "grilled spiced chicken salad with amchur","the flavor equation",154,"indian","appetizer"," olive oil,  red wine vinegar,  coriander,  cumin,  chili powder,  butter lettuce,  shallot,  lime,  black pepper,  amchur powder, (chicken breast or chicken thigh)",0
 "grilled steak fajitas","The Food Lab",350,"latin","main","soy sauce,  lime,  cooking oil,  brown sugar,  cumin,  chile powder,  garlic,  bell pepper,  onion,  tortillas, (skirt steak or flank steak), [avocado or  salsa verde or  sour cream]",0
 "grilled yogurt flatbreads","every day",102,"middle eastern","side","active dry yeast,  olive oil,  flour, (greek yogurt or yogurt)",0
 "ground lamb pulao","Anylist",NA,"indian","meal","basmati rice,  butter,  garlic,  ginger,  chile powder,  lime,  turmeric,  scallions,  mint, (ground lamb or ground beef)",0
 "gyudon","Wok",235,"asian","meal"," shoyu,  sake,  mirin,  sugar,  onion,  ginger,  scallions,  rice, (dashi or hondashi,  rib eye steak or flank steak), [egg or togarashi]",1
-"halal cart chicken and rice","Anylist",NA,"middle eastern","meal","chicken thigh,  lemon,  oregano,  olive oil,  coriander,  garlic,  butter,  white rice,  shredded lettuce,  harissa,  greek yogurt,  mayonnaise,  parsley,  chicken stock,  sugar,  white vinegar",0
+"halal cart chicken and rice","Anylist",NA,"middle eastern","meal","chicken thigh,  lemon,  oregano,  olive oil,  coriander,  garlic,  butter,  white rice,  shredded lettuce,  harissa,  greek yogurt,  mayonnaise,  parsley,  chicken stock,  sugar,  white vinegar",1
 "halloumi with eggplant and zucchini","every day",116,"mediterranean","side","olive oil,  garlic,  lemon,  zucchini,  halloumi, (oregano or dried oregano), [eggplant]",0
 "hard roasted spiced cauliflower","nothing fancy",150,"western","side"," cauliflower,  garlic,  red pepper flakes,  fennel seed,  coriander,  turmeric,  olive oil, (chives or mint or parsley or cilantro), [feta]",0
 "hawaiian huli huli chicken","Meathead",299,"western","main","whole chicken,  pineapple juice,  chicken stock,  soy sauce,  dark brown sugar,  ginger,  worcestershire sauce,  sriracha,  sesame oil,  garlic, (ketchup or barbecue sauce,  rice vinegar or lemon or lime)",0
@@ -382,7 +382,7 @@
 "kimchi and spam fried rice","Wok",288,"asian","meal"," leftover rice,  spam,  cooking oil,  kimchi,  onion,  scallions,  garlic,  fish sauce,  sesame oil,  cilantro,  egg, [thai chili]",0
 "kimchi braised pork with sesame","nothing fancy",212,"asian","main"," cooking oil,  garlic,  ginger,  gochujang,  kimchi,  scallions, (pork shoulder or baby back ribs), [watercress or  radish or granny smith apple]",0
 "kimchi pancake","Anylist",NA,"asian","appetizer"," sesame seeds,  scallions,  potato flour,  flour,  garlic powder,  baking powder,  kimchi,  gochujang,  sugar,  fish sauce,  cooking oil, [ponzu sauce]",0
-"korean stir fried shredded potatoes","Wok",188,"asian","side"," yukon gold potato,  cooking oil,  onion,  carrot,  sesame oil, [sesame seeds]",0
+"korean stir fried shredded potatoes","Wok",188,"asian","side"," yukon gold potato,  cooking oil,  onion,  carrot,  sesame oil, [sesame seeds]",1
 "korean style congee with chicken and vegetables","Wok",261,"asian","meal","chicken breast,  ginger,  scallions,  garlic,  rice,  cooking oil,  carrot,  zucchini,  celery,  sesame oil,  sesame seeds",0
 "korean style radish pickles","Appetites",251,"asian","side","white vinegar,  sugar,  daikon",0
 "Kuching style laksa","Appetites",55,"asian","soup"," chicken stock,  laksa paste,  shrimp,  egg,  soy sauce,  cooking oil,  rice vermicelli,  coconut milk,  bean sprouts,  cilantro,  lime, (chicken breast or bone in chicken breast)",0
@@ -397,7 +397,7 @@
 "leftover rice","Noggin",NA,"western","ingredient"," , (rice or white rice or basmati rice)",0
 "lemon chicken with artichokes and orzo","Hero Dinners",18,"western","meal","olive oil,  artichoke hearts,  chicken breast,  butter,  onion,  garlic,  orzo,  lemon,  chicken stock,  parsley",0
 "lemon garlic kale salad","Anylist",NA,"western","salad","almonds,  lemon,  olive oil,  garlic,  kale,  parmesan",0
-"lemon honey poached pears with whipped greek yogurt","Essential Instant Pot",132,"western","dessert","honey,  cinnamon stick,  lemon,  pear,  greek yogurt,  cinnamon",0
+"lemon honey poached pears with whipped greek yogurt","Essential Instant Pot",132,"western","dessert","honey,  cinnamon stick,  lemon,  pear,  greek yogurt,  cinnamon",1
 "lemon poppy seed breakfast cake","Essential Instant Pot",17,"western","breakfast","poppy seeds,  egg,  greek yogurt,  sugar,  lemon,  butter,  flour,  baking powder,  powdered sugar",0
 "lentil and chickpea salad with feta and tahini","Anylist",NA,"mediterranean","main"," garlic,  olive oil,  coriander,  cumin,  tahini,  lemon,  canned chickpeas,  feta,  sesame seeds, (lentils or black lentils,  red onion or pickled onion), [sage or  preserved lemon]",0
 "light and flaky buttermilk biscuits","Salt, Fat, Acid, Heat",392,"western","breakfast","buttermilk,  butter,  flour,  baking powder,  heavy cream",0
@@ -407,9 +407,9 @@
 "lime vinaigrette","Salt, Fat, Acid, Heat",243,"western","dressing"," lime,  olive oil,  garlic, [jalapeno]",0
 "long roasted eggplant with garlic and croutons","nothing fancy",158,"western","side"," eggplant,  olive oil,  garlic,  red pepper flakes,  crusty bread,  preserved lemon,  lemon, (greek yogurt or sour cream,  mint or cilantro)",0
 "ma po tofu","Hero Dinners",118,"asian","meal","tofu,  chicken stock,  soy sauce,  oyster sauce,  chili-garlic sauce,  cornstarch,  cooking oil,  mushrooms,  garlic,  ginger,  sesame oil,  scallions,  white rice, (ground turkey or ground pork)",0
-"mango apple ceviche","every day",45,"latin","side","mango,  red onion,  lime,  olive oil,  granny smith apple,  sunflower seeds, (cilantro or parsley), [serrano pepper or jalapeno]",0
+"mango apple ceviche","every day",45,"latin","side","mango,  red onion,  lime,  olive oil,  granny smith apple,  sunflower seeds, (cilantro or parsley), [serrano pepper or jalapeno]",1
 "mango cabbage slaw","Hero Dinners",102,"latin","side","mango,  cabbage,  cilantro,  lime,  sugar, [jalapeno]",0
-"mango lime dressing","the flavor equation",147,"indian","dressing","mango,  buttermilk,  cooking oil,  lime,  dijon mustard,  black pepper,  chili powder",0
+"mango lime dressing","the flavor equation",147,"indian","dressing","mango,  buttermilk,  cooking oil,  lime,  dijon mustard,  black pepper,  chili powder",1
 "maple mashed sweet potatoes","Essential Instant Pot",117,"western","side","sweet potato,  maple syrup,  butter,  cinnamon",0
 "maple sage breakfast sausage","The Food Lab",507,"western","main","pork shoulder,  bacon,  maple syrup,  garlic,  red pepper flakes,  ground sage",0
 "marinated kale salad with chickpeas and sumac onions","The Food Lab",827,"western","salad","kale,  olive oil,  red onion,  sumac,  sesame seeds,  lemon,  garlic,  dijon mustard,  canned chickpeas",0
@@ -418,9 +418,9 @@
 "masala shrimp","the flavor equation",259,"indian","main"," shrimp,  olive oil,  garlic,  ginger,  tomato paste,  lime,  garam masala,  cayenne pepper,  cinnamon, [chives]",0
 "mayonnaise","Anylist",NA,"ingredient","ingredient","cooking oil,  egg,  lemon",0
 "Meat loaf with mushroom gravy","Appetites",220,"western","main","cooking oil,  onion,  celery,  marjoram,  thyme,  ground beef,  ground veal,  egg,  panko,  tomato paste,  butter,  cremini mushrooms,  shallot,  chicken stock,  heavy cream",0
-"meatball parm hero","Appetites",71,"western","main","olive oil,  onion,  garlic,  oregano,  parsley,  ground beef,  ground veal,  ground pork,  panko,  egg,  white wine,  red pasta sauce,  hoagie rolls,  mozzerella,  parmesan",0
+"meatball parm hero","Appetites",71,"western","main","olive oil,  onion,  garlic,  oregano,  parsley,  ground beef,  ground veal,  ground pork,  panko,  egg,  white wine,  red pasta sauce,  hoagie rolls,  mozzerella,  parmesan",1
 "memphis rub","Anylist",NA,"ingredient","ingredient","paprika,  dark brown sugar,  garlic powder,  chili powder,  black pepper,  onion powder,  dried thyme,  dried oregano,  mustard powder,  cayenne pepper, [celery salt or  celery seed]",0
-"merguez sausage","The Food Lab",506,"mediterranean","main"," garlic,  harissa,  fennel seed,  sumac, (pork shoulder or lamb,  dried oregano or oregano)",0
+"merguez sausage","The Food Lab",506,"mediterranean","main"," garlic,  harissa,  fennel seed,  sumac, (pork shoulder or lamb,  dried oregano or oregano)",1
 "merguez with yogurt, mint and moroccan salad","The Food Lab",516,"mediterranean","meal"," cucumber,  red onion,  greek yogurt,  lemon,  mint,  merguez sausage, (pita bread or naan or flatbread), [tomato]",0
 "mexican street corn salad","The Food Lab",437,"latin","side","cooking oil,  corn,  mayonnaise,  scallions,  cilantro,  garlic,  lime,  chili powder, (cotija or feta or parmesan)",0
 "mexican-ish herb salsa","Salt, Fat, Acid, Heat",363,"latin","sauce"," shallot,  lime,  cilantro,  jalapeno,  scallions,  cooking oil, [pomegranate or pepitas or cucumber or jicama or mango or avocado]",0
@@ -439,7 +439,7 @@
 "naan","The Food Lab",517,"mediterranean","side","flour,  sugar,  butter, (instant yeast or baking powder,  greek yogurt or whole milk)",0
 "new england fish dinner","Hero Dinners",167,"western","meal","yukon gold potato,  onion,  olive oil,  thyme,  green beans,  cod,  panko,  butter,  parsley,  lemon",0
 "new mexico style beef chili","Appetites",230,"western","stew"," poblano pepper,  new mexico chile,  flour,  chuck roast,  cooking oil,  onion,  garlic,  cumin,  coriander,  mexican oregano,  lager,  chicken stock,  cilantro,  sour cream, (tomato paste or harissa), [jalapeno or tortilla chips]",0
-"noodles with burnt garlic sesame and chile oil","Wok",307,"asian","meal","burnt garlic sesame and chile oil,  noodles,  soy sauce,  scallions,  cucumber",0
+"noodles with burnt garlic sesame and chile oil","Wok",307,"asian","meal","burnt garlic sesame and chile oil,  noodles,  soy sauce,  scallions,  cucumber",1
 "noodles with shanghai style scallion oil","Wok",309,"asian","meal","noodles,  shanghai style scallion oil,  dark soy sauce,  soy sauce,  sugar",0
 "noodles with thai basil and peanut pesto","Wok",325,"asian","meal"," garlic,  ginger,  dry roasted peanuts,  cilantro,  fish sauce,  tofu,  olive oil,  cooking oil,  spaghetti,  green beans, (basil or thai basil), [thai chili or sriracha]",0
 "noodles with xo sauce","Wok",305,"asian","meal","noodles,  xo pepperoni sauce,  scallions,  chinkiang vinegar,  soy sauce",0
@@ -482,8 +482,8 @@
 "persian herb and cucumber yogurt","Salt, Fat, Acid, Heat",371,"middle eastern","sauce"," yogurt,  cucumber,  garlic,  walnuts,  olive oil, (raisins or golden raisins), [mint or dill or parsley or cilantro]",0
 "persian spinach yogurt","Salt, Fat, Acid, Heat",372,"middle eastern","sauce","olive oil,  spinach,  cilantro,  garlic,  yogurt,  lemon",0
 "persian-ish rice","Salt, Fat, Acid, Heat",284,"middle eastern","side","basmati rice,  yogurt,  butter,  cooking oil, [parsley or cilantro or dill]",1
-"peruvian green sauce","The Food Lab",598,"latin","sauce","jalapeno,  cilantro,  garlic,  mayonnaise,  sour cream,  aji amarillo paste,  lime,  white vinegar,  olive oil",0
-"peruvian style roast chicken","The Food Lab",598,"latin","main","whole chicken,  cooking oil,  cumin,  paprika,  garlic,  white vinegar",0
+"peruvian green sauce","The Food Lab",598,"latin","sauce","jalapeno,  cilantro,  garlic,  mayonnaise,  sour cream,  aji amarillo paste,  lime,  white vinegar,  olive oil",1
+"peruvian style roast chicken","The Food Lab",598,"latin","main","whole chicken,  cooking oil,  cumin,  paprika,  garlic,  white vinegar",1
 "pickled chiles","Wok",84,"asian","prep","garlic,  white vinegar, (thai chili or red hot chili pepper)",0
 "pickled onion","Anylist",NA,"ingredient","ingredient"," red onion,  sugar,  white vinegar, [jalapeno]",0
 "pico's not so bland chicken","Wok",80,"asian","meal","water chestnuts,  chicken breast,  xiaoxing wine,  baking soda,  egg,  cornstarch,  soy sauce,  chicken stock,  sugar,  white pepper,  cooking oil,  garlic,  ginger,  mushrooms",0
@@ -495,13 +495,13 @@
 "pork chops with roasted grape relish","Hero Dinners",124,"western","main","olive oil,  pork chop,  grapes,  shallot,  dried thyme,  sherry wine,  balsamic vinegar,  sugar,  butter, [brussels sprouts or  fingerling potatoes]",0
 "pork meatballs with mushroom cream sauce","The Food Lab",542,"western","main","ground pork,  heavy cream,  gelatin,  sandwich bread,  soy sauce,  marmite,  anchovies,  garlic,  egg,  sugar,  fennel seed,  cooking oil,  butter,  mushrooms,  onion,  flour,  chicken stock,  lemon, [buttermilk or  thyme]",0
 "Portugese Kale Soup","Appetites",44,"mediterranean","soup"," kidney beans,  chicken stock,  linguica,  kale,  yukon gold potato,  sherry vinegar,  red pepper flakes, [ham hock]",0
-"potato and roasted corn herbed raita","the flavor equation",78,"middle eastern","sauce"," yukon gold potato,  cooking oil,  corn on the cob,  mint,  greek yogurt,  cilantro,  lime,  chili powder, [serrano pepper or jalapeno]",0
+"potato and roasted corn herbed raita","the flavor equation",78,"middle eastern","sauce"," yukon gold potato,  cooking oil,  corn on the cob,  mint,  greek yogurt,  cilantro,  lime,  chili powder, [serrano pepper or jalapeno]",1
 "potato hash with peppers and onions","The Food Lab",140,"western","breakfast","russet potato,  cooking oil,  bell pepper,  onion,  hot sauce,  egg",0
 "potstickers","Hungry Monkey",239,"asian","main","napa cabbage,  ground pork,  scallions,  ginger,  oyster sauce,  sesame oil,  soy sauce,  egg,  gyoza wrappers, [lotus root]",0
 "preserved lemon","Anylist",NA,"ingredient","ingredient"," sugar, (lemon or meyer lemon)",0
 "pressure cooker chicken korma","Anylist",NA,"indian","meal","heavy cream,  saffron,  bone in chicken thigh,  olive oil,  golden raisins,  almonds,  cardamon,  cinnamon stick,  onion,  ginger,  garlic,  coriander,  cumin,  yogurt,  chile powder,  garam masala",0
 "pressure cooker corn risotto","Anylist",NA,"western","main","arborio rice,  chicken stock,  corn,  butter,  shallot,  garlic,  white wine,  bay leaf,  thyme,  heavy cream,  parmesan,  turmeric",0
-"pretzels","Hungry Monkey",155,"western","appetizer","flour,  instant yeast,  honey,  baking soda",0
+"pretzels","Hungry Monkey",155,"western","appetizer","flour,  instant yeast,  honey,  baking soda",1
 "puff pastry","Noggin",NA,"ingredient","ingredient","flour,  butter",0
 "pumpkin seed chutney","the flavor equation",323,"indian","sauce","pepitas,  cilantro,  mint,  lime,  olive oil,  black peppercorns,  garlic,  serrano pepper,  ginger,  cumin",0
 "punjabi black lentils","Anylist",NA,"indian","meal","butter,  onion,  garlic,  ginger,  cumin seed,  coriander,  turmeric,  garam masala,  chili powder,  tomato sauce,  black lentils,  heavy cream,  cilantro",0
@@ -543,7 +543,7 @@
 "salted citrus salad with fennel, radish and olive","nothing fancy",92,"western","salad"," castlevetrano olives,  olive oil,  radish,  fennel bulb,  honey, (tangerine or orange or blood orange,  lemon or lime)",0
 "santa maria style grilled tri tip","The Food Lab",347,"western","main","tri tip,  garlic,  tomato,  celery,  scallions,  cilantro,  red wine vinegar,  worcestershire sauce, (california chile or poblano pepper or new mexico chile)",0
 "sausage and green onion strata","Essential Instant Pot",19,"western","breakfast"," egg,  chicken stock,  scallions,  crusty bread,  sausage, [parsley]",0
-"sausage and pepper hero","Appetites",69,"western","main","sweet italian sausage,  olive oil,  onion,  hoagie rolls,  bell pepper",0
+"sausage and pepper hero","Appetites",69,"western","main","sweet italian sausage,  olive oil,  onion,  hoagie rolls,  bell pepper",1
 "sausage gravy and biscuits","Appetites",215,"western","breakfast"," buttermilk biscuits,  butter,  heavy cream,  whole milk,  breakfast sausage, [Frank's hot sauce]",0
 "savory pastry dough","Appetites",163,"western","ingredient","flour,  butter",0
 "scallion mint salsa","the flavor equation",163,"indian","sauce"," olive oil,  lemon,  mint,  scallions,  garlic,  black pepper, [jalapeno]",0
@@ -563,7 +563,7 @@
 "shrimp bisque","Appetites",60,"western","soup"," shrimp,  olive oil,  shallot,  scallions,  garlic,  tomato paste,  sherry,  fish sauce,  butter,  flour,  heavy cream,  lemon, (shellfish stock or chicken stock)",0
 "sichuan style fish fragrant eggplant","Wok",191,"asian","side"," chinese eggplant,  cornstarch,  soy sauce,  dark soy sauce,  sugar,  cooking oil,  garlic,  ginger,  doubanjiang,  scallions,  cilantro, (chinkiang vinegar or balsamic vinegar), [chicken stock or msg or ground pork]",0
 "sichuan style hot and sour stir fried potatoes","Wok",190,"asian","side"," yukon gold potato,  cooking oil,  szechuan peppercorn,  garlic,  soy sauce,  chinkiang vinegar,  sugar, (dried red chile pepper or red pepper flakes)",0
-"sicilian chicken salad","Salt, Fat, Acid, Heat",342,"mediterranean","main","red onion,  red wine vinegar,  currants,  lemon,  parsley,  pine nuts,  fennel seed, (chicken breast or leftover roast chicken,  aioli or mayonnaise), [celery or  fennel bulb]",0
+"sicilian chicken salad","Salt, Fat, Acid, Heat",342,"mediterranean","main","red onion,  red wine vinegar,  currants,  lemon,  parsley,  pine nuts,  fennel seed, (chicken breast or leftover roast chicken,  aioli or mayonnaise), [celery or  fennel bulb]",1
 "sicilian oregano sauce","Salt, Fat, Acid, Heat",369,"mediterranean","sauce"," garlic,  parsley,  olive oil,  lemon, (oregano or dried oregano)",0
 "silky sweet corn soup","Salt, Fat, Acid, Heat",276,"western","soup","corn on the cob,  butter,  onion",0
 "sitr fried kimchi pork","Wok",91,"asian","meal"," gochujang,  soy sauce,  sesame oil,  sugar,  baking soda,  cornstarch,  kimchi,  cooking oil,  onion, (pork belly or pork loin), [sesame seeds or red hot chili pepper]",0
@@ -619,7 +619,7 @@
 "summer squash with basil, parmesan and toasted pepitas","nothing fancy",108,"western","salad"," pepitas,  lemon,  fish sauce,  parmesan,  olive oil,  chives,  basil,  parsley, (zucchini or summer squash)",0
 "super crisp roasted potatoes","The Food Lab",474,"western","side"," russet potato, (duck fat or bacon fat or olive oil), [thyme or parsley or chives or rosemary]",0
 "super flaky buttermilk biscuits","The Food Lab",163,"western","breakfast","buttermilk,  sour cream,  flour,  baking powder,  baking soda,  butter",0
-"sushi takeout cobb","every day",53,"asian","salad","carrot,  shallot,  ginger,  rice vinegar,  miso,  sesame oil,  cooking oil,  avocado,  edamame,  cucumber,  chives, (napa cabbage or cabbage,  tofu or silken tofu), [daikon]",0
+"sushi takeout cobb","every day",53,"asian","salad","carrot,  shallot,  ginger,  rice vinegar,  miso,  sesame oil,  cooking oil,  avocado,  edamame,  cucumber,  chives, (napa cabbage or cabbage,  tofu or silken tofu), [daikon]",1
 "sweet and sour chicken or pork","Wok",75,"asian","meal"," soy sauce,  xiaoxing wine,  sugar,  baking soda,  egg,  cornstarch,  canned pineapple,  ketchup,  cooking oil,  bell pepper,  onion,  garlic,  ginger, (chicken breast or pork tenderloin,  white vinegar or apple cider vinegar), [cashews]",0
 "sweet and sour red cabbage","Essential Instant Pot",120,"western","side","butter,  red cabbage,  granny smith apple,  chicken stock,  honey,  apple cider vinegar",0
 "sweet italian sausage","The Food Lab",505,"ingredient","ingredient","pork shoulder,  garlic,  fennel seed,  dried oregano,  nutmeg,  red wine vinegar",0
@@ -668,7 +668,7 @@
 "vinegared apples with white cheddar","nothing fancy",103,"western","salad"," apple,  honey,  olive oil, (persimmon or asian pear,  apple cider vinegar or white vinegar,  white cheddar or gouda), [horseradish]",0
 "warm kale,white bean mushroom salad with chilli tahini","the flavor equation",111,"middle eastern","salad","olive oil,  shallot,  mushrooms,  kale,  canned cannelini beans,  tahini,  chili-garlic sauce,  rice vinegar",0
 "weeknight pasta with meat sauce","The Food Lab",706,"western","main","onion,  carrot,  celery,  anchovies,  garlic,  dried oregano,  mushrooms,  ground beef,  olive oil,  butter,  tomato paste,  canned whole tomatoes,  fish sauce,  parmesan,  pasta, [parsley or basil]",0
-"white bean and asparagus salad","Anylist",NA,"western","side"," bay leaf,  asparagus,  tarragon,  lemon,  garlic,  olive oil, (canned white beans or canned cannelini beans)",0
+"white bean and asparagus salad","Anylist",NA,"western","side"," bay leaf,  asparagus,  tarragon,  lemon,  garlic,  olive oil, (canned white beans or canned cannelini beans)",1
 "white gazpacho","Appetites",63,"western","soup"," crusty bread,  almonds,  garam masala,  olive oil,  sherry vinegar, [grapes or capers]",0
 "wild mushroom shepherds pie","every day",129,"western","main","dried mushrooms,  olive oil,  onion,  carrot,  garlic,  mushrooms,  sherry,  tomato paste,  chicken stock,  russet potato,  butter,  parsley, (creme fraiche or sour cream,  milk or buttermilk,  smoked paprika or paprika)",0
 "winter slaw with farro","every day",48,"western","side","dried apricots,  white vinegar,  green cabbage,  farro,  almonds,  parmesan,  olive oil",0

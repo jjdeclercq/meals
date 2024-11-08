@@ -31,6 +31,7 @@ vignettes/*.pdf
 *_cache/
 /cache/
 
+/presentations/mealtime_files
 # Images
 *.jpg
 # Temporary files created by R markdown
@@ -43,3 +44,6 @@ vignettes/*.pdf
 # ignore archived ingredients
 /data/archive/
 /data/archive/*
+
+*.html
+/presentations/mealtime_files/

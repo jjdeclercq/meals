@@ -46,5 +46,5 @@ vignettes/*.pdf
 /data/archive/*
 
 *.html
-presentations/mealtime_files/
-presentations/mealtime_files/*
+presentation/mealtime_files/
+presentation/mealtime_files/*

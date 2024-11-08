@@ -47,3 +47,4 @@ vignettes/*.pdf
 
 *.html
 /presentations/mealtime_files/
+/presentations/mealtime_files/*

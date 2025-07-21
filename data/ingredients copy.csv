@@ -1,0 +1,627 @@
+name,n,has,class,class2,vegetarian,vegan,equal,sometimes,makeable,restricted,date_changed,rn
+parmesan,81,1,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,1
+feta,21,0,dairy,cheese,1,0,NA,NA,NA,0,12/9/24,2
+cheddar,18,1,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,3
+mozzerella,9,0,dairy,cheese,1,0,NA,NA,NA,0,8/8/24,4
+cream cheese,8,0,dairy,cheese,1,0,NA,NA,NA,0,8/9/24,5
+gruyere,7,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,6
+jack cheese,7,0,dairy,cheese,1,0,NA,NA,NA,0,9/13/24,7
+american cheese,5,1,dairy,cheese,1,0,NA,NA,NA,0,9/23/24,8
+blue cheese,5,1,dairy,cheese,1,0,NA,NA,NA,0,12/9/24,9
+cotija,5,1,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,10
+ricotta,5,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,11
+fontina,4,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,12
+goat cheese,4,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,13
+burrata,2,0,dairy,cheese,1,0,NA,mozzerella,NA,0,3/3/24,14
+comte,2,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,15
+halloumi,2,0,dairy,cheese,1,0,NA,NA,NA,0,9/20/24,16
+paneer,2,0,dairy,cheese,1,0,,feta,0,0,3/3/24,17
+provolone,2,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,18
+white cheddar,2,0,dairy,cheese,1,0,NA,cheddar,NA,0,3/3/24,19
+brie,1,0,dairy,cheese,1,0,,,0,0,8/8/24,20
+cottage cheese,1,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,21
+gorgonzola,1,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,22
+gouda,1,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,23
+raclette cheese,1,0,dairy,cheese,1,0,,,0,0,8/8/24,24
+stilton,1,0,dairy,cheese,1,0,NA,NA,NA,0,3/3/24,25
+swiss cheese,1,0,dairy,cheese,1,0,,,0,0,8/8/24,26
+nard,0,0,dairy,cheese,1,0,,,1,0,8/20/24,27
+butter,185,1,dairy,dairy,1,0,NA,NA,NA,0,3/3/24,28
+egg,109,1,dairy,dairy,1,0,NA,NA,NA,0,9/16/24,29
+heavy cream,44,1,dairy,dairy,1,0,NA,NA,NA,0,9/16/24,30
+sour cream,35,1,dairy,dairy,1,0,"greek yogurt, yogurt",NA,NA,0,9/16/24,31
+greek yogurt,33,0,dairy,dairy,1,0,yogurt,NA,NA,0,12/9/24,32
+milk,31,1,dairy,dairy,1,0,whole milk,NA,NA,0,9/8/24,33
+buttermilk,28,1,dairy,dairy,1,0,NA,NA,NA,0,12/9/24,34
+yogurt,18,1,dairy,dairy,1,0,greek yogurt,NA,1,0,3/3/24,35
+creme fraiche,16,0,dairy,dairy,1,0,NA,heavy cream and buttermilk,1,0,3/3/24,36
+whole milk,11,0,dairy,dairy,1,0,NA,milk,NA,0,3/3/24,37
+ground beef,20,0,meat,beef,0,0,NA,"short ribs, chuck roast, skirt steak, bone in short rib, brisket",NA,0,8/10/24,38
+flank steak,19,1,meat,beef,0,0,NA,NA,NA,0,3/3/24,39
+skirt steak,12,0,meat,beef,0,0,NA,NA,NA,0,3/3/24,40
+flap meat,7,1,meat,beef,0,0,NA,NA,NA,0,7/29/24,41
+chuck roast,6,0,meat,beef,0,0,NA,NA,NA,0,3/3/24,42
+hanger steak,6,0,meat,beef,0,0,NA,NA,NA,0,3/3/24,43
+rib eye steak,4,0,meat,beef,0,0,NA,NA,NA,0,3/3/24,44
+short ribs,4,0,meat,beef,0,0,NA,NA,NA,0,3/3/24,45
+baby back ribs,3,0,meat,beef,0,0,NA,NA,NA,0,9/8/24,46
+tri tip,2,0,meat,beef,0,0,NA,NA,NA,0,3/3/24,47
+bone in short rib,1,0,meat,beef,0,0,NA,NA,NA,0,3/3/24,48
+strip steak,1,0,meat,beef,0,0,NA,NA,NA,0,3/3/24,49
+brisket,0,0,meat,beef,0,0,NA,NA,NA,0,3/3/24,50
+chicken breast,54,1,meat,chicken,0,0,NA,NA,NA,0,3/3/24,51
+chicken thigh,23,1,meat,chicken,0,0,NA,NA,NA,0,9/1/24,52
+whole chicken,20,0,meat,chicken,0,0,NA,NA,NA,0,3/3/24,53
+chicken bones,5,0,meat,chicken,0,0,NA,NA,NA,0,3/3/24,54
+bone in chicken breast,4,0,meat,chicken,0,0,NA,NA,NA,0,3/3/24,55
+bone in chicken thigh,4,0,meat,chicken,0,0,NA,NA,NA,0,3/3/24,56
+chicken tenders,4,0,meat,chicken,0,0,NA,NA,1,0,12/9/24,57
+ground chicken,4,0,meat,chicken,0,0,NA,chicken thigh,NA,0,3/3/24,58
+chicken wings,3,0,meat,chicken,0,0,,,0,0,3/3/24,59
+chicken leg quarters,1,0,meat,chicken,0,0,NA,NA,NA,0,3/3/24,60
+leftover roast chicken,1,0,meat,chicken,0,0,NA,NA,NA,0,3/3/24,61
+chicken apple sausage,0,0,meat,chicken,0,0,NA,NA,NA,0,3/3/24,62
+ground lamb,7,0,meat,other,0,0,NA,NA,NA,0,3/3/24,63
+lamb,4,0,meat,other,0,0,NA,NA,NA,0,3/3/24,64
+duck breast,2,0,meat,other,0,0,NA,NA,NA,0,3/3/24,65
+ground veal,2,0,meat,other,0,0,NA,NA,NA,0,3/3/24,66
+lamb loin chops,2,0,meat,other,0,0,NA,NA,NA,0,3/3/24,67
+the mix,2,1,meat,other,0,0,,,1,1,9/30/24,68
+salami,1,1,meat,other,0,0,,pepperoni,0,0,9/30/24,69
+spam,1,0,meat,other,0,0,,,0,0,3/3/24,70
+bacon,20,0,meat,pork,0,0,NA,NA,NA,0,9/8/24,71
+ground pork,16,1,meat,pork,0,0,NA,pork shoulder,NA,0,3/3/24,72
+pork shoulder,10,0,meat,pork,0,0,NA,NA,NA,0,3/3/24,73
+pork loin,7,0,meat,pork,0,0,NA,pork tenderloin,NA,0,3/3/24,74
+spanish chorizo,6,0,meat,pork,0,0,NA,NA,NA,0,12/9/24,75
+pancetta,3,0,meat,pork,0,0,NA,NA,NA,0,12/9/24,76
+pork belly,3,0,meat,pork,0,0,,bacon,0,0,3/3/24,77
+pork chop,2,0,meat,pork,0,0,NA,NA,NA,0,3/3/24,78
+pork tenderloin,2,0,meat,pork,0,0,NA,pork loin,NA,0,3/3/24,79
+prosciutto,2,0,meat,pork,0,0,NA,NA,NA,0,12/9/24,80
+bone-in pork chop,1,0,meat,pork,0,0,NA,NA,NA,0,3/3/24,81
+ham,1,0,meat,pork,0,0,NA,NA,NA,0,9/30/24,82
+ham hock,0,0,meat,pork,0,0,NA,NA,NA,0,3/3/24,83
+sweet italian sausage,4,1,meat,sausage,0,0,NA,NA,1,0,7/29/24,84
+pepperoni,3,1,meat,sausage,0,0,,,0,0,8/9/24,85
+sausage,3,1,meat,sausage,0,0,NA,NA,NA,0,7/29/24,86
+breakfast sausage,2,0,meat,sausage,0,0,NA,NA,NA,0,9/30/24,87
+chorizo,2,0,meat,sausage,0,0,NA,NA,1,0,3/3/24,88
+linguica,2,0,meat,sausage,0,0,NA,NA,NA,0,3/3/24,89
+andoullie sausage,1,0,meat,sausage,0,0,,,0,0,3/3/24,90
+bratwurst,1,0,meat,sausage,0,0,NA,NA,1,0,12/9/24,91
+garlic sausage,1,0,meat,sausage,0,0,NA,NA,1,0,3/3/24,92
+kielbasa,1,0,meat,sausage,0,0,,andoullie sausage,0,0,8/8/24,93
+merguez sausage,1,0,meat,sausage,0,0,NA,NA,1,0,8/9/24,94
+shrimp,21,0,meat,seafood,0,0,NA,NA,NA,1,10/15/24,95
+cod,10,0,meat,seafood,0,0,NA,NA,NA,0,12/9/24,96
+salmon,9,0,meat,seafood,0,0,NA,NA,NA,0,3/3/24,97
+mahi mahi,8,0,meat,seafood,0,0,NA,NA,NA,0,3/3/24,98
+halibut,4,0,meat,seafood,0,0,mahi mahi,cod,0,0,3/3/24,99
+tilapia,2,0,meat,seafood,0,0,NA,NA,NA,0,3/3/24,100
+crab,1,0,meat,seafood,0,0,,,0,1,3/3/24,101
+grouper,1,0,meat,seafood,0,0,NA,NA,NA,0,3/3/24,102
+lump crap meat,1,0,meat,seafood,0,0,,,0,1,3/3/24,103
+skin on salmon,1,0,meat,seafood,0,0,salmon,NA,NA,0,3/3/24,104
+swordfish,1,0,meat,seafood,0,0,NA,NA,NA,0,12/9/24,105
+trout,1,0,meat,seafood,0,0,NA,NA,NA,0,3/3/24,106
+tofu,25,1,meat,tofu,1,1,NA,NA,NA,0,12/9/24,107
+silken tofu,1,0,meat,tofu,1,1,tofu,NA,NA,0,3/3/24,108
+ground turkey,8,0,meat,turkey,0,0,NA,NA,NA,0,3/3/24,109
+turkey breast,1,0,meat,turkey,0,0,NA,NA,NA,0,9/23/24,110
+white wine,18,1,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,111
+vodka,10,0,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,112
+lager,6,1,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,113
+sherry,5,1,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,114
+red wine,4,1,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,115
+marsala wine,2,0,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,116
+whiskey,2,1,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,117
+Angostura bitters,1,1,pantry,alcohol,1,1,,,0,0,8/15/24,118
+brandy,1,0,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,119
+port wine,1,0,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,120
+porter beer,1,0,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,121
+sweet marsala,1,0,pantry,alcohol,1,1,NA,NA,NA,0,3/3/24,122
+rum,0,1,pantry,alcohol,1,1,,,0,0,8/15/24,123
+Grand Marnier,0,1,pantry,alcohol,1,1,,,0,0,8/15/24,124
+canned chickpeas,7,1,pantry,beans,1,1,NA,NA,NA,0,3/3/24,125
+black beans,5,1,pantry,beans,1,1,NA,canned black beans,NA,0,3/3/24,126
+chickpeas,4,1,pantry,beans,1,1,NA,NA,NA,0,8/25/24,127
+canned cannelini beans,3,1,pantry,beans,1,1,canned chickpeas,NA,NA,0,3/3/24,128
+kidney beans,3,0,pantry,beans,1,1,NA,NA,NA,0,3/3/24,129
+pinto beans,3,0,pantry,beans,1,1,NA,canned pinto beans,NA,0,3/3/24,130
+canned black beans,2,1,pantry,beans,1,1,NA,black beans,NA,0,3/3/24,131
+cannelini beans,2,0,pantry,beans,1,1,NA,NA,NA,0,8/26/24,132
+white beans,2,0,pantry,beans,1,1,NA,NA,NA,0,8/26/24,133
+black eyed peas,1,0,pantry,beans,1,1,NA,NA,NA,0,3/3/24,134
+canned cannellini beans,1,1,pantry,beans,1,1,NA,NA,NA,0,3/3/24,135
+canned white beans,1,1,pantry,beans,1,1,canned cannelini beans,cannelini beans,NA,0,8/26/24,136
+giant white beans,1,0,pantry,beans,1,1,NA,NA,NA,0,3/3/24,137
+pineapple juice,3,1,pantry,beverage,1,1,NA,NA,NA,0,8/16/24,138
+club soda,2,0,pantry,beverage,1,1,NA,NA,NA,0,3/3/24,139
+apple cider,1,0,pantry,beverage,1,1,,,0,0,9/30/24,140
+apple juice,1,0,pantry,beverage,1,1,NA,NA,NA,0,3/3/24,141
+coconut water,1,0,pantry,beverage,1,1,,,0,0,12/9/24,142
+coffee,1,1,pantry,beverage,1,1,,,0,0,8/15/24,143
+coke,1,0,pantry,beverage,1,1,NA,NA,NA,0,3/3/24,144
+crusty bread,22,0,pantry,bread,1,1,NA,sandwich bread,NA,0,9/20/24,145
+corn tortillas,8,0,pantry,bread,1,1,NA,flour tortillas,NA,0,9/13/24,146
+puff pastry,7,1,pantry,bread,1,0,NA,pie dough,1,0,12/9/24,147
+sandwich bread,7,1,pantry,bread,1,1,NA,crusty bread,NA,0,9/8/24,148
+flour tortillas,6,1,pantry,bread,1,1,NA,corn tortillas,NA,0,9/30/24,149
+baguette,5,0,pantry,bread,1,1,NA,crusty bread,NA,0,3/3/24,150
+croutons,5,1,pantry,bread,1,1,NA,crusty bread,1,0,10/15/24,151
+hoagie rolls,5,1,pantry,bread,1,1,NA,hamburger bun,NA,0,7/29/24,152
+hamburger buns,4,1,pantry,bread,1,1,NA,NA,NA,0,9/8/24,153
+pita bread,4,1,pantry,bread,1,1,NA,NA,1,0,12/9/24,154
+flatbread,3,0,pantry,bread,1,1,naan,pita bread,1,0,10/15/24,155
+pie dough,3,0,pantry,bread,1,0,NA,puff pastry,1,0,3/3/24,156
+tortillas,3,1,pantry,bread,1,1,"corn tortillas, flour tortillas",NA,NA,0,3/3/24,157
+naan,2,0,pantry,bread,1,1,flatbread,NA,1,0,3/3/24,158
+buttermilk biscuits,1,0,pantry,bread,1,0,NA,NA,NA,0,3/3/24,159
+savory pastry dough,1,0,pantry,bread,1,0,NA,NA,NA,0,3/3/24,160
+tomato paste,30,1,pantry,canned,1,1,NA,NA,NA,0,3/3/24,161
+coconut milk,13,1,pantry,canned,1,1,NA,NA,NA,0,3/3/24,162
+canned whole tomatoes,11,0,pantry,canned,1,1,NA,crushed tomatoes,NA,0,3/3/24,163
+crushed tomatoes,8,0,pantry,canned,1,1,canned whole tomatoes,NA,NA,0,3/3/24,164
+chipotle,7,1,pantry,canned,1,1,NA,NA,NA,0,3/3/24,165
+black olives,4,1,pantry,canned,1,1,,,0,0,3/3/24,166
+tomato sauce,4,1,pantry,canned,1,1,NA,"canned whole tomatoes, crushed tomatoes",NA,0,3/3/24,167
+diced tomatoes,3,1,pantry,canned,1,1,NA,NA,NA,0,3/3/24,168
+evaporated milk,2,1,pantry,canned,1,1,NA,NA,NA,0,3/3/24,169
+canned baby clams,1,0,pantry,canned,1,1,NA,NA,NA,0,3/3/24,170
+canned pineapple,1,0,pantry,canned,1,1,,pineapple,0,0,3/3/24,171
+canned tuna,1,0,pantry,canned,0,0,NA,NA,NA,0,9/13/24,172
+clam juice,1,0,pantry,canned,0,0,NA,NA,NA,0,3/3/24,173
+water chestnuts,1,0,pantry,canned,1,1,,,0,0,3/3/24,174
+guajillo chile,4,1,pantry,chiles,1,1,NA,NA,NA,0,3/3/24,175
+ancho chile,3,0,pantry,chiles,1,1,NA,NA,NA,0,3/3/24,176
+dried mirasol pepper,3,0,pantry,chiles,1,1,,,0,0,12/21/24,179
+dried red chile pepper,3,0,pantry,chiles,1,1,,szechuan chili oil,0,0,3/3/24,177
+arbol chile,2,0,pantry,chiles,1,1,NA,NA,NA,0,3/3/24,178
+pasilla chile,2,0,pantry,chiles,1,1,NA,NA,NA,0,3/3/24,180
+aji amarillo,1,1,pantry,chiles,1,1,,,0,0,12/21/24,181
+cascabel chile,1,0,pantry,chiles,1,1,NA,NA,NA,0,3/3/24,182
+cubanelle pepper,1,0,pantry,chiles,1,1,NA,NA,NA,0,3/3/24,183
+dried chipotle,1,0,pantry,chiles,1,1,,,0,0,12/12/24,184
+dried new mexico chile,1,0,pantry,chiles,1,1,NA,NA,NA,0,3/3/24,185
+mulato chile,1,0,pantry,chiles,1,1,NA,NA,NA,0,3/3/24,186
+pequin chile,1,0,pantry,chiles,1,1,NA,NA,NA,0,3/3/24,187
+soy sauce,143,1,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,188
+fish sauce,33,1,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,189
+dijon mustard,29,1,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,190
+mayonnaise,28,1,pantry,condiment,1,0,NA,aioli,1,0,3/3/24,191
+dark soy sauce,23,1,pantry,condiment,1,1,,soy sauce,0,0,3/3/24,192
+oyster sauce,17,1,pantry,condiment,0,0,NA,NA,NA,0,3/3/24,193
+szechuan chili oil,13,1,pantry,condiment,1,1,,,1,0,3/3/24,194
+ketchup,12,1,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,195
+peanut butter,11,1,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,196
+harissa,9,1,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,197
+sriracha,9,1,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,198
+chinese sesame paste,5,1,pantry,condiment,0,0,,"tahini, peanut butter",0,0,3/3/24,199
+barbecue sauce,4,1,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,200
+hoisin sauce,4,1,pantry,condiment,1,1,,,0,0,3/3/24,201
+hot sauce,4,1,pantry,condiment,1,1,Frank's hot sauce,NA,NA,0,3/3/24,202
+shoyu,4,1,pantry,condiment,1,1,soy sauce,,0,0,3/3/24,203
+apricot preserves,2,0,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,204
+chili-garlic sauce,2,1,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,205
+chunky peanut butter,2,1,pantry,condiment,1,1,NA,NA,NA,0,8/25/24,206
+low sodium soy sauce,2,1,pantry,condiment,1,1,NA,soy sauce,NA,0,3/3/24,207
+shanghai style scallion oil,2,1,pantry,condiment,1,1,,,1,0,3/3/24,208
+tamari,2,0,pantry,condiment,1,1,soy sauce,,0,0,3/3/24,209
+Italian salad dressing,1,1,pantry,condiment,1,0,,,1,0,8/20/24,210
+fig preserves,1,0,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,211
+horseradish,1,0,pantry,condiment,1,1,NA,NA,NA,0,3/3/24,212
+hummus,1,1,pantry,condiment,1,1,NA,NA,1,0,3/3/24,213
+jelly,1,1,pantry,condiment,1,1,,,0,0,7/29/24,214
+nuoc cham,1,0,pantry,condiment,0,0,,,1,0,3/3/24,215
+raspberry jam,1,0,pantry,condiment,1,1,,jelly,0,0,8/15/24,216
+salsa verde,1,1,pantry,condiment,1,1,NA,NA,1,0,3/3/24,217
+tartar sauce,1,0,pantry,condiment,0,1,NA,NA,1,0,3/3/24,218
+teriyaki sauce,1,1,pantry,condiment,1,1,NA,NA,1,0,3/3/24,219
+xo pepperoni sauce,1,1,pantry,condiment,0,0,,,1,1,3/3/24,220
+Frank's hot sauce,0,1,pantry,condiment,1,1,hot sauce,NA,NA,0,3/3/24,221
+ponzu sauce,0,0,pantry,condiment,1,1,,,0,0,3/3/24,222
+do chua,0,0,pantry,condiment,1,1,,,1,0,3/3/24,223
+dried wood ear mushroom,4,1,pantry,deydrated,1,1,,,0,0,3/3/24,224
+dried daylily buds,2,0,pantry,deydrated,1,1,,,0,0,3/3/24,225
+dried mushrooms,2,0,pantry,deydrated,1,1,NA,NA,NA,0,3/3/24,226
+dried porcini mushrooms,2,0,pantry,deydrated,1,1,NA,NA,NA,0,3/3/24,227
+kombu,2,1,pantry,deydrated,1,1,,,0,0,3/3/24,228
+dried shiitake mushroom,1,0,pantry,deydrated,1,1,,"dried mushrooms, dried porcini mushrooms",0,0,3/3/24,229
+nori,1,1,pantry,deydrated,1,1,,,0,0,3/3/24,230
+mild red wine olive oil vinaigrette,3,0,pantry,dressing,1,1,NA,NA,1,0,3/3/24,231
+hazelnut vinaigrette,2,0,pantry,dressing,1,1,NA,NA,1,0,3/3/24,232
+mild lemon olive oil vinaigrette,2,0,pantry,dressing,1,1,NA,NA,1,0,3/3/24,233
+caesar dressing,1,0,pantry,dressing,0,0,NA,NA,1,0,3/3/24,234
+ginger peanut dressing,1,0,pantry,dressing,1,1,NA,NA,NA,0,3/3/24,235
+pine nut vinaigrette,1,0,pantry,dressing,1,1,NA,NA,1,0,3/3/24,236
+raisins,8,1,pantry,dried fruit,1,1,NA,currants,NA,0,3/3/24,237
+dried cranberries,6,1,pantry,dried fruit,1,1,NA,dried cherries,NA,0,3/3/24,238
+dried cherries,4,0,pantry,dried fruit,1,1,NA,dried cranberries,NA,0,3/3/24,239
+dates,3,1,pantry,dried fruit,1,1,NA,dried figs,NA,0,3/3/24,240
+dried apricots,3,1,pantry,dried fruit,1,1,NA,NA,NA,0,3/3/24,241
+dried figs,2,0,pantry,dried fruit,1,1,NA,dates,NA,0,3/3/24,242
+golden raisins,2,1,pantry,dried fruit,1,1,NA,NA,NA,0,3/3/24,243
+currants,1,0,pantry,dried fruit,1,1,NA,raisins,NA,0,3/3/24,244
+prunes,1,0,pantry,dried fruit,1,1,NA,NA,NA,0,3/3/24,245
+sugar,151,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,246
+flour,115,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,247
+cornstarch,67,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,248
+sesame seeds,46,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,249
+baking powder,41,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,250
+baking soda,41,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,251
+brown sugar,29,1,pantry,dry,1,1,dark brown sugar,NA,NA,0,3/3/24,252
+panko,23,1,pantry,dry,1,1,bread crumbs,NA,NA,0,9/8/24,253
+dark brown sugar,22,1,pantry,dry,1,1,brown sugar,NA,NA,0,3/3/24,254
+powdered sugar,12,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,255
+bread crumbs,8,1,pantry,dry,1,1,panko,crusty bread,NA,0,3/3/24,256
+instant yeast,8,1,pantry,dry,1,1,active dry yeast,NA,NA,0,3/3/24,257
+palm sugar,8,1,pantry,dry,1,1,NA,"brown sugar, dark brown sugar",NA,0,3/3/24,258
+potato flour,7,1,pantry,dry,1,1,,,0,0,3/3/24,259
+gelatin,6,1,pantry,dry,0,0,NA,NA,NA,0,3/3/24,260
+cocoa powder,5,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,261
+unsweetened coconut chips,4,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,262
+active dry yeast,3,1,pantry,dry,1,1,instant yeast,NA,NA,0,3/3/24,263
+cornmeal,3,0,pantry,dry,1,1,NA,NA,NA,0,3/3/24,264
+msg,2,1,pantry,dry,1,1,,,0,0,3/3/24,265
+turbinado sugar,2,1,pantry,dry,1,1,,sugar,0,0,8/15/24,266
+bread flour,1,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,267
+chickpea flour,1,0,pantry,dry,1,1,,"flour, bread flour",0,0,3/3/24,268
+flax seed,1,1,pantry,dry,1,1,NA,NA,NA,0,3/3/24,269
+rice flour,1,0,pantry,dry,1,1,NA,NA,NA,0,3/3/24,270
+olive oil,282,1,pantry,fat,1,1,NA,cooking oil,NA,0,3/3/24,271
+cooking oil,231,1,pantry,fat,1,1,NA,olive oil,NA,0,3/3/24,272
+sesame oil,73,1,pantry,fat,1,1,NA,NA,NA,0,3/3/24,273
+ghee,5,1,pantry,fat,1,0,NA,"cooking oil, butter",1,0,3/3/24,274
+lard,4,0,pantry,fat,0,0,NA,shortening,NA,0,3/3/24,275
+coconut oil,3,0,pantry,fat,1,1,NA,cooking oil,NA,0,3/3/24,276
+bacon fat,2,1,pantry,fat,0,0,NA,"butter, olive oil, duck fat",NA,0,3/3/24,277
+duck fat,2,0,pantry,fat,0,0,NA,"butter, olive oil, bacon fat",NA,0,3/3/24,278
+hazelnut oil,1,1,pantry,fat,1,1,NA,NA,NA,0,3/3/24,279
+shortening,1,0,pantry,fat,1,1,NA,lard,NA,0,3/3/24,280
+walnut oil,1,1,pantry,fat,1,1,NA,NA,NA,0,3/3/24,281
+rice,38,1,pantry,grain,1,1,"white rice, brown rice",NA,NA,0,3/3/24,282
+basmati rice,9,1,pantry,grain,1,1,NA,"rice, brown rice",NA,0,3/3/24,283
+white rice,9,1,pantry,grain,1,1,rice,brown rice,NA,0,3/3/24,284
+farro,7,0,pantry,grain,1,1,NA,barley,NA,0,12/9/24,285
+jasmine rice,7,0,pantry,grain,1,1,,rice,0,0,9/8/24,286
+couscous,5,0,pantry,grain,1,1,NA,NA,NA,0,3/3/24,287
+green lentils,5,1,pantry,grain,1,1,NA,brown lentils,NA,0,3/3/24,288
+barley,4,0,pantry,grain,1,1,NA,farro,NA,0,3/3/24,289
+black lentils,4,1,pantry,grain,1,1,NA,NA,NA,0,8/26/24,290
+lentils,3,1,pantry,grain,1,1,"green lentils, brown lentils, black lentils",NA,NA,0,3/3/24,291
+old fashioned rolled oats,3,1,pantry,grain,1,1,NA,NA,NA,0,3/3/24,292
+arborio rice,2,1,pantry,grain,1,1,NA,NA,NA,0,3/3/24,293
+brown lentils,2,0,pantry,grain,1,1,NA,green lentils,NA,0,3/3/24,294
+popcorn,2,1,pantry,grain,1,1,,,0,0,3/3/24,295
+wheat berries,2,0,pantry,grain,1,1,NA,barley,NA,0,3/3/24,296
+corn grits,1,0,pantry,grain,1,1,NA,NA,NA,0,3/3/24,297
+grits,1,0,pantry,grain,1,1,NA,NA,NA,0,3/3/24,298
+polenta,1,1,pantry,grain,1,1,,,0,0,8/8/24,299
+quinoa,1,1,pantry,grain,1,1,,,0,0,3/3/24,300
+red lentils,1,0,pantry,grain,1,1,,,0,0,3/3/24,301
+wild rice,1,0,pantry,grain,1,1,NA,NA,NA,0,3/3/24,302
+vanilla extract,18,1,pantry,misc,1,1,NA,NA,NA,0,3/3/24,303
+rice cakes,4,0,pantry,misc,1,1,,,0,0,3/3/24,304
+chocolate,3,1,pantry,misc,1,0,,chocolate chips,0,0,8/10/24,305
+frangipane,3,0,pantry,misc,1,1,NA,NA,1,0,8/26/24,306
+almond extract,2,1,pantry,misc,1,1,NA,NA,NA,0,3/3/24,307
+vanilla ice cream,2,1,pantry,misc,1,0,,,0,0,8/28/24,308
+almond paste,1,0,pantry,misc,1,1,NA,NA,NA,0,3/3/24,309
+bittersweet chocolate,1,0,pantry,misc,1,0,,,0,0,8/15/24,310
+chocolate chips,1,1,pantry,misc,1,0,,,0,0,8/10/24,311
+dark chocolate,1,0,pantry,misc,1,0,,,0,0,8/15/24,312
+dulce de leche,1,0,pantry,misc,1,0,,,0,0,8/15/24,313
+frozen grated coconut,1,0,pantry,misc,1,1,NA,NA,NA,0,3/3/24,314
+gyoza wrappers,1,0,pantry,misc,1,1,NA,NA,NA,0,3/3/24,315
+makrut lime leaf,1,0,pantry,misc,1,1,,lime,0,0,3/3/24,316
+mini chocolate chips,1,1,pantry,misc,1,0,chocolate chips,,0,0,8/25/24,317
+parmesan rind,1,0,pantry,misc,1,0,NA,NA,NA,0,3/3/24,318
+passion fruit pulp,1,0,pantry,misc,1,1,,,0,0,12/21/24,319
+semi-sweet chocolate,1,1,pantry,misc,1,0,,"chocolate, chocolate chips",0,0,8/15/24,320
+cuitlacoche,0,0,pantry,misc,1,1,,,0,0,8/19/24,321
+pasta,17,1,pantry,noodle,1,1,NA,NA,1,0,3/3/24,322
+noodles,11,1,pantry,noodle,1,1,NA,NA,NA,0,3/3/24,323
+spaghetti,7,1,pantry,noodle,1,1,NA,pasta,NA,0,3/3/24,324
+chow mein,5,0,pantry,noodle,1,1,,,0,0,8/26/24,325
+fettucine,4,0,pantry,noodle,1,1,NA,pasta,NA,0,3/3/24,326
+lasagna noodles,3,0,pantry,noodle,1,1,NA,NA,1,0,3/3/24,327
+orzo,3,0,pantry,noodle,1,1,NA,NA,NA,0,3/3/24,328
+rice vermicelli,3,1,pantry,noodle,1,1,rice noodles,NA,NA,0,3/3/24,329
+chow fun,2,0,pantry,noodle,1,1,,,0,0,3/3/24,330
+elbow macaroni,2,1,pantry,noodle,1,1,NA,pasta,NA,0,3/3/24,331
+lo mein noodles,2,0,pantry,noodle,1,1,NA,NA,NA,0,3/3/24,332
+glass noodles,1,0,pantry,noodle,1,1,,,NA,0,9/8/24,333
+linguine,1,0,pantry,noodle,1,1,NA,pasta,NA,0,3/3/24,334
+rice noodles,1,0,pantry,noodle,1,1,NA,NA,NA,0,3/3/24,335
+shirataki,1,0,pantry,noodle,1,1,,,0,0,3/3/24,336
+yakisoba noodles,1,0,pantry,noodle,1,1,,noodles,0,0,3/3/24,337
+almonds,16,1,pantry,nut,1,1,NA,NA,NA,0,9/1/24,338
+dry roasted peanuts,14,1,pantry,nut,1,1,NA,NA,NA,0,3/3/24,339
+pepitas,14,1,pantry,nut,1,1,NA,NA,NA,0,3/3/24,340
+pine nuts,13,1,pantry,nut,1,1,NA,NA,NA,0,3/3/24,341
+walnuts,11,1,pantry,nut,1,1,NA,NA,NA,0,3/3/24,342
+hazelnuts,9,1,pantry,nut,1,1,NA,NA,NA,0,3/3/24,343
+pistachios,8,1,pantry,nut,1,1,NA,NA,NA,0,3/3/24,344
+peanuts,6,1,pantry,nut,1,1,NA,NA,NA,0,3/3/24,345
+cashews,5,1,pantry,nut,1,1,NA,NA,NA,0,9/1/24,346
+pecans,5,1,pantry,nut,1,1,NA,NA,NA,0,3/3/24,347
+sunflower seeds,4,1,pantry,nut,1,1,NA,NA,NA,0,3/3/24,348
+sliced almonds,1,0,pantry,nut,1,1,,almonds,0,0,8/15/24,349
+tahini,19,1,pantry,paste,1,1,NA,NA,1,0,3/3/24,350
+miso,14,1,pantry,paste,1,1,NA,NA,NA,0,3/3/24,351
+gochujang,10,1,pantry,paste,1,1,NA,NA,NA,0,8/16/24,352
+marmite,7,1,pantry,paste,1,1,NA,NA,NA,0,3/3/24,353
+doubanjiang,5,1,pantry,paste,1,1,,,0,0,3/3/24,354
+white miso,4,1,pantry,paste,1,1,NA,NA,NA,0,3/3/24,355
+dried fermented black beans,3,0,pantry,paste,1,1,,,0,0,3/3/24,356
+red thai curry paste,3,1,pantry,paste,1,0,,,0,0,8/26/24,357
+tamarind paste,3,0,pantry,paste,1,1,,,0,0,3/3/24,358
+aji amarillo paste,2,1,pantry,paste,1,1,NA,NA,NA,0,3/3/24,359
+green curry paste,2,1,pantry,paste,1,1,NA,NA,NA,0,3/3/24,360
+laksa paste,1,1,pantry,paste,0,0,NA,NA,NA,0,3/3/24,361
+red miso,1,0,pantry,paste,1,1,miso,NA,NA,0,3/3/24,362
+capers,19,1,pantry,pickles,1,1,NA,NA,NA,0,3/3/24,363
+anchovies,16,1,pantry,pickles,0,0,NA,NA,NA,0,3/3/24,364
+kimchi,9,1,pantry,pickles,1,1,NA,NA,NA,0,9/20/24,365
+castlevetrano olives,7,0,pantry,pickles,1,1,NA,NA,NA,0,8/26/24,366
+kalamata olives,6,1,pantry,pickles,1,1,NA,NA,NA,0,3/3/24,367
+preserved lemon,6,1,pantry,pickles,1,1,NA,lemon,1,0,3/3/24,368
+pickle,5,1,pantry,pickles,1,1,NA,NA,NA,0,3/3/24,369
+pimento olives,3,0,pantry,pickles,1,1,NA,NA,NA,0,3/3/24,370
+pickled onion,2,1,pantry,pickles,1,1,NA,red onion,1,0,10/15/24,371
+sauerkraut,2,1,pantry,pickles,1,1,NA,NA,NA,0,9/13/24,372
+ya cai,2,1,pantry,pickles,1,1,,,0,0,3/3/24,373
+giardiniera,1,1,pantry,pickles,1,1,,,0,0,8/20/24,374
+pickled chiles,0,0,pantry,pickles,1,1,,,1,0,3/3/24,375
+leftover rice,7,0,pantry,prep,1,1,rice,,1,0,3/3/24,376
+red pasta sauce,2,0,pantry,prep,1,1,NA,NA,1,0,3/3/24,377
+aioli,1,0,pantry,prep,1,0,NA,mayonnaise,1,0,3/3/24,378
+black bean burger,1,1,pantry,prep,1,1,NA,NA,1,0,8/26/24,379
+burnt garlic sesame and chile oil,1,0,pantry,prep,1,1,,,1,0,3/3/24,380
+chile paste,1,0,pantry,prep,0,0,NA,NA,1,0,3/3/24,381
+fried shallots,1,1,pantry,prep,1,1,,,1,0,3/3/24,382
+sofrito,1,0,pantry,prep,1,1,,,1,0,3/3/24,383
+bibimbap sauce,0,0,pantry,prep,1,1,,,1,0,3/3/24,384
+crackers,2,1,pantry,snack,1,1,NA,NA,NA,0,3/3/24,385
+graham cracker,2,1,pantry,snack,1,1,,,0,0,3/3/24,386
+applesauce,1,1,pantry,snack,1,1,,,0,0,3/3/24,387
+parmesan crisps,1,0,pantry,snack,1,0,,parmesan,0,0,9/13/24,388
+pita chips,1,1,pantry,snack,1,1,NA,pita bread,NA,0,3/3/24,389
+sriracha peas,1,0,pantry,snack,1,1,NA,NA,NA,0,3/3/24,390
+tortilla chips,1,1,pantry,snack,1,1,NA,NA,NA,0,3/3/24,391
+wasabi peas,1,0,pantry,snack,1,1,NA,NA,NA,0,3/3/24,392
+chicken stock,108,1,pantry,stock,0,0,NA,vegetable stock,1,0,3/3/24,393
+dashi,10,1,pantry,stock,1,1,,hondashi,1,0,3/3/24,394
+vegetable stock,5,0,pantry,stock,1,1,NA,chicken stock,NA,0,3/3/24,395
+parmesan broth,2,1,pantry,stock,0,0,NA,NA,1,0,3/3/24,396
+beef stock,1,0,pantry,stock,0,0,,chicken stock,NA,0,8/1/24,397
+shellfish stock,1,0,pantry,stock,0,0,NA,chicken stock,NA,0,3/3/24,398
+honey,43,1,pantry,sweetener,1,1,NA,NA,NA,0,3/3/24,399
+maple syrup,12,1,pantry,sweetener,1,1,NA,NA,NA,0,3/3/24,400
+pomegranate molasses,5,1,pantry,sweetener,1,1,NA,NA,NA,0,3/3/24,401
+agave nectar,2,1,pantry,sweetener,1,1,NA,NA,NA,0,3/3/24,402
+date syrup,2,0,pantry,sweetener,1,1,,,0,0,3/3/24,403
+corn syrup,1,1,pantry,sweetener,1,1,,,0,0,8/15/24,404
+white vinegar,52,1,pantry,vinegar,1,1,NA,rice vinegar,NA,0,3/3/24,405
+rice vinegar,41,1,pantry,vinegar,1,1,NA,NA,NA,0,3/3/24,406
+red wine vinegar,39,1,pantry,vinegar,1,1,NA,NA,NA,0,3/3/24,407
+xiaoxing wine,39,1,pantry,vinegar,1,1,NA,NA,NA,0,3/3/24,408
+apple cider vinegar,29,1,pantry,vinegar,1,1,NA,NA,NA,0,3/3/24,409
+chinkiang vinegar,23,1,pantry,vinegar,1,1,NA,balsamic vinegar,0,0,3/3/24,410
+balsamic vinegar,19,1,pantry,vinegar,1,1,NA,NA,NA,0,3/3/24,411
+mirin,17,1,pantry,vinegar,1,1,NA,NA,NA,0,3/3/24,412
+worcestershire sauce,15,1,pantry,vinegar,0,0,NA,NA,NA,0,3/3/24,413
+sake,13,1,pantry,vinegar,1,1,NA,NA,NA,0,3/3/24,414
+sherry vinegar,8,1,pantry,vinegar,1,1,NA,"sherry wine, apple cider vinegar",NA,0,3/3/24,415
+raspberry vinegar,1,0,pantry,vinegar,1,1,NA,NA,NA,0,3/3/24,416
+sherry wine,1,1,pantry,vinegar,1,1,NA,sherry vinegar,NA,0,3/3/24,417
+garlic,383,1,produce,allium,1,1,NA,NA,NA,0,9/16/24,418
+scallions,146,1,produce,allium,1,1,NA,onion,NA,0,9/16/24,419
+onion,142,1,produce,allium,1,1,NA,shallot,NA,0,3/3/24,420
+shallot,85,1,produce,allium,1,1,NA,onion,NA,0,3/3/24,421
+red onion,43,1,produce,allium,1,1,NA,onion,NA,0,8/9/24,422
+leek,10,0,produce,allium,1,1,NA,NA,NA,0,3/3/24,423
+white onion,9,0,produce,allium,1,1,NA,onion,NA,0,3/3/24,424
+chinese chives,1,0,produce,allium,1,1,,chives,0,0,3/3/24,425
+lemon,157,1,produce,fruit,1,1,NA,meyer lemon,NA,0,3/3/24,426
+lime,88,1,produce,fruit,1,1,NA,lemon,NA,0,9/8/24,427
+orange,24,0,produce,fruit,1,1,NA,NA,NA,0,3/3/24,428
+granny smith apple,9,0,produce,fruit,1,1,NA,apple,NA,0,12/9/24,429
+apple,6,1,produce,fruit,1,1,granny smith apple,NA,NA,0,7/29/24,430
+mango,5,0,produce,fruit,1,1,NA,NA,NA,0,9/1/24,431
+strawberries,5,0,produce,fruit,1,1,NA,NA,NA,0,12/9/24,432
+blueberries,4,0,produce,fruit,1,1,,,0,0,9/8/24,433
+pear,4,0,produce,fruit,1,1,NA,NA,NA,0,3/3/24,434
+blood orange,3,0,produce,fruit,1,1,orange,NA,NA,0,3/3/24,435
+meyer lemon,3,0,produce,fruit,1,1,NA,lemon,NA,0,3/3/24,436
+pineapple,3,0,produce,fruit,1,1,NA,NA,NA,0,3/3/24,437
+Peach,2,0,produce,fruit,1,1,,,0,0,9/8/24,438
+asian pear,2,0,produce,fruit,1,1,NA,NA,NA,0,3/3/24,439
+grapefruit,2,0,produce,fruit,1,1,NA,NA,NA,0,3/3/24,440
+grapes,2,1,produce,fruit,1,1,NA,NA,NA,0,12/9/24,441
+plums,2,0,produce,fruit,1,1,NA,NA,NA,0,9/1/24,442
+pomegranate,2,1,produce,fruit,1,1,NA,NA,NA,0,10/15/24,443
+raspberries,2,0,produce,fruit,1,1,,,0,0,9/30/24,444
+tangerine,2,0,produce,fruit,1,1,NA,orange,NA,0,3/3/24,445
+coconut,1,0,produce,fruit,1,1,NA,NA,NA,0,3/3/24,446
+green plantain,1,0,produce,fruit,1,1,NA,NA,NA,0,3/3/24,447
+honeydew,1,0,produce,fruit,1,1,,,0,0,7/29/24,448
+papaya,1,0,produce,fruit,1,1,NA,NA,NA,0,3/3/24,449
+persimmon,1,0,produce,fruit,1,1,NA,NA,NA,0,3/3/24,450
+watermelon radish,1,0,produce,fruit,1,1,,radish,0,0,7/29/24,451
+yellow mango,1,0,produce,fruit,1,1,mango,,0,0,8/15/24,452
+cilantro,123,1,produce,herb,1,1,NA,NA,NA,0,12/9/24,453
+parsley,110,0,produce,herb,1,1,NA,NA,NA,0,10/15/24,454
+mint,40,0,produce,herb,1,1,NA,dried mint,NA,0,8/25/24,455
+thyme,29,0,produce,herb,1,1,NA,dried thyme,NA,0,7/29/24,456
+basil,27,1,produce,herb,1,1,NA,dried basil,NA,0,12/9/24,457
+chives,27,0,produce,herb,1,1,NA,dried chives,NA,0,9/8/24,458
+dill,19,0,produce,herb,1,1,NA,dried dill,NA,0,10/15/24,459
+oregano,19,0,produce,herb,1,1,NA,dried oregano,NA,0,3/3/24,460
+thai basil,10,0,produce,herb,1,1,NA,NA,NA,0,12/9/24,461
+rosemary,8,0,produce,herb,1,1,NA,dried rosemary,NA,0,3/3/24,462
+tarragon,7,0,produce,herb,1,1,NA,NA,NA,0,3/3/24,463
+sage,6,0,produce,herb,1,1,NA,dried sage,NA,0,3/3/24,464
+chervil,1,0,produce,herb,1,1,NA,parsley,NA,0,3/3/24,465
+lemongrass,0,0,produce,herb,1,1,NA,NA,NA,0,12/9/24,466
+kale,21,0,produce,leaf,1,1,NA,spinach,NA,0,8/12/24,467
+spinach,15,0,produce,leaf,1,1,NA,kale,NA,0,10/15/24,468
+arugula,9,0,produce,leaf,1,1,NA,NA,NA,0,8/25/24,469
+romaine lettuce,9,0,produce,leaf,1,1,NA,NA,NA,0,9/30/24,470
+iceberg lettuce,7,1,produce,leaf,1,1,NA,shredded lettuce,NA,0,12/9/24,471
+salad greens,3,0,produce,leaf,1,1,NA,NA,NA,0,10/15/24,472
+shredded lettuce,3,1,produce,leaf,1,1,iceberg lettuce,NA,NA,0,3/3/24,473
+butter lettuce,2,0,produce,leaf,1,1,,romaine lettuce,0,0,8/26/24,474
+chard,1,0,produce,leaf,1,1,,,0,0,3/3/24,475
+collard greens,1,0,produce,leaf,1,1,,,0,0,3/3/24,476
+watercress,0,0,produce,leaf,1,1,NA,NA,NA,0,3/3/24,477
+mushrooms,27,0,produce,mushroom,1,1,"cremini mushrooms, white mushrooms",NA,NA,0,10/15/24,478
+shiitake mushrooms,11,0,produce,mushroom,1,1,NA,mushrooms,NA,0,3/3/24,479
+cremini mushrooms,4,0,produce,mushroom,1,1,mushrooms,white mushrooms,NA,0,3/3/24,480
+portobello mushroom,1,0,produce,mushroom,1,1,,mushrooms,0,0,8/8/24,481
+white mushrooms,1,0,produce,mushroom,1,1,mushrooms,cremini mushrooms,NA,0,3/3/24,482
+jalapeno,17,0,produce,pepper,1,1,NA,NA,NA,0,3/3/24,483
+poblano pepper,6,0,produce,pepper,1,1,NA,NA,NA,0,8/25/24,484
+new mexico chile,4,0,produce,pepper,1,1,NA,NA,NA,0,8/25/24,485
+red hot chili pepper,4,0,produce,pepper,1,1,,szechuan chili oil,0,0,3/3/24,486
+serrano pepper,4,0,produce,pepper,1,1,NA,NA,NA,0,3/3/24,487
+thai chili,4,0,produce,pepper,1,1,NA,"serrano pepper, jalapeno",NA,0,3/3/24,488
+california chile,2,0,produce,pepper,1,1,NA,NA,NA,0,3/3/24,489
+scotch bonnet,2,0,produce,pepper,1,1,,habenero ,0,0,12/21/24,490
+shishito peppers,2,0,produce,pepper,1,1,,,0,0,3/3/24,491
+aji dulce,1,0,produce,pepper,1,1,,bell pepper,0,0,12/21/24,492
+habenero ,0,0,produce,pepper,1,1,,,0,0,12/21/24,493
+ginger,116,1,produce,root,1,1,NA,NA,NA,0,3/3/24,494
+carrot,65,1,produce,root,1,1,NA,NA,NA,0,7/29/24,495
+russet potato,20,1,produce,root,1,1,NA,NA,NA,0,9/30/24,496
+yukon gold potato,16,0,produce,root,1,1,NA,NA,NA,0,9/8/24,497
+sweet potato,11,0,produce,root,1,1,NA,NA,NA,0,3/3/24,498
+beets,7,0,produce,root,1,1,NA,NA,NA,0,3/3/24,499
+radish,5,0,produce,root,1,1,NA,NA,NA,0,3/3/24,500
+daikon,4,0,produce,root,1,1,NA,NA,NA,0,9/30/24,501
+parsnip,4,0,produce,root,1,1,NA,NA,NA,0,3/3/24,502
+new potato,2,0,produce,root,1,1,NA,"yukon gold potato, baby potatoes",NA,0,3/3/24,503
+baby potatoes,1,0,produce,root,1,1,NA,NA,NA,0,3/3/24,504
+baby turnips,1,0,produce,root,1,1,NA,NA,NA,0,3/3/24,505
+fingerling potatoes,1,0,produce,root,1,1,NA,NA,NA,0,3/3/24,506
+jicama,1,0,produce,root,1,1,NA,NA,NA,0,12/9/24,507
+kohlrabi,1,0,produce,root,1,1,NA,NA,NA,0,9/30/24,508
+pearl onions,1,0,produce,root,1,1,NA,NA,NA,0,3/3/24,509
+yuca,1,0,produce,root,1,1,,,0,0,12/23/24,510
+lotus root,0,0,produce,root,1,1,NA,NA,NA,0,3/3/24,511
+zucchini,19,0,produce,squash,1,1,NA,NA,NA,0,9/20/24,512
+butternut squash,9,0,produce,squash,1,1,NA,NA,NA,0,12/9/24,513
+kabocha squash,7,0,produce,squash,1,1,NA,NA,NA,0,3/3/24,514
+summer squash,6,0,produce,squash,1,1,NA,NA,NA,0,9/20/24,515
+acorn squash,2,0,produce,squash,1,1,NA,NA,NA,0,3/3/24,516
+delicata squash,2,0,produce,squash,1,1,,butternut squash,0,0,3/3/24,517
+pumpkin,1,0,produce,squash,1,1,,,0,0,12/9/24,518
+cucumber,30,1,produce,vegetable,1,1,NA,NA,NA,0,9/30/24,519
+celery,28,0,produce,vegetable,1,1,NA,NA,NA,0,8/9/24,520
+bell pepper,23,0,produce,vegetable,1,1,red bell pepper,NA,NA,0,3/3/24,522
+cabbage,22,0,produce,vegetable,1,1,"red cabbage, green cabbage",NA,NA,0,9/20/24,521
+asparagus,14,1,produce,vegetable,1,1,NA,NA,NA,0,12/9/24,523
+avocado,14,1,produce,vegetable,1,1,NA,NA,NA,0,9/23/24,527
+broccoli,14,0,produce,vegetable,1,1,NA,NA,NA,0,8/25/24,524
+cauliflower,14,1,produce,vegetable,1,1,NA,NA,NA,0,10/15/24,525
+green beans,14,1,produce,vegetable,1,1,NA,NA,NA,0,12/9/24,526
+corn,12,1,produce,vegetable,1,1,corn on the cob,NA,NA,0,3/3/24,528
+frozen peas,12,1,produce,vegetable,1,1,peas,NA,NA,0,9/30/24,529
+snap peas,12,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,530
+bean sprouts,10,0,produce,vegetable,1,1,NA,NA,NA,0,9/13/24,531
+eggplant,10,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,532
+brussels sprouts,7,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,533
+red bell pepper,7,0,produce,vegetable,1,1,bell pepper,NA,NA,0,3/3/24,534
+corn on the cob,6,0,produce,vegetable,1,1,NA,NA,NA,0,9/8/24,535
+edamame,6,1,produce,vegetable,1,1,NA,NA,NA,0,8/25/24,536
+tomatillo,6,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,537
+artichoke hearts,5,1,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,538
+bok choy,5,0,produce,vegetable,1,1,,,0,0,3/3/24,539
+green cabbage,5,0,produce,vegetable,1,1,NA,red cabbage,NA,0,8/16/24,540
+peas,5,1,produce,vegetable,1,1,frozen peas,NA,NA,0,3/3/24,541
+fennel bulb,4,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,542
+napa cabbage,4,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,543
+tomato,4,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,544
+chinese broccoli,3,0,produce,vegetable,1,1,,,0,0,3/3/24,545
+chinese eggplant,3,0,produce,vegetable,1,1,,,0,0,3/3/24,546
+fava beans,3,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,547
+persian cucumber,3,0,produce,vegetable,1,1,NA,cucumber,NA,0,3/3/24,548
+red cabbage,3,0,produce,vegetable,1,1,NA,green cabbage,NA,0,10/15/24,549
+broccoli rabe,2,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,550
+lima beans,2,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,551
+rhubarb,2,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,552
+long beans,1,0,produce,vegetable,1,1,green beans,,0,0,3/3/24,553
+rutabaga,1,0,produce,vegetable,1,1,NA,NA,NA,0,3/3/24,554
+sprouts,0,0,produce,vegetable,1,1,NA,NA,NA,0,9/30/24,555
+cumin,57,1,spice,spice,1,1,cumin seed,NA,NA,0,3/3/24,556
+red pepper flakes,46,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,557
+black pepper,39,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,558
+dried oregano,39,1,spice,spice,1,1,oregano,NA,NA,0,3/3/24,559
+bay leaf,33,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,560
+cayenne pepper,33,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,561
+coriander,31,1,spice,spice,1,1,coriander seed,NA,NA,0,3/3/24,562
+turmeric,30,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,563
+cinnamon,23,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,564
+paprika,22,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,565
+white pepper,20,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,566
+szechuan peppercorn,19,1,spice,spice,1,1,,,0,0,9/20/24,567
+chili powder,17,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,568
+cumin seed,17,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,569
+garlic powder,17,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,570
+smoked paprika,17,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,571
+fennel seed,16,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,572
+aleppo pepper,14,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,573
+gochugaru,13,1,spice,spice,1,1,,,0,0,3/3/24,574
+garam masala,12,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,575
+hondashi,11,1,spice,spice,1,1,,,0,0,3/3/24,576
+nutmeg,11,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,577
+onion powder,11,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,578
+cardamon,10,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,579
+star anise,8,1,spice,spice,1,1,,,0,0,3/3/24,580
+amchur powder,7,0,spice,spice,1,1,,,0,0,3/3/24,581
+black peppercorns,7,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,582
+cinnamon stick,7,1,spice,spice,1,1,NA,cinnamon,NA,0,3/3/24,583
+sumac,7,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,584
+black mustard seed,5,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,585
+cloves,5,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,586
+dried thyme,5,1,spice,spice,1,1,NA,thyme,NA,0,3/3/24,587
+poppy seeds,5,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,588
+saffron,5,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,589
+ground cloves,4,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,590
+ground ginger,4,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,591
+mexican oregano,4,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,592
+mustard powder,4,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,593
+ancho chile powder,3,1,spice,spice,1,1,NA,NA,1,0,3/3/24,594
+chile powder,3,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,595
+kala namak,3,1,spice,spice,1,1,,,0,0,3/3/24,596
+katsuobushi,3,1,spice,spice,1,1,,,0,0,3/3/24,597
+memphis rub,3,0,spice,spice,1,1,NA,NA,1,0,9/13/24,598
+dried basil,2,1,spice,spice,1,1,NA,basil,NA,0,3/3/24,599
+dried mint,2,1,spice,spice,1,1,,mint,0,0,3/3/24,600
+dried rosemary,2,0,spice,spice,1,1,NA,NA,NA,0,3/3/24,601
+dry mustard,2,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,602
+epazote,2,0,spice,spice,1,1,NA,NA,NA,0,3/3/24,603
+five spice powder,2,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,604
+ground allspice,2,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,614
+kashmiri chilli,2,1,spice,spice,1,1,,aleppo pepper,0,0,3/3/24,605
+poultry rub,2,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,606
+apple pie spice blend,1,0,spice,spice,1,1,,,0,0,8/15/24,607
+caraway seed,1,0,spice,spice,1,1,NA,NA,NA,0,3/3/24,608
+celery salt,1,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,609
+celery seed,1,0,spice,spice,1,1,NA,NA,NA,0,3/3/24,610
+dried chives,1,1,spice,spice,1,1,chives,,0,0,3/3/24,611
+fenugreek seeds,1,1,spice,spice,1,1,,,0,0,3/3/24,612
+green peppercorns,1,1,spice,spice,1,1,,black pepper,0,0,3/3/24,613
+ground mace,1,0,spice,spice,1,1,nutmeg,NA,NA,0,3/3/24,615
+ground sage,1,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,616
+marjoram,1,0,spice,spice,1,1,NA,NA,NA,0,3/3/24,617
+nigella seeds,1,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,618
+sichuan peppercorns,1,1,spice,spice,1,1,,,0,0,3/3/24,619
+taco seasoning,1,1,spice,spice,1,1,,,1,0,8/15/24,620
+togarashi,1,1,spice,spice,1,1,,,0,0,3/3/24,621
+vanilla bean,1,1,spice,spice,1,1,vanilla extract,,0,0,12/9/24,622
+zaatar,1,1,spice,spice,1,1,NA,NA,NA,0,3/3/24,623
+furikake,0,1,spice,spice,1,0,,,0,0,3/3/24,624
+asafetida,0,1,spice,spice,1,1,,,0,0,3/3/24,625
+test,0,0,spice,spice,1,1,,,0,0,8/8/24,626

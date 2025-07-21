@@ -14,7 +14,7 @@ require(tidyverse)
 require(DT)
 
 
-source("/Users/joshvumc/Documents/GitHub/meals/code/meal_funs.R")
+source("/Users/joshdeclercq/Documents/GitHub/meals/code/meal_funs.R")
 
 ```
 
@@ -63,26 +63,26 @@ To do as of July 2022
 
 ```{r}
 # Get df of recipes
-meals <- read.csv("/Users/joshvumc/Documents/GitHub/meals/data/recipes_in.csv")
+meals <- read.csv("../data/recipes_in.csv")
 # meals.out <- read.csv("/Users/joshvumc/Documents/GitHub/meals/data/recipes_in.csv")
 
 recipes_expand <- expand.recipes(meals)
 # write.csv(recipes_expand, "/Users/joshvumc/Dropbox/meal_planning/recipes_expand.csv", row.names = FALSE)
-save(recipes_expand, file= "/Users/joshvumc/Documents/GitHub/meals/data/recipes_expand.rda")
+save(recipes_expand, file= "../data/recipes_expand.rda")
 # load("/Users/joshvumc/Documents/GitHub/meals/data/recipes_expand.rda")
 ## current ingredient list
 
-ingredients <- read.csv("/Users/joshvumc/Documents/GitHub/meals/data/ingredients.csv")
+ingredients <- read.csv("../data/ingredients.csv")%>% mutate(date_changed = mdy(date_changed))
 
 ##### update ingredient list 
 
-new.ingredients <- update_ingredients(recipes_expand, ingredients)
-write.csv(new.ingredients, "/Users/joshvumc/Documents/GitHub/meals/data/ingredients.csv", row.names = FALSE)
+new.ingredients <- update_ingredients(recipes_expand, ingredients) #%>% mutate(date_changed = mdy(date_changed))
+write.csv(new.ingredients, "../data/ingredients.csv", row.names = FALSE)
 
 ## Make and colorize menu of makeable meals
 made_menu <- make_menu(recipes_expand, new.ingredients, meals) 
-
-  write.csv(made_menu, "/Users/joshvumc/Documents/GitHub/meals/data/recipes_out.csv")
+# made_menu <- make_menu2(recipes_expand, new.ingredients, meals, made_menu)
+  write.csv(made_menu, "../data/recipes_out.csv", row.names = FALSE)
 
   ## Need to make this code work to speed up program
   # make_menu(expand.recipes(meals[1,]), ingredients, meals)
@@ -90,7 +90,116 @@ made_menu <- make_menu(recipes_expand, new.ingredients, meals)
 # new.ingredients %>% filter(grepl("rice", name))
 # which(made_menu$Selected==1)
   # new.ingredients %<>% mutate(across(c(sometimes, equal), ~ifelse(.x=="", NA, .x)))
+  
+
+
+# read.csv("../data/ingredients.csv") %>%
+#   mutate(rn = 1:n()) %>% tibble::as_tibble() %>% mutate(date_changed = ymd(date_changed))
 ```
+
+
+-   n.ingredients = Number of ingredients in recipe variant
+-   p.ingredients = Number of ingredients in stock for recipe variant
+-   can.make = If n and p match, then the recipe is makeable (level 1)
+-   e.ingredients = Number of ingredients or equivalent substitutions in stock for recipe variant
+-   can.make2 = If n and e match, then the recipe is makeable (level 2)
+-   s.ingredients = Number of ingredients or sometimes substitutions in stock for recipe variant
+-   can.make3 = If n and s match, then the recipe is makeable (level 3)
+
+```{r}
+## Tagging recipes
+
+rt_meta <- c("Favorite", "Made previously","Easy", "Complicated", "Kid-friendly", "Requires prep", "Do-ahead", "Large yield")
+rt_cuisine < c("American", "Southern", "Indian", "Chinese", "Vietnamese", "Thai", "Korean", "French", "Cajun", "Middle eastern",
+  "Mexican", "Italian", "Mediterranian", "Latin", "Japanese")
+rt_type <- c("Dressing",  "Sauce/condiment", "Ingredient", "Salad", "Soup/stew",
+             "Side dish", "Main course", "Meal", "Appetizer","Breakfast", "Dessert")
+rt_method <- c("Grilling", "Smoking", "Sous vide", "Deep fry", "Baking", "Stir fry", "Pressure cooker")
+
+
+meals %>% select(Recipe) %>% bind_cols(
+  ., 
+  data.frame(recipe_tags) %>% mutate(x = 0) %>% pivot_wider(., names_from = "recipe_tags", values_from = "x")
+)
+
+# Example dataframe
+recipes_df <- data.frame(
+  Recipe = c("Spaghetti Bolognese", "Chicken Curry", "Tacos", "Pancakes"),
+  stringsAsFactors = FALSE
+)
+
+# Add columns for tags, initialized to empty strings
+for(tag in recipe_tags) {
+  recipes_df[[tag]] <- ""
+}
+
+selected_tags <- recipe_tags[1:3]
+
+      updated_recipes <- recipes_df
+      for(tag in recipe_tags) {
+        updated_recipes[updated_recipes$Recipe == "Spaghetti Bolognese", tag] <- ifelse(tag %in% selected_tags, tag, "")
+      }
+    
+      gl <- paste0(ingredients %>% filter(class2 == "seafood") %>% pull(name), collapse = "|")
+made_menu %>% filter(grepl(gl, Ingredients)) 
+
+c("cheese", "dairy", "beef", "chicken", "pork", "sausage", "seafood", 
+  "beans", "grain", "noodle", "nut", "leaf", "mushroom", "root", "squash", "vegetable")
+
+
+CC <- "sugar, egg, heavy cream, (vanilla bean or vanilla extract, feta or cheddar), [rum or Grand Marnier or brandy]"
+
+
+regmatches(CC, gregexpr("(?<=\\()[^()]+(?=\\))", CC, perl = TRUE)) %>% unlist() %>% strsplit(., split = "or") %>% unlist() %>% trimws()
+
+
+paste.ingredients2
+
+EE <- c("a", "b", "1", "c", "d", "2", "e", "f")
+DD <- c("a or b, c or d, e or f")
+
+f.exchange2(EE)
+f.include2
+
+
+inv.include2(meals[15, "Ingredients"])
+# Example usage
+
+inv.exchange2(CC)
+inv.optional2(meals[14, "Ingredients"])
+inv.exchange2(meals[15, "Ingredients"])
+
+```
+
+```{r}
+made_menu %>% select(Source, diet, restricted, makeability, Needed, Selected ) %>% jgt(., order.cat = TRUE)
+
+load(file= "../data/recipes_expand.rda")
+load(file = "../data/recipes_out.csv")
+
+meals %>% filter(Recipe == "honey thyme baked feta") %>% j.reactable()
+```
+
+
+```{r}
+
+instring <- c("farro", "barley", "corn")
+
+inrec <- recipes_expand %>% select(Recipe, any_of(instring)) %>% rowwise() %>% 
+  mutate(x = sum(across(any_of(instring)))) %>% filter(x > 0) %>% select(Recipe) %>% distinct()
+
+a <- Sys.time()
+make_menu2(recipes_expand %>% slice(1:2),  new.ingredients, meals, made_menu)
+b <- Sys.time()
+b-a
+expand.recipes(meals)
+
+a <- Sys.time()
+make_menu(recipes_expand,  new.ingredients, meals) 
+b <- Sys.time()
+b-a
+```
+
 
 ```{r}
 lg <- c(30, 16)
@@ -241,7 +350,7 @@ recipes_expand %>% filter(recipe %in% meals$Meal[c(5,7,8:12)]) %>% select(-varia
 
 wok <- made_menu %>% filter(Source == "Wok") %$% Recipe
 
-recipes_expand %>% filter(Recipe %in% wok[19:28])  %>% 
+recipes_expand %>% filter(Recipe %in% wok[19:40])  %>% 
   select(-variant) %>% group_by(Recipe) %>% summarise_all(mean) %>% pivot_longer(., -Recipe) %>% filter(value >0) %>%
   group_by(name) %>%summarise(n = sum(value), count = n()) %>%
   left_join(., ingredients %>% select(name, has, class), by = "name") %>% arrange(class,  desc(n)) %>%
@@ -254,8 +363,54 @@ recipes_expand %>% filter(Recipe %in% wok[19:28])  %>%
 
 e# f.exchange("a or b or 3 or c or d")
 
-made_menu %>% filter(Recipe %in% wok[1:5]) 
+made_menu %>% filter(Recipe %in% wok[1:25]) 
+
+
+nh <- ingredients %>% filter(has ==0) %>% pull(name)
+recipes_expand %>% filter(Recipe %in% (made_menu %>% filter(Selected==1) %>% pull(Recipe))) %>% 
+  select(-variant) %>% group_by(Recipe) %>% summarise_all(function(x) 1*((mean(x)>0))) %>% rm.zero.cols() %>% 
+  select(any_of(nh)) %>% as.data.frame()%>% UpSetR::upset(nsets = 12)
+
+recipes_expand %>% filter(Recipe %in% (made_menu %>% filter(Selected==1) %>% pull(Recipe))) %>% 
+  select(-variant) %>% group_by(Recipe) %>% summarise_all(function(x) 1*((mean(x)>0))) %>% rm.zero.cols() %>% 
+  select(Recipe, any_of(nh)) %>% 
+  pivot_longer(., -Recipe) %>% 
+  filter(value == 1) %>% group_by(name) %>% mutate(x = toString(Recipe), n = n()) %>% select(name, x, n) %>% distinct() %>% j.reactable()
 ```
+
+
+
+```{r}
+## Add dates to ingredients
+list.files("/Users/joshdeclercq/Documents/GitHub/meals/data/archive")
+
+sub(".*_(\\d{4}-\\d{2}-\\d{2}).*", "\\1", list.files("/Users/joshdeclercq/Documents/GitHub/meals/data/archive"))
+
+DI <- map(list.files("/Users/joshdeclercq/Documents/GitHub/meals/data/archive")[1:18],
+    ~read.csv(paste0("/Users/joshdeclercq/Documents/GitHub/meals/data/archive/", .x)) %>% 
+      mutate(date = sub(".*_(\\d{4}-\\d{2}-\\d{2}).*", "\\1",.x))) %>% 
+  list_rbind()
+
+DI<-DI %>% group_by(name, has) %>% summarise(date = min(date))%>% group_by(name) %>% summarise(date = max(date))
+
+# ingredients <- read.csv("../data/ingredients.csv")
+# 
+# ingredients <- left_join(ingredients, DI, by = "name")
+# 
+# ##### update ingredient list 
+# 
+# write.csv(ingredients, "../data/ingredients.csv", row.names = FALSE)
+
+## ALl current ingredients
+# cur_ing <- DI %>% select(-date, -n, -has, -rn) %>% distinct()
+
+cur_has <- read.csv("/Users/joshdeclercq/Documents/GitHub/meals/data/archive/ingredients_2024-08-19.csv") %>% select(name, has)
+uig <- cur_ing %>% left_join(., cur_has, by = "name") %>% left_join(., DI, by = "name")
+
+# write.csv(uig, "../data/ingredients_x.csv", row.names = FALSE)
+```
+
+
 
 ```{r}
 # wordcloud
@@ -1039,7 +1194,7 @@ MEAL <- DF %>%
 M <- c("beef pie")
 optional <- c("beef", "thyme")
 exchange <- c("carrot", "onion", "garlic")
-include <- c("kale", "milk", "cheddar", "brown rice")
+include <- c("kale", "milk", "cheddar", "brown rice", "beef")
 # exchange <- c(NULL)
 
 

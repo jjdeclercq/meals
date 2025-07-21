@@ -1,0 +1,866 @@
+---
+title: "Mealtime: A Shiny app for meal planning"
+author:
+- Josh DeClercq  
+- Department of Biostatistics  
+date: "November 25, 2024"
+format: 
+  revealjs:
+    logo: mealtime_files/images/potato.jpeg
+    theme: white
+editor: visual
+---
+
+```{r}
+#| echo: false
+require(tidyverse)
+require(gtsummary)
+require(magrittr)
+require(gt)
+require(reactable)
+require(Hmisc)
+
+devtools::source_url("https://raw.githubusercontent.com/jjdeclercq/VUMisC/refs/heads/main/JDmisc/JDmisc.R")
+
+source("/Users/joshdeclercq/Documents/GitHub/meals/code/meal_funs.R")
+```
+
+```{r}
+#| echo: false
+
+choice_recipes <- c("smoked trout florida mullet style", "tartar sauce", "bibimbap (wok)","memphis rub", "halal cart chicken and rice", "taco night", "roasted carrots with harissa and creme fraiche", "mapo tofu", "pizza salad", "dan dan noodles", "easy drop berry shortcakes", "creme fraiche", "croutons")
+
+mt_meals <- read.csv("recipes_in.csv") %>% filter(Recipe %in% choice_recipes)
+mt_expand <- expand.recipes(mt_meals)
+
+ING <- read.csv("ingredients.csv")# %>% filter(name %in% names(mt_expand))
+
+    ## vectors of ingredients both in and out of stock
+  has <- ING %>% filter(has == 1) %$% name
+  not.has <- ING %>% filter(has == 0) %$% name 
+  not.has <- not.has[not.has %in% ING$name] ## not sure what this is doing -- glossing over entry errors?
+  
+  ## vectors of dietary restrictions
+  vegan <- ING %>% filter(vegan==1) %$% name 
+  veg <- ING %>% filter(vegetarian==1) %$% name
+
+  
+  # vector of ingredients that are in stock that are equivalent substitutions for other ingredients
+  equi <- ING %>% select(name, equal) %>%
+    separate_rows(., equal, sep = ", ") %>%
+    left_join(., ING %>% select(equal = name, has2 = has), by = "equal") %>%
+    filter(has2==1) %$% name %>% unique()
+  equi <- c(has, equi)%>% unique()
+
+  ## vector of ingredients that are in stock that can sometimes be substituted for other ingredients
+  sometimes <- ING %>% select(name, sometimes) %>%
+    separate_rows(., sometimes, sep = ", ") %>%
+    left_join(., ING %>% select(sometimes = name, has2 = has), by = "sometimes") %>%
+    filter(has2==1) %$% name %>% unique()
+  sometimes <- c(sometimes, equi) %>% unique()
+  
+  ### Things I don't have, but I can substitute for
+  subs1 <- ING %>% select(name,has, equal) %>%
+    separate_rows(., equal, sep = ", ") %>%
+    left_join(., ING %>% select(equal = name, has2 = has), by = "equal") %>% 
+    filter(has2==1, has==0) %$% name %>% unique()
+  
+  ## Things not in stock that there can sometimes be substituted for
+  subs2 <- ING %>% select(name,has, sometimes) %>%
+    separate_rows(., sometimes, sep = ", ") %>%
+    left_join(., ING %>% select(sometimes = name, has2 = has), by = "sometimes") %>% 
+    filter(has2==1, has==0) %$% name %>% unique() %>% setdiff(., subs1)
+ 
+  ## List of ingredients that are not in stock or cannot be substitued for
+  nh <- setdiff(not.has, c(subs1, subs2))
+  
+  ## Sort ingredient vectors by length
+  has <- sort.vec(has)
+  nh <- sort.vec(nh)
+  subs1 <- sort.vec(subs1)
+  subs2 <- sort.vec(subs2) 
+  
+MEAL <- mt_expand %>% 
+    rowwise() %>%
+    mutate(n.ingredients = sum(c_across(where(is.numeric))), ## Number of ingredients in recipe variant
+           p.ingredients = sum(c_across(any_of(has))), ## Number of ingredients in stock for recipe variant
+           can.make = 1*(p.ingredients == n.ingredients), ## If n and p match, then the recipe is makeable
+           e.ingredients = sum(c_across(any_of(c(has, subs1)))), ## Number of ingredients or equivalent substitutions in stock for recipe variant
+           can.make2 = max(e.ingredients == n.ingredients, can.make), ## If n and e match, then the recipe is makeable
+           s.ingredients = sum(c_across(any_of(c(has, subs1, subs2)))), ## Number of ingredients or sometimes substitutions in stock for recipe variant
+           can.make3 = max(s.ingredients == n.ingredients, can.make2), ## If n and s match, then the recipe is makeable
+           n.vegan = sum(c_across(any_of(vegan))), ## Number of vegan ingredients
+           is.vegan = n.vegan == n.ingredients, ## Determine if recipe is vegan
+           n.veg = sum(c_across(any_of(veg))), ## Number of vegetarian ingredients
+           is.veg = n.veg == n.ingredients ## Determine if recipe is vegetarian
+    ) %>% 
+    group_by(Recipe, variant)%>% # determine makability
+    mutate(makeability = 5 - (1+sum(c_across(contains("can.make")))), 
+           makeability = ifelse(makeability==4, 5, makeability))%>% 
+    mutate(makeability = replace_na(makeability, 995))
+
+make4_int <- ING %>% filter(makeable ==1) %>% 
+    select(name, has) %>%
+    left_join(., 
+              MEAL%>%ungroup() %>% select(name = Recipe, makeability) %>% 
+                group_by(name) %>% summarise(makeability = min(makeability, na.rm = TRUE)),
+              by = "name") %>% filter(!is.na(makeability))
+
+make4 <-make4_int %>% filter(makeability %in% 1:3, has == 0) %$% name
+
+  ## 'reaching' is the vector of ingredient that are in stock + equivalent + substitutible or makeable ingredients 
+  reaching <- c(has, equi, sometimes, make4) %>% unique()
+  
+  ## limit make4 to the lowest level of availability
+  make4 <- setdiff(make4, c(subs1, subs2))
+  
+  ## update vector of ingredients that are not available
+  nh <- setdiff(nh, make4)
+  
+  ## fill in makeability 4 designation
+  ## Determine if any of the recipe variants meet dietary restrictions AND equal to the best makeability rating
+  ## Arrange data and pick the most makeabile variant with the most ingredients
+  ## Add back the orginal ingredients list
+  MEAL.slice_int <- MEAL %>% 
+    mutate(m.ingredients = sum(c_across(any_of(reaching))), 
+           can.make4 = 1*(m.ingredients == n.ingredients),
+           makeability = ifelse(makeability==5 & can.make4==1, 4, makeability)) 
+  
+   MEAL.slice <- MEAL.slice_int %>%  
+    select(1, contains("make"), everything()) %>% 
+    arrange(Recipe, makeability, desc(n.ingredients))%>%
+    mutate(
+           makeable.vegan = is.vegan == TRUE & makeability == min(makeability),
+           makeable.veg = is.veg == TRUE & makeability == min(makeability)) %>%
+    select(Recipe, variant,makeability, n.ingredients, contains("make"), n.vegan, is.vegan, n.veg, is.veg, everything())%>% 
+    group_by(Recipe) %>%
+    dplyr::slice(1) %>%
+    mutate(diet = case_when(is.vegan ~ "Vegan",
+                            is.veg & !is.vegan ~ "Vegetarian",
+                            TRUE ~ "Non-vegetarian"),
+           Needed = n.ingredients - p.ingredients)%>%
+    left_join(mt_meals %>% select(1:4, Ingredients) , ., by = "Recipe") 
+   
+bMEALS <- MEAL.slice %>%
+    select(Recipe,  Source, Page,Type,diet, Ingredients, makeability, Needed) %>%
+    regex.ingredients() %>%
+    mutate(Ingredients = sprintj8(all_of(has), Ingredients, "#458B00"))%>%
+    mutate(Ingredients = sprintj8(all_of(nh), Ingredients, "#CD2626"))%>%
+    mutate(Ingredients = sprintj8(all_of(subs1), Ingredients, "#CDAD00"))%>%
+    mutate(Ingredients = sprintj8(all_of(subs2), Ingredients, "orange"))%>%
+    mutate(Ingredients = sprintj8(make4, Ingredients, "#1C86EE"))%>%
+    mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub(",", ", ", gsub("&","", Ingredients)))))
+```
+
+## Mise en place
+
+-   Background
+-   Recipes in
+-   Expanding recipes
+-   Ingredients
+-   Recipes out
+-   Mealtime app demonstration
+-   Shiny code
+
+## Background
+
+Three things to know about me:
+
+-   I like to cook\
+-   I like to code\
+-   I like to eat
+
+## Background
+
+<s>Three</s> [Four]{style="color:red;"} things to know about me:
+
+-   I like to cook\
+-   I like to code\
+-   I like to eat\
+-   I like to overthink things and make them incredibly complicated in the name of *saving time*
+
+## Background {.smaller}
+
+-   Spring 2020, almost all meals are made and eaten in the house
+-   Going to the grocery store was no longer a 'routine' task
+-   Wanted to buy as much food that would fit into the fridge, and also avoid waste
+-   Meal planning became more critical
+-   Can only do so many taco nights and grilled cheese sandwiches
+    -   Need to break up the monotony
+-   Crack open those cookbooks
+    -   Number of options increase, but meal planning complexity skyrockets
+
+::: incremental
+-   The solution? Make a Shiny app!
+    -   Now if there were only a way for me to have huge swaths of time sequestered away from the world...
+:::
+
+## Goals {.smaller}
+
+::: columns
+::: {.column width="65%"}
+-   Know what ingredients are needed for recipes
+-   Know what recipes can be made with ingredients
+
+![](mealtime_files/images/IMG_9940.jpg)
+:::
+
+::: {.column width="35%"}
+![](mealtime_files/images/IMG_9938.jpg)
+
+::: incremental
+-   Eat deliciously!
+:::
+:::
+:::
+
+# Recipes in
+
+## Recipe components to [consider]{style="color:green;"} {.smaller}
+
+::: columns
+::: {.column width="60%"}
+![](mealtime_files/images/IMG_9945.jpg)
+:::
+
+::: {.column width="40%"}
+-   Recipe name
+-   Source and page number
+-   Type
+    -   Main course, meal, breakfast, appetizer, etc.
+-   Cooking method
+-   Ingredients
+-   ... and more!
+:::
+:::
+
+## Recipe components to [ignore]{style="color:red;"} {.smaller}
+
+::: columns
+::: {.column width="60%"}
+![](mealtime_files/images/IMG_9945.jpg)
+:::
+
+::: {.column width="40%"}
+-   Recipe introductions
+-   Cooking instructions
+-   Editorializing is possible
+    -   Can leave out unwanted ingredients
+-   **Quantities**
+    -   Major assumption
+    -   Based on 'typical' portions
+:::
+:::
+
+## Simple recipe
+
+-   Recipe has just 4 ingredients
+-   Can be represented in readable format:
+
+```{r}
+mt_meals %>% filter(Recipe == "smoked trout florida mullet style") %>% select(Recipe:Ingredients) %>% jgtt()
+```
+
+-   Or as a data frame:
+
+```{r}
+mt_meals %>% filter(Recipe == "smoked trout florida mullet style") %>% expand.recipes() %>% jgtt()
+```
+
+## Recipes with optional or exchangeable ingredients {.smaller}
+
+```{r}
+mt_meals %>% filter(Recipe == "easy drop berry shortcakes")%>% select(Recipe:Ingredients) %>% jgtt()
+```
+
+-   Three classifications of ingredient importance:
+    -   include
+        -   flour, baking soda, baking powder, sugar, butter, egg, heavy cream
+    -   exchangeable
+        -   (raspberries or strawberries or blueberries)
+    -   optional
+        -   \[turbinado sugar or lemon\]
+
+::: {.fragment .grow .highlight-red}
+-   One recipe or three?
+:::
+
+# Expand recipes
+
+## Preparing the data {.smaller}
+
+-   Remove optional ingredients
+-   Separate necessary ingredients from exchangeable
+
+```{r}
+#| echo: true
+
+## Remove optional ingredients from the expansion
+m <- mt_meals %>% filter(Recipe == "easy drop berry shortcakes") %>% 
+  select(Recipe, Ingredients) %>% 
+  separate(., Ingredients, c("Ingredients", "Optional"), sep= "\\[") %>% 
+    mutate(Ingredients = gsub("[()]|\\[|\\]", "", Ingredients))
+
+# Convert to list
+(ing <- str_split(m$Ingredients, ", ") )
+```
+
+## Recipe variants {.smaller .scrollable}
+
+One recipe can have multiple permutations:
+
+-   Expand all combinations of exchangeable ingredients
+    -   'a and (b or c)' becomes 'a and b' or 'a and c'
+-   Optional ingredients are ignored in the expansion
+    -   'a and (b or c) and \[d\]' is still 'a and b' or 'a and c'
+-   Each unique set becomes a recipe variant
+
+```{r}
+#| echo: false
+  names(ing) <- m$Recipe
+expand.grid(c(str_split(grep(" or ", ing[[1]], v = TRUE, inv = F), " or "),
+                item = list(grep(" or ", ing[[1]], v = TRUE, inv = TRUE)))) %>% 
+    mutate(v =1, Recipe = names(ing), VarXX = " ") %>%  
+  unite(.,"variant", contains("Var"), remove = FALSE, sep = " ") %>% 
+  select(-VarXX) %>%
+    pivot_longer(., c(-v, -Recipe,-variant)) %>% 
+  unique() %>% select(-name) %>% 
+  mutate(value = str_trim(value, "both"))%>%
+    filter(value != "") %>% 
+    pivot_wider(., names_from = "value", values_from = "v") %>%
+    mutate(across(where(is.numeric), .fns = ~replace_na(.x, 0))) %>% 
+  jgtt()
+```
+
+## Many variants
+
+-   Bibimbap recipe yields 128 variants
+
+```{r}
+mt_meals %>% filter(Recipe == "bibimbap (wok)") %>% select(Recipe:Ingredients) %>% jgtt()
+
+mt_meals %>% filter(Recipe == "bibimbap (wok)") %>% expand.recipes() %>% 
+  j.reactable(., defaultPageSize = 5)
+```
+
+# Ingredients
+
+## Components of an ingredient {.smaller}
+
+-   Ingredient name
+-   Classification
+    -   Dairy, produce, meat, pantry, spice
+-   Sub-classification
+    -   Produce: fruit, herb, pepper, mushroom, vegetable, etc.
+-   Dietary restrictions
+    -   Vegan, vegetarian, lactose, etc.
+-   In stock?
+-   Acceptable substitutions
+    -   Panko vs. bread crumbs
+
+## Ingredients list {.scrollable}
+
+::: columns
+::: {.column width="45%"}
+-   With list of possible recipes, now can derive all potential ingredients
+-   Manual input of additional information
+-   Keep track of what's in stock, and what's *sort of* in stock
+:::
+
+::: {.column width="55%"}
+```{r}
+trout_ing <- mt_meals %>%
+  filter(Recipe %in% c("smoked trout florida mullet style", "tartar sauce", "memphis rub"))%>% expand.recipes()
+trout_ing <- c(names(trout_ing), "panko", "bread crumbs", "vanilla bean", "chives", "aioli" )
+
+ING %>% filter(name %in% trout_ing) %>% 
+  select(name, class, class2:makeable, has) %>% mutate(makeable = as.character(makeable)) %>% 
+  mutate(across(where(is.character), ~replace_na(.x, ""))) %>% jgtt()
+
+mt_ing <- mt_meals %>% expand.recipes() %>% select(-Recipe, -variant) %>% names()
+```
+:::
+:::
+
+## Grades of in-stock
+
+```{r}
+(in_stock <- list("In stock" = intersect(has, mt_ing), 
+       "Out" = intersect(nh, mt_ing), 
+       "Subtitute equal" = intersect(subs1, mt_ing), 
+       "Reach subtitution" = intersect(subs2, mt_ing) ) )
+
+```
+
+## Makeable ingredients
+
+-   Ingredients can be recipes
+
+-   Recipes can be ingredients
+
+    -   Examples include: salad dressing, condiments, spice mixes, etc.
+
+```{r}
+mt_meals %>% filter(Recipe %in% c("smoked trout florida mullet style",
+                               "tartar sauce", "memphis rub")) %>% 
+  select(Recipe:Ingredients) %>% 
+  jgtt()
+```
+
+-   At first glance, some recipes may be out of reach
+    -   Varying levels of make-able-ness... makeability?
+
+## Makeability
+
+-   Makeability ratings:
+    -   1: everything needed for recipe
+    -   2: everything or equal substitutions
+    -   3: everything or any kind of substitution
+    -   4: everything or any kind of substitution AND all of the components of a makeable ingredient
+    -   5: not able to be made with current ingredients
+
+# Recipes out
+
+## Putting it together {.smaller}
+
+-   13 recipes
+    -   156 variants
+-   99 ingredients
+    -   71 in stock
+    -   22 not in stock
+    -   0 substitute equal
+    -   5 reach substitution
+    -   1 makeable
+-   Want to determine makeability for all variants
+
+## Putting it together {.smaller}
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|4,5|6,7|8,9|10,11|12,13|14,15|16,17|18,19|20,21|22,23|24,25|26"
+mt_expand %>% 
+    rowwise() %>%
+    mutate(    
+               ## Number of ingredients in recipe variant
+           n.ingredients = sum(c_across(where(is.numeric))),
+               ## Number of ingredients in stock for recipe variant
+           p.ingredients = sum(c_across(any_of(has))),
+               ## If n and p match, then the recipe is makeable 1
+           can.make = 1*(p.ingredients == n.ingredients), 
+               ## Number of ingredients or equivalent substitutions in stock for recipe variant
+           e.ingredients = sum(c_across(any_of(c(has, subs1)))), 
+              ## If n and e match, then the recipe is makeable 2
+           can.make2 = max(e.ingredients == n.ingredients, can.make), 
+              ## Number of ingredients or sometimes substitutions in stock for recipe variant
+           s.ingredients = sum(c_across(any_of(c(has, subs1, subs2)))), 
+              ## If n and s match, then the recipe is makeable 3
+           can.make3 = max(s.ingredients == n.ingredients, can.make2), 
+              ## Number of vegan ingredients
+           n.vegan = sum(c_across(any_of(vegan))), 
+              ## Determine if recipe is vegan
+           is.vegan = n.vegan == n.ingredients, 
+              ## Number of vegetarian ingredients
+           n.veg = sum(c_across(any_of(veg))), 
+              ## Determine if recipe is vegetarian
+           is.veg = n.veg == n.ingredients 
+    ) 
+```
+
+## Getting makeable ingredients
+
+-   In order to know if something is makeable level 4, need to know which recipe-ingredients can be made
+
+-   Among ingredients that are makeable:
+
+    -   Find lowest makeability score in expanded recipes
+    -   Join back to ingredients
+    -   Keep the ones with makeability 1, 2 or 3
+
+    ```{r}
+    #| echo: false
+    #| eval: false
+
+    make4 <- ING %>% filter(makeable ==1) %>% 
+        select(name, has) %>%
+        left_join(., 
+                  MEAL%>%ungroup() %>% select(name = Recipe, makeability) %>% 
+                    group_by(name) %>% summarise(makeability = min(makeability, na.rm = TRUE)),
+                  by = "name") %>% 
+        filter(makeability %in% 1:3, has == 0) %$% name
+
+    in_stock <- c(in_stock, "Makeable" = make4)
+    ```
+
+```{r}
+make4_int %>% jgtt()
+```
+
+## Intermediate output {.scrollable}
+
+-   For each variant, a makeability is assigned
+-   Vegan/vegetarian classifications can also change based on ingredients
+-   For each recipe, select the variant with the lowest makeability and the largest number of ingredients
+
+```{r}
+MEAL.slice%>%ungroup() %>% select(Recipe,makeability, n.ingredients, p.ingredients,diet) %>% 
+  jgtt()
+```
+
+## Getting closer {.smaller}
+
+-   Know which recipes can be made
+-   Can I see which ingredients are needed for unmakeable recipes?
+-   Through the magic of regular expressions, I can turn this:
+
+```{r}
+MEAL.slice %>% filter(Recipe == "taco night") %>% pull(Ingredients)
+```
+
+## Getting closer {.smaller}
+
+-   Know which recipes can be made
+-   Can I see which ingredients are needed for unmakeable recipes?
+-   Through the magic of regular expressions, I can turn this:
+
+```{r}
+MEAL.slice %>% filter(Recipe == "taco night") %>% pull(Ingredients)
+```
+
+-   Into this:
+
+```{r}
+#| results: asis
+#| 
+bMEALS %>% filter(Recipe == "taco night") %>% pull(Ingredients) %>% cat()
+```
+
+## Under the hood {.smaller}
+
+-   Make ingredients easier to target
+    -   Encountered issues with using 'or' as a delimiter ("corn" and "oregano")
+
+```{r}
+regex.ingredients(mt_meals %>% filter(Recipe == "taco night")) %>% pull(Ingredients)
+```
+
+-   For each classification of in stock, replace the ingredient with html code to colorize text:
+
+```         
+for(i in 1:length(vec)){
+    V <- gsub(paste0("&",vec[i],"&"), sprintf("<span style='color: %s;'>%s</span>", color, vec[i]), V)
+  }
+```
+
+-   html output through reactable:
+    -   `columns = list(Ingredients = colDef(html = TRUE))`
+
+## Finished menu
+
+```{r}
+j.reactable(bMEALS,
+            columns = list(Ingredients = colDef(html = TRUE, minWidth = 350),
+                                   Recipe = colDef(minWidth = 150),
+                                   Source = colDef(minWidth = 150),
+                                   Page = colDef(minWidth = 50, show = FALSE)
+                                   ))
+```
+
+## I'm hungier than that! {.smaller}
+
+::: columns
+::: {.column width="40%"}
+-   Can only make a few meals with ingredients on hand
+-   Which ingredients will have biggest impact on makeable recipes?
+:::
+
+::: {.column width="60%"}
+```{r}
+#| fig-height: 6
+#| 
+mt_expand%>% group_by(Recipe) %>% summarise_all(function(x) 1*((mean(x)>0))) %>% rm.zero.cols() %>% 
+        select(any_of(nh)) %>% 
+        as.data.frame()%>% 
+  UpSetR::upset(nsets = 12, text.scale = 2, mb.ratio = c(0.4, 0.6), nintersects = 25)
+```
+
+-   Shopping list:
+    -   Parsley, buttermilk, cilantro, ground beef, tofu, trout, spinach and zucchini
+:::
+:::
+
+## Now what can I make?
+
+```{r}
+to_buy <- c("parsley", "buttermilk", "cilantro", "ground beef", "tofu", "spinach", "zucchini", "trout")
+
+new_ING <- ING %>% mutate(has = ifelse(name %in% to_buy|has == 1, 1, 0))
+
+make_menu2(mt_expand, new_ING, mt_meals, bMEALS) %>% select(names(bMEALS)) %>% 
+  j.reactable(.,
+            columns = list(Ingredients = colDef(html = TRUE, minWidth = 350),
+                                   Recipe = colDef(minWidth = 150),
+                                   Source = colDef(minWidth = 150),
+                                   Page = colDef(minWidth = 50, show = FALSE)
+                                   ))
+```
+
+## Shiny App-etite
+
+-   Goal is to put it all together into one, user-friendly app
+-   Processes to manage:
+    -   Adding recipes
+    -   Adding ingredients
+    -   Moving ingredients in and out of stock
+    -   And more!
+
+## A live Shiny demo!
+
+### (What could possibly go wrong?)
+
+## Navigation
+
+![](mealtime_files/images/navbar.png){.nostretch fig-align="center" width="1000px"}
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "|1|5|7,8|11|12|13|22"
+
+  navbarPage(
+    "Add recipes",
+    theme = shinythemes::shinytheme("spacelab"),
+    ########### UI view recipes #######
+    tabPanel(
+      "View Recipes",
+      sidebarLayout(
+        sidebarPanel(
+          ## SIDEBAR PANELCODE
+        ),
+                mainPanel(
+          tabsetPanel(
+          tabPanel("All", 
+                   reactableOutput("filter_recipes_df")),
+          tabPanel("Selected plot", 
+                   plotOutput("xxx")
+                   ),
+          tabPanel("Selected table", 
+                   
+                   reactableOutput("select_test")
+          )
+        ))
+      )
+    ))
+```
+
+## Sidebar panel
+
+::: columns
+::: {.column width="50%"}
+-   checkboxGroupButtons
+-   selectizeInput
+-   sliderInput
+-   radioButtons
+-   checkboxGroupInput
+-   actionButton
+:::
+
+::: {.column width="50%"}
+![](mealtime_files/images/control%20panel.png)
+:::
+:::
+
+## Sidebar panel
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|3,4|5,6|21,22|25|26"
+#| 
+sidebarPanel(
+h3("Filter Recipes"),
+checkboxGroupButtons("fr_source", "Source", sort(sources), 
+                     selected = sort(sources), size = "sm", status = "mygrey"),
+selectizeInput("fr_type", "Type", sort(types), 
+               selected = sort(types), multiple = T, options = NULL),
+selectizeInput("fr_category", "Category", sort(categories), 
+               selected = sort(categories), multiple = T, options = NULL),         
+selectizeInput("fr_tags", "Select tags", recipe_tags, multiple = T, options = NULL),
+selectizeInput("fr_food_or", "Select ingredients (or)", sort(filter.food_static), 
+               multiple = T, options = NULL),
+selectizeInput("fr_food_and", "Select ingredients (and)", 
+               sort(filter.food_static), multiple = T, options = NULL),
+selectizeInput("fr_food_not", "Select ingredients (not)", 
+               choices = c("X", sort(filter.food_static)), 
+               multiple = TRUE, options = NULL, selected = "X"),
+sliderInput("fr_ingredient", "Ingredients Needed", 
+            min = 0, max = 10, value = c(0, 10), ticks = F),
+radioButtons("fr_make", "Makeability", 
+             makea, inline = TRUE, selected = 5),
+radioButtons("fr_selected", "Selected", 
+             c("All", "Selected"), inline = TRUE),
+checkboxGroupInput("fr_restrict", "Restrict", 
+                   c("No", "Yes"), inline = TRUE, selected = "Yes"),
+actionButton("fr_submit", "Update selections"))
+#
+```
+
+## Reactive elements
+
+::: columns
+::: {.column width="50%"}
+-   reactiveValues
+-   renderDataTable
+-   renderReactable
+-   observeEvent
+-   observe
+:::
+
+::: {.column width="50%"}
+![](mealtime_files/images/ingredients.png)
+:::
+:::
+
+## Reactive elements
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1|3-17|21|22-35|47-65|69"
+makeable.rv <- reactiveValues(df = recipe_df)
+
+observeEvent(
+c(
+  input$fr_source,
+  input$fr_type,
+  input$fr_category,
+  input$fr_tags,
+  input$fr_ingredient,
+  input$fr_food_or,
+  input$fr_food_and,
+  input$fr_food_not,
+  input$fr_make,
+  input$fr_selected,
+  input$fr_submit,
+  input$fr_restrict
+),
+
+{
+  filter_select <- ifelse(input$fr_selected == "All", 0, 1)
+  df <- makeable.rv$df
+  df %<>% 
+    dplyr::select(Recipe, Source,Page, Category = diet,  
+                  Type, Needed, Ingredients,makeability, restricted, Selected, Tags) %>% 
+    mutate(Selected = ifelse(Recipe %in% makeable.rv$Selected, 1, 0)) %>%
+    dplyr::filter(
+      Source %in% input$fr_source,
+      Type %in% input$fr_type,
+      Category %in% input$fr_category,
+      makeability <= input$fr_make,
+      restricted %in% input$fr_restrict,
+      Selected >= filter_select,
+      dplyr::between(Needed, input$fr_ingredient[1], input$fr_ingredient[2])) %>% 
+    mutate(Source = ifelse(is.na(Page), Source, paste0(Source, " (", Page, ")")))  %>% 
+    select(-Needed, -Category, -restricted)
+  
+  ## Filter on tags
+  df <- df[grepl(andMatch(as.character(input$fr_tags)), df$Tags, perl = TRUE),]
+
+  
+  df <- df[grepl(paste(as.character(input$fr_food_or),collapse="|"), df$Ingredients),]
+  df <- df[grepl(andMatch(as.character(input$fr_food_and)), df$Ingredients, perl = TRUE),]
+  df <- df[!grepl(paste(as.character(input$fr_food_not),collapse="|"), df$Ingredients),]
+  
+  makeable.rv$RRR <- df
+  
+  output$filter_recipes_df <- renderReactable(
+    {
+      reactable(df %>% select(-Selected), searchable = TRUE, 
+                onClick = "select", 
+                selection = "multiple",
+                height = 800, 
+                pagination = FALSE,
+                defaultSelected = which(df$Recipe %in% makeable.rv$Selected),
+                columns = list(Ingredients = colDef(html = TRUE, minWidth = 350),
+                               Recipe = colDef(minWidth = 150),
+                               Source = colDef(minWidth = 150),
+                               Page = colDef(minWidth = 50, show = FALSE), 
+                               Tags = colDef(minWidth = 200)
+                               ),
+                theme = reactableTheme(rowSelectedStyle = 
+                                         list(backgroundColor = "#eee", 
+                                              boxShadow = "inset 2px 0 0 0 #ffa62d")),
+                resizable = TRUE)
+    }
+  )
+
+}
+)
+
+```
+
+## Selecting rows
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "|1|6-8|11"
+
+output$filter_recipes_df <- renderReactable(
+        {
+reactable(df %>% 
+            select(-Selected), 
+          searchable = TRUE, 
+          onClick = "select", 
+          selection = "multiple",
+          defaultSelected = which(df$Recipe %in% makeable.rv$Selected))
+          })
+                    
+getReactableState("filter_recipes_df", "selected")                
+```
+:::
+
+::: {.column width="50%"}
+![](mealtime_files/images/selected.png)
+:::
+:::
+
+## Easy as pie?
+
+-   ...not quite
+-   Data entry is tedious and error prone
+-   I've made some improvements to speed, but I wouldn't say it's speedy
+-   Not all edge cases are worked out
+    -   Occasionally see some strange behavior
+
+## Lessons learned
+
+-   Shiny apps are accessible for someone with limited experience
+-   Google and Chat-GPT are your friend
+-   Drawing diagrams to understand reactive elements is helpful
+-   When all else fails, make sure you've spelled your variable name correctly!
+
+## Lessons (almost) learned
+
+-   Descriptive variable names, clean code and annotation are important
+-   Debugging is much more difficult to do in app--make sure something works **before** inserting it into your app
+-   Sometimes, the best way forward is to go back and clean up clunky code
+-   Sequester big chunks of repetitive code into appropriately named functions
+-   Use github so if you break something you can always go back
+
+## Next steps/ future directions
+
+-   Add perishability ratings to ingredients to know which recipes to cook first to avoid waste
+-   Add ingredient cost indicators for budgeting considerations
+-   In-app editing of recipes and ingredients
+-   Suggested sides/ pairings
+-   Recipe logs for taking notes
+-   Figure out how to extend it to other users
+
+## Questions? Suggestions?
+
+(Of the coding or cooking variety)
+
+# Happy Thanksgiving!

@@ -192,7 +192,7 @@ make_menu <- function(DF, ING, MEALS){
   
   ## Colorize ingredients based on what level of 'in stock' they are
   MEAL.slice %>%
-    select(Recipe,  Source, Page,Type, Cuisine,diet,restricted, Ingredients, makeability, Needed, Selected) %>%
+    select(Recipe,  Source, Page,Type, Cuisine,diet,restricted, Ingredients, makeability, Needed, Selected, Tags) %>%
     # separate_rows(., "Ingredients", sep = ",") %>% 
     # mutate(X = case_when(grepl(" or $", Ingredients) ~ "Optional",
     #                      grepl(" or ", Ingredients) ~ "One of",
@@ -350,4 +350,189 @@ paste.ingredients2 <- function(opt, exc, inc){
   data.frame(ing = c(f.include2(inc), f.exchange2(exc), f.optional2(opt) ), 
              type = c("in", "ex", "op")) %>% 
     filter(ing != "") %$% toString(ing)
+}
+
+
+## Make make_menu only work on recipes with changed ingredients
+
+make_menu2 <- function(DF, ING, MEALS.IN, MEALS.OUT){
+  
+  cMEALS <- MEALS.IN %>% filter(Recipe %in% DF$Recipe)
+  uMEALS <- MEALS.OUT %>% filter(Recipe %nin% DF$Recipe)
+  
+  ## vectors of ingredients both in and out of stock
+  has <- ING %>% filter(has == 1) %$% name
+  not.has <- ING %>% filter(has == 0) %$% name 
+  not.has <- not.has[not.has %in% ING$name] ## not sure what this is doing -- glossing over entry errors?
+  
+  ## vectors of dietary restrictions
+  vegan <- ING %>% filter(vegan==1) %$% name 
+  veg <- ING %>% filter(vegetarian==1) %$% name
+  not.restricted <- ING %>% filter(restricted == 0) %$% name
+  
+  # vector of ingredients that are in stock that are equivalent substitutions for other ingredients
+  equi <- ING %>% select(name, equal) %>%
+    separate_rows(., equal, sep = ", ") %>%
+    left_join(., ING %>% select(equal = name, has2 = has), by = "equal") %>%
+    filter(has2==1) %$% name %>% unique()
+  equi <- c(has, equi)%>% unique()
+
+  ## vector of ingredients that are in stock that can sometimes be substituted for other ingredients
+  sometimes <- ING %>% select(name, sometimes) %>%
+    separate_rows(., sometimes, sep = ", ") %>%
+    left_join(., ING %>% select(sometimes = name, has2 = has), by = "sometimes") %>%
+    filter(has2==1) %$% name %>% unique()
+  sometimes <- c(sometimes, equi) %>% unique()
+  
+  ### Things I don't have, but I can substitute for
+  subs1 <- ING %>% select(name,has, equal) %>%
+    separate_rows(., equal, sep = ", ") %>%
+    left_join(., ING %>% select(equal = name, has2 = has), by = "equal") %>% 
+    filter(has2==1, has==0) %$% name %>% unique()
+  
+  ## Things not in stock that there can sometimes be substituted for
+  subs2 <- ING %>% select(name,has, sometimes) %>%
+    separate_rows(., sometimes, sep = ", ") %>%
+    left_join(., ING %>% select(sometimes = name, has2 = has), by = "sometimes") %>% 
+    filter(has2==1, has==0) %$% name %>% unique() %>% setdiff(., subs1)
+  
+  ## List of ingredients that are not in stock or cannot be substitued for
+  nh <- setdiff(not.has, c(subs1, subs2))
+  
+  ## Sort ingredient vectors by length
+  has <- sort.vec(has)
+  nh <- sort.vec(nh)
+  subs1 <- sort.vec(subs1)
+  subs2 <- sort.vec(subs2)
+  
+  
+  MEAL <- DF %>% 
+    rowwise() %>%
+    mutate(n.ingredients = sum(c_across(where(is.numeric))), ## Number of ingredients in recipe variant
+           p.ingredients = sum(c_across(any_of(has))), ## Number of ingredients in stock for recipe variant
+           can.make = 1*(p.ingredients == n.ingredients), ## If n and p match, then the recipe is makeable
+           e.ingredients = sum(c_across(any_of(c(has, subs1)))), ## Number of ingredients or equivalent substitutions in stock for recipe variant
+           can.make2 = max(e.ingredients == n.ingredients, can.make), ## If n and e match, then the recipe is makeable
+           s.ingredients = sum(c_across(any_of(c(has, subs1, subs2)))), ## Number of ingredients or sometimes substitutions in stock for recipe variant
+           can.make3 = max(s.ingredients == n.ingredients, can.make2), ## If n and s match, then the recipe is makeable
+           n.vegan = sum(c_across(any_of(vegan))), ## Number of vegan ingredients
+           is.vegan = n.vegan == n.ingredients, ## Determine if recipe is vegan
+           n.veg = sum(c_across(any_of(veg))), ## Number of vegetarian ingredients
+           is.veg = n.veg == n.ingredients, ## Determine if recipe is vegetarian
+           n.restrict = sum(c_across(any_of(not.restricted))), ## Number of not restricted ingredients
+           is.restrict = n.restrict == n.ingredients ## Determine if recipe is not restricted
+    ) %>% 
+    group_by(Recipe, variant)%>% # determine makability
+    mutate(makeability = 5 - (1+sum(c_across(contains("can.make")))), 
+           makeability = ifelse(makeability==4, 5, makeability))%>% 
+    mutate(makeability = replace_na(makeability, 995))
+  
+  ## Makeability
+  # 1 = makeable with no substitutions
+  # 2 = makeabile with equivalent ingredients
+  # 3 = makeabile with substitutable ingredients
+  # 4 = makeable after making intermediate ingredients
+  # 5 = not makeable
+  
+  ## some ingredients are themselves recipes
+  ## This subsets those ingredients and cross references it with the makability rating 
+  ## make4 is the list of ingredients not in stock but can be made in one shape or form
+  make4 <- ING %>% filter(makeable ==1) %>% 
+    select(name, has) %>%
+    left_join(., 
+              MEAL%>%ungroup() %>% select(name = Recipe, makeability) %>% 
+                group_by(name) %>% summarise(makeability = min(makeability, na.rm = TRUE)),
+              by = "name") %>% 
+    filter(makeability %in% 1:3, has == 0) %$% name
+  
+  ## 'reaching' is the vector of ingredient that are in stock + equivalent + substitutible or makeable ingredients 
+  reaching <- c(has, equi, sometimes, make4) %>% unique()
+  
+  ## limit make4 to the lowest level of availability
+  make4 <- setdiff(make4, c(subs1, subs2))
+  
+  ## update vector of ingredients that are not available
+  nh <- setdiff(nh, make4)
+  
+  ## fill in makeability 4 designation
+  ## Determine if any of the recipe variants meet dietary restrictions AND equal to the best makeability rating
+  ## Arrange data and pick the most makeabile variant with the most ingredients
+  ## Add back the orginal ingredients list
+  MEAL.slice <- MEAL %>% 
+    mutate(m.ingredients = sum(c_across(any_of(reaching))), 
+           can.make4 = 1*(m.ingredients == n.ingredients),
+           makeability = ifelse(makeability==5 & can.make4==1, 4, makeability)) %>%
+    select(1, contains("make"), everything()) %>% 
+    arrange(Recipe, makeability, desc(n.ingredients))%>%
+    mutate(makeable.restrict = is.restrict == TRUE & makeability == min(makeability),
+           makeable.vegan = is.vegan == TRUE & makeability == min(makeability),
+           makeable.veg = is.veg == TRUE & makeability == min(makeability)) %>%
+    select(Recipe, variant,makeability, n.ingredients, contains("make"), n.vegan, is.vegan, n.veg, is.veg, everything())%>% 
+    group_by(Recipe) %>%
+    dplyr::slice(1) %>%
+    mutate(diet = case_when(is.vegan ~ "Vegan",
+                            is.veg & !is.vegan ~ "Vegetarian",
+                            TRUE ~ "Non-vegetarian"),
+           restricted = yesno(makeable.restrict),
+           Needed = n.ingredients - p.ingredients) %>%
+    left_join(cMEALS , ., by = "Recipe") 
+  
+  
+  ## Colorize ingredients based on what level of 'in stock' they are
+  bMEALS <- MEAL.slice %>%
+    select(Recipe,  Source, Page,Type, Cuisine,diet,restricted, Ingredients, makeability, Needed, Selected, Tags) %>%
+    regex.ingredients() %>%
+    mutate(Ingredients = sprintj8(all_of(has), Ingredients, "#458B00"))%>%
+    mutate(Ingredients = sprintj8(all_of(nh), Ingredients, "#CD2626"))%>%
+    mutate(Ingredients = sprintj8(all_of(subs1), Ingredients, "#CDAD00"))%>%
+    mutate(Ingredients = sprintj8(all_of(subs2), Ingredients, "orange"))%>%
+    mutate(Ingredients = sprintj8(make4, Ingredients, "#1C86EE"))%>%
+    mutate(Ingredients = gsub("xyz", " or ", gsub("><",">, <",gsub(",", ", ", gsub("&","", Ingredients))))) %>%
+    mutate(Selected = replace_na(Selected, 0))
+  
+  # return(bMEALS)
+  bind_rows(bMEALS, uMEALS)# %>% left_join(., MEALS.IN %>% select(Recipe, Tags), by = "Recipe")
+  
+}
+
+
+inv.exchange2 <- function(DD) {
+  DD <- regmatches(DD, gregexpr("(?<=\\()[^()]+(?=\\))", DD, perl = TRUE))[[1]] 
+  
+  # Split the string by comma and trim spaces
+  parts <- trimws(unlist(strsplit(DD, ",")))
+  
+  # Create a sequence of numbers as characters
+  seq_numbers <- as.character(seq_along(parts) - 1)
+  
+  # Insert sequence numbers in place of commas
+  EE <- c(rbind(parts[-length(parts)], seq_numbers[-1]), parts[length(parts)])%>% strsplit(., split = " or ") %>% unlist() %>% trimws()
+  
+  return(EE)
+}
+
+inv.optional2 <- function(CC){
+  regmatches(CC, gregexpr("(?<=\\[)[^\\]]+(?=\\])", CC, perl = TRUE)) %>% unlist() %>% strsplit(., split = "or") %>% unlist() %>% trimws()
+}
+
+inv.include2 <- function(CC) {
+  # Remove text within parentheses and square brackets
+  cleaned_string <- gsub("\\([^)]*\\)", "", CC)  # Remove text within parentheses
+  cleaned_string <- gsub("\\[[^]]*\\]", "", cleaned_string)  # Remove text within square brackets
+  
+  # Split the string by commas and trim spaces
+  main_ingredients <- trimws(unlist(strsplit(cleaned_string, ",")))
+  
+  # Remove any empty elements (in case there were extra commas)
+  main_ingredients <- main_ingredients[nchar(main_ingredients) > 0]
+  
+  return(main_ingredients)
+}
+
+
+rm.zero.cols <- function(dat) {
+  names <- dat %>% dplyr::summarise(across(everything(), .fns = ~sum(.x==0)==nrow(dat)))%>% 
+    mutate(i = 1) %>% pivot_longer(.,-i) %>% filter(value %in% c(FALSE, NA)) %$% name
+  
+  dat[,names]
 }
